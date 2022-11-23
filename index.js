@@ -7,13 +7,13 @@ const express = require('express')
 // menggunakan logger morgan
 const morgan = require('morgan')
 // import routing
-const router = require('./config/routes')
+// const router = require('./config/routes')
 
 const cors = require('cors')
 // error handler
 // const errorHandler = require('./middlewares/errorHandler')
 // const ApiError = require('./utils/ApiError')
-const httpStatus = require('http-status')
+// const httpStatus = require('http-status')
 
 const port = process.env.PORT
 // inisialisasi setelah import statement
@@ -27,7 +27,7 @@ app.use(cors())
 app.use(express.urlencoded({ extended:false }))
 
 app.use(morgan('dev'))
-app.use(router)
+// app.use(router)
 
 // middleware for page not found
 // app.use((req, res, next) => {
