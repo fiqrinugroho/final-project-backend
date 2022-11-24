@@ -1,19 +1,21 @@
+// services
+const authService = require('../services/authServices');
 
-const register = (req, res, next) =>{
+const login = (req, res, next) => {
     authService
-      .registerNewUser(req.body)
-      .then((user) => {
-        res.status(201).json({
-          status: "OK",
-          message: "Success Register New User",
-          data: user,
-        });
+    .login(req.body)
+    .then((user) => {
+      res.status(200).json({
+         status: "OK",
+         message: "Success Login",
+         data: user,
+       });
       })
-      .catch((err) => {
-        next(err);
-      }); 
-}
+    .catch((err) => {
+      next(err);
+    });
+};
 
 module.exports = {
-    register,
+    login,
 }
