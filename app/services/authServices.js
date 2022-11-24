@@ -16,14 +16,14 @@ const login = async (reqBody) => {
     if (user && bcrypt.compareSync(password, user.password)) {
         const token = jwt.sign({
             id: user.id,
-            name: user.profile.fullName,
+            name: user.firstName,
             email: user.email,
             roleId: user.roleId,
         }, 'rahasia')
 
         return {
                 id: user.id,
-                name:user.profile.fullName,
+                name: user.firstName,
                 email: user.email,
                 roleId: user.roleId,
                 role : user.role.roleName,
@@ -34,6 +34,59 @@ const login = async (reqBody) => {
     }
 };
 
+const registerNewUser = async (reqBody) => {
+    const { firstName,lastName, email, password } = reqBody;
+
+    // validasi data yang kosong
+    if (!email) throw new ApiError(httpStatus.BAD_REQUEST, "email cannot be empty");
+    if (!firstName) throw new ApiError(httpStatus.BAD_REQUEST, "first name cannot be empty");
+    // if (!lastName) throw new ApiError(httpStatus.BAD_REQUEST, "last name cannot be empty");
+    if (!password) throw new ApiError(httpStatus.BAD_REQUEST, "password cannot be empty");
+  
+    const user = await authRepository.findEmail(email);
+    if (user) {
+        throw new ApiError(httpStatus.BAD_REQUEST, `user with email : ${email} already taken`)
+    }
+     // validasi minimum password length
+     const passswordLength = password.length >= 8
+     if (!passswordLength) {
+         throw new ApiError(httpStatus.BAD_REQUEST, "minimum password length must be 8 charater or more")
+     }
+
+    const hash = bcrypt.hashSync(password, 10);
+    const createUser = { 
+      firstName,
+      lastName,
+      email,
+      password: hash
+    }
+    // membuat user
+    await authRepository.createUser(createUser);
+    // mencari user yang baru dibuat
+    const newUser = await authRepository.findEmail(email);
+    // menyatukan first & last name menjadi fullname
+    const fullName = firstName + " " + lastName;
+    // membuat profile dengan userId user
+    await authRepository.addProfile(newUser.id, fullName );
+    const token = jwt.sign({
+        id: newUser.id,
+        name: newUser.fristName,
+        email: newUser.email,
+        roleId: newUser.roleId,
+    }, 'rahasia')
+
+    return {
+            id: user.id,
+            name:user.firstName,
+            email: user.email,
+            roleId: user.roleId,
+            role : user.role.roleName,
+            token
+            }
+}
+
+
 module.exports = {
     login,
+    registerNewUser,
 }
