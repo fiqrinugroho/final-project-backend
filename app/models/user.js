@@ -13,13 +13,11 @@ module.exports = (sequelize, DataTypes) => {
       this.belongsTo(models.role, {
         foreignKey: 'roleId',
       })
-      this.belongsTo(models.profile, {
-        foreignKey: 'id',
-      })
+      this.hasOne(models.profile, { foreignKey: 'userId' })
     }
   }
   user.init({
-    fristName: DataTypes.STRING,
+    firstName: DataTypes.STRING,
     lastName: DataTypes.STRING,
     email: DataTypes.STRING,
     password: DataTypes.STRING,
