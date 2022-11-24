@@ -8,7 +8,7 @@ const auth = require('../../app/controllers/authController');
 
 
 // API auth
-// router.post('/register', auth.register)
+router.post('/register', auth.register)
 router.post('/login', auth.login)
 
 module.exports = router
