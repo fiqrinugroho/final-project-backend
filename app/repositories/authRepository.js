@@ -1,28 +1,29 @@
 // import models
-const { users, role } = require('../models')
+const { user, role, profile } = require('../models')
 
-// create new user
+// membuat user baru
 const createUser = (createArgs) => {
-  return users.create(createArgs);
+  return user.create(createArgs);
 }
 
-// untuk mencari data sesuai dengan email user
-const findEmail = (email) => {
+// untuk mencari data user dan profile
+const findUser = (email) => {
     // cari user berdasarkan email
-    const user = users.findOne({
+    const find = user.findOne({
         where: {
           email,
         },
-        include: {
+        include: [{
+          model: profile,
+        },
+        {
           model: role,
-        }
+        }]
       });
-    return user
+    return find
 }
-
-
 
 module.exports = {
     createUser,
-    findEmail,
+    findUser,
 }
