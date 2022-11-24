@@ -7,11 +7,9 @@ const authRepository = require('../repositories/authRepository');
 const login = async (reqBody) => {
     const { email, password } = reqBody
     const user = await authRepository.findUser(email);
-    console.log(user)
 
     // gagal melanjutkan karena username nya tidak ada 
     if (!user) {
-        console.log("jalan")
         throw new ApiError(httpStatus.NOT_FOUND, `user with email : ${email} is not found`)
     }
     // check password user, jika success login dapat response yang isinya TOKEN
