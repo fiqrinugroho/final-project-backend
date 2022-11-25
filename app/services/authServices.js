@@ -3,6 +3,8 @@ const jwt = require("jsonwebtoken")
 const httpStatus = require('http-status');
 const ApiError = require('../../utils/ApiError');
 const authRepository = require('../repositories/authRepository');
+const { JWT_SIGNATURE_KEY } = require("../../config/application");
+
 
 const login = async (reqBody) => {
     const { email, password } = reqBody
@@ -13,29 +15,24 @@ const login = async (reqBody) => {
         throw new ApiError(httpStatus.NOT_FOUND, `user with email : ${email} is not found`)
     }
     // check password user, jika success login dapat response yang isinya TOKEN
-    if (user && bcrypt.compareSync(password, user.password)) {
-        const token = jwt.sign({
-            id: user.id,
-            name: user.firstName,
-            email: user.email,
-            roleId: user.roleId,
-        }, 'rahasia')
-
+    const isPasswordCorrect = verifyPassword(password, user.password);
+    if (user && isPasswordCorrect) {
+        const accessToken = createToken(user)
         return {
-                id: user.id,
-                name: user.firstName,
-                email: user.email,
-                roleId: user.roleId,
-                role : user.role.roleName,
-                token
-                }
+            id:  user.id,
+            name: user.firstName,
+            email:  user.email,
+            roleId:  user.roleId,
+            role :  user.role.roleName,
+            accessToken
+        }
     }else {
         throw new ApiError(httpStatus.BAD_REQUEST, "The password you entered is incorrect");
     }
 };
 
 const registerNewUser = async (reqBody) => {
-    const { firstName,lastName, email, password } = reqBody;
+    const { firstName, lastName, email, password } = reqBody;
 
     // validasi data yang kosong
     if (!email) throw new ApiError(httpStatus.BAD_REQUEST, "email cannot be empty");
@@ -53,7 +50,7 @@ const registerNewUser = async (reqBody) => {
          throw new ApiError(httpStatus.BAD_REQUEST, "minimum password length must be 8 charater or more")
      }
 
-    const hash = bcrypt.hashSync(password, 10);
+    const hash = encryptPassword(password);
     const createUser = { 
       firstName,
       lastName,
@@ -68,23 +65,38 @@ const registerNewUser = async (reqBody) => {
     const fullName = firstName + " " + lastName;
     // membuat profile dengan userId user
     await authRepository.addProfile(newUser.id, fullName );
-    const token = jwt.sign({
-        id: newUser.id,
-        name: newUser.fristName,
-        email: newUser.email,
-        roleId: newUser.roleId,
-    }, 'rahasia')
 
+    const accessToken = createToken(newUser)
     return {
-            id: user.id,
-            name:user.firstName,
-            email: user.email,
-            roleId: user.roleId,
-            role : user.role.roleName,
-            token
+            id:  newUser.id,
+            name: newUser.firstName,
+            email:  newUser.email,
+            roleId:  newUser.roleId,
+            role :  newUser.role.roleName,
+            accessToken
             }
 }
 
+const createToken = (user) => {
+    return jwt.sign({
+        id: user.id,
+        name: user.fristName,
+        email: user.email,
+        roleId: user.roleId,
+    }, JWT_SIGNATURE_KEY);
+  }
+
+ const decodeToken = (token) => {
+    return jwt.verify(token, JWT_SIGNATURE_KEY);
+  }
+
+ const encryptPassword = (password) => {
+    return bcrypt.hashSync(password, 10);
+  }
+
+ const verifyPassword = (password, encryptedPassword) => {
+    return bcrypt.compareSync(password, encryptedPassword)
+  }
 
 module.exports = {
     login,
