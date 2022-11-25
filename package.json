@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index"
+    "start": "nodemon index",
+    "lint": "eslint . --ext .js",
+    "lint:fix": "eslint --fix --ext .js,.jsx ."
   },
   "author": "FSW-C14",
   "license": "ISC",
@@ -22,5 +24,11 @@
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.25.8",
     "sequelize-cli": "^6.5.2"
+  },
+  "devDependencies": {
+    "eslint": "^8.28.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "prettier": "^2.8.0"
   }
 }
