@@ -1,0 +1,326 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Final Project API",
+    "version": "1.0.0"
+  },
+  "_servers": [
+    {
+      "url": "http:/localhost:3001",
+      "description": "localhost"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Auth",
+      "description": "Auth API Collection"
+    }
+  ],
+  "paths": {
+    "/api/auth/register": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "Register a New User",
+        "requestBody": {
+          "description": "Register New User",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "firstName": {
+                    "type": "string",
+                    "example": "Zidane"
+                  },
+                  "lastName": {
+                    "type": "string",
+                    "example": "Arvito"
+                  },
+                  "email": {
+                    "type": "string",
+                    "example": "vito@mail.com"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "p@ssw0rd"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success Register New User",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Success Register New User"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/registerUser"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Email Already Exists",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Failed"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "user with email : vito@mail.com already taken"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/auth/login": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "Login User",
+        "requestBody": {
+          "description": "Login User",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "example": "vito@mail.com"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "p@ssw0rd"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success Login",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Success Login"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/loginUser"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Incorrect Password",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Failed"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "The password you entered is incorrect"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Email Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Failed"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "user with email : not-found@mail.com  is not found"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "Unauthorized": {
+        "description": "Need Token for access",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "fail"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "required authorization"
+                }
+              }
+            }
+          }
+        }
+      },
+      "isAdmin": {
+        "description": "Member Can't Access This page",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "Unauthorized Access"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "only admin can access this page"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "registerUser": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": "6"
+          },
+          "name": {
+            "type": "string",
+            "example": "Zidane"
+          },
+          "email": {
+            "type": "string",
+            "example": "vito@mail.com"
+          },
+          "roleId": {
+            "type": "integer",
+            "example": "2"
+          },
+          "role": {
+            "type": "string",
+            "example": "Member"
+          },
+          "accessToken": {
+            "type": "string",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiZW1haWwiOiJ2aXRvQG1haWwuY29tIiwicm9sZUlkIjoyLCJpYXQiOjE2Njk2NjMzMTR9.CtkS22YXgl5zPR0SItR629YoC4hOp9RHnk3sFFnv9Yg"
+          }
+        }
+      },
+      "loginUser": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": "6"
+          },
+          "name": {
+            "type": "string",
+            "example": "Zidane"
+          },
+          "email": {
+            "type": "string",
+            "example": "vito@mail.com"
+          },
+          "roleId": {
+            "type": "integer",
+            "example": "2"
+          },
+          "role": {
+            "type": "string",
+            "example": "Member"
+          },
+          "token": {
+            "type": "string",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiZW1haWwiOiJ2aXRvQG1haWwuY29tIiwicm9sZUlkIjoyLCJpYXQiOjE2Njk2NjM2MDB9.t-mS8RHauM7M5fiIGbXRDaJg7pVE2O82HwfTyY7Z98E"
+          }
+        }
+      },
+      "role": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": "2"
+          },
+          "roleName": {
+            "type": "string",
+            "example": "Member"
+          },
+          "createdAt": {
+            "type": "date",
+            "example": "2022-10-17T14:04:48.389Z"
+          },
+          "updatedAt": {
+            "type": "date",
+            "example": "2022-10-17T14:04:48.389Z"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerToken": {
+        "description": "Insert Token, You can get it after login",
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}
