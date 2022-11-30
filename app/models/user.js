@@ -12,6 +12,8 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "roleId",
       });
       this.hasOne(models.profile, { foreignKey: "userId" });
+      this.hasMany(models.whistlist, { foreignKey: "userId" });
+      this.hasMany(models.transaction, { foreignKey: "userId" });
     }
   }
   user.init(

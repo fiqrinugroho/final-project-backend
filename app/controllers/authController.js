@@ -16,6 +16,21 @@ const login = (req, res, next) => {
     });
 };
 
+const loginAdmin = (req, res, next) => {
+  authService
+    .loginAdmin(req.body)
+    .then((user) => {
+      res.status(200).json({
+        status: "OK",
+        message: "Success Login Admin",
+        data: user,
+      });
+    })
+    .catch((err) => {
+      next(err);
+    });
+};
+
 const register = (req, res, next) => {
   authService
     .registerNewUser(req.body)
@@ -33,5 +48,6 @@ const register = (req, res, next) => {
 
 module.exports = {
   login,
+  loginAdmin,
   register,
 };
