@@ -1,22 +1,22 @@
 // services
-const authService = require('../services/authServices');
+const authService = require("../services/authServices");
 
 const login = (req, res, next) => {
-    authService
+  authService
     .login(req.body)
     .then((user) => {
       res.status(200).json({
-         status: "OK",
-         message: "Success Login",
-         data: user,
-       });
-      })
+        status: "OK",
+        message: "Success Login",
+        data: user,
+      });
+    })
     .catch((err) => {
       next(err);
     });
 };
 
-const register = (req, res, next) =>{
+const register = (req, res, next) => {
   authService
     .registerNewUser(req.body)
     .then((user) => {
@@ -28,10 +28,10 @@ const register = (req, res, next) =>{
     })
     .catch((err) => {
       next(err);
-    }); 
-}
+    });
+};
 
 module.exports = {
-    login,
-    register
-}
+  login,
+  register,
+};

@@ -1,0 +1,4 @@
+node_modules/
+database/
+.eslintrc.js
+.env
