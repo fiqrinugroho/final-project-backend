@@ -8,7 +8,7 @@
     "start": "nodemon index",
     "lint": "eslint . --ext .js",
     "lint:fix": "eslint --fix --ext .js,.jsx .",
-    "db:config": "sequelize db:create && sequelize db:migrate && sequelize db:seed:undo:all && sequelize db:seed:all"
+    "db:config": "sequelize db:create && sequelize db:migrate && sequelize db:seed:all"
   },
   "author": "FSW-C14",
   "license": "ISC",
