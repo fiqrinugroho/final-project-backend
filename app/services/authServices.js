@@ -13,7 +13,7 @@ const login = async (reqBody) => {
   if (!user) {
     throw new ApiError(
       httpStatus.NOT_FOUND,
-      `user with email : ${email} is not found`
+      `user not found`
     );
   }
   // check password user, jika success login dapat response yang isinya TOKEN
@@ -52,7 +52,7 @@ const registerNewUser = async (reqBody) => {
   if (user) {
     throw new ApiError(
       httpStatus.BAD_REQUEST,
-      `user with email : ${email} already taken`
+      `email already exists`
     );
   }
   // validasi minimum password length
