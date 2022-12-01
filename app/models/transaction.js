@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
       this.belongsTo(models.payment, {
         foreignKey: "paymentId",
       });
-      this.belongsTo(models.typetrip, {
+      this.belongsTo(models.typeTrip, {
         foreignKey: "tripId",
       });
       this.hasOne(models.history, { foreignKey: "transactionId" });
