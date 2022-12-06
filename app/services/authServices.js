@@ -11,10 +11,7 @@ const login = async (reqBody) => {
 
   // gagal melanjutkan karena username nya tidak ada
   if (!user) {
-    throw new ApiError(
-      httpStatus.NOT_FOUND,
-      `user not found`
-    );
+    throw new ApiError(httpStatus.NOT_FOUND, `user not found`);
   }
   // check password user, jika success login dapat response yang isinya TOKEN
   const isPasswordCorrect = verifyPassword(password, user.password);
@@ -50,10 +47,7 @@ const registerNewUser = async (reqBody) => {
 
   const user = await authRepository.findEmail(email);
   if (user) {
-    throw new ApiError(
-      httpStatus.BAD_REQUEST,
-      `email already exists`
-    );
+    throw new ApiError(httpStatus.BAD_REQUEST, `email already exists`);
   }
   // validasi minimum password length
   const passswordLength = password.length >= 8;
@@ -95,7 +89,7 @@ const createToken = (user) => {
   return jwt.sign(
     {
       id: user.id,
-      name: user.fristName,
+      name: user.firstName,
       email: user.email,
       roleId: user.roleId,
     },
@@ -115,7 +109,46 @@ const verifyPassword = (password, encryptedPassword) => {
   return bcrypt.compareSync(password, encryptedPassword);
 };
 
+const loginAdmin = async (reqBody) => {
+  const { email, password } = reqBody;
+  const user = await authRepository.findUser(email);
+
+  // gagal melanjutkan karena username nya tidak ada
+  if (!user) {
+    throw new ApiError(
+      httpStatus.NOT_FOUND,
+      `admin with email : ${email} is not found`
+    );
+  }
+  // check password user, jika success login dapat response yang isinya TOKEN
+  const isPasswordCorrect = verifyPassword(password, user.password);
+  if (user && isPasswordCorrect) {
+    if (user.roleId === 1) {
+      const accessToken = createToken(user);
+      return {
+        id: user.id,
+        name: user.firstName,
+        email: user.email,
+        roleId: user.roleId,
+        role: user.role.roleName,
+        accessToken,
+      };
+    } else {
+      throw new ApiError(
+        httpStatus.BAD_REQUEST,
+        "Only Admin Can Access This Page"
+      );
+    }
+  } else {
+    throw new ApiError(
+      httpStatus.BAD_REQUEST,
+      "The password you entered is incorrect"
+    );
+  }
+};
+
 module.exports = {
   login,
   registerNewUser,
+  loginAdmin,
 };
