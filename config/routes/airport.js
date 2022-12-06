@@ -10,5 +10,6 @@ const isAdmin = require("../../middlewares/isAdmin");
 router.post("/create", Authentication, isAdmin, airport.createAirport);
 router.get("/", Authentication, airport.getAirport);
 router.get("/:id", Authentication, airport.getAirportById);
+router.put("/update/:id", Authentication, isAdmin, airport.updateAirport);
 
 module.exports = router;
