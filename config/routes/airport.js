@@ -11,5 +11,6 @@ router.post("/create", Authentication, isAdmin, airport.createAirport);
 router.get("/", Authentication, airport.getAirport);
 router.get("/:id", Authentication, airport.getAirportById);
 router.put("/update/:id", Authentication, isAdmin, airport.updateAirport);
+router.delete("/delete/:id", Authentication, isAdmin, airport.deleteAirport);
 
 module.exports = router;
