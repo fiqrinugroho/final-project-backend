@@ -15,7 +15,20 @@ const createAirport = (newAirport) => {
   return airport.create(newAirport);
 };
 
+const getAirport = () => {
+  return airport.findAll();
+};
+
+const getAirportById = (id) => {
+  return airport.findOne({
+    where: {
+      id,
+    },
+  });
+};
 module.exports = {
   findAirport,
   createAirport,
+  getAirport,
+  getAirportById,
 };

@@ -24,6 +24,17 @@ const createAirport = async (reqBody) => {
     return await airportRepository.createAirport(newAirport);
   }
 };
+
+const getAirport = async () => {
+  return await airportRepository.getAirport();
+};
+
+const getAirportById = async (id) => {
+  return await airportRepository.getAirportById(id);
+};
+
 module.exports = {
   createAirport,
+  getAirport,
+  getAirportById,
 };
