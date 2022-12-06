@@ -40,6 +40,10 @@ const updateAirport = async (reqBody, id) => {
   return await airport.update(reqBody, { where: { id } });
 };
 
+const deleteAirport = async (id) => {
+  return await airport.destroy({ where: { id } });
+};
+
 module.exports = {
   findAirport,
   createAirport,
@@ -47,4 +51,5 @@ module.exports = {
   getAirportById,
   findAirportById,
   updateAirport,
+  deleteAirport,
 };

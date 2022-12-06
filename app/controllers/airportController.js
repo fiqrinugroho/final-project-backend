@@ -6,7 +6,7 @@ const createAirport = (req, res, next) => {
     .createAirport(req.body)
     .then((airport) => {
       res.status(201).json({
-        status: "OK",
+        status: "Success",
         message: "Success Create New Airport",
         data: airport,
       });
@@ -52,9 +52,23 @@ const updateAirport = (req, res, next) => {
     .updateAirport(req.body, req.params.id)
     .then((airport) => {
       res.status(200).json({
-        status: "OK",
+        status: "Success",
         message: "Success Update Airport",
         data: airport,
+      });
+    })
+    .catch((err) => {
+      next(err);
+    });
+};
+
+const deleteAirport = (req, res, next) => {
+  airportService
+    .deleteAirport(req.params.id)
+    .then(() => {
+      res.status(200).json({
+        status: "Success",
+        message: "Success Delete Airport",
       });
     })
     .catch((err) => {
@@ -67,4 +81,5 @@ module.exports = {
   getAirport,
   getAirportById,
   updateAirport,
+  deleteAirport,
 };
