@@ -33,8 +33,29 @@ const getAirportById = async (id) => {
   return await airportRepository.getAirportById(id);
 };
 
+const updateAirport = async (reqBody, id) => {
+  const airport = await airportRepository.findAirportById(id);
+
+  if (!airport) {
+    throw new ApiError(httpStatus.BAD_REQUEST, `airport not found`);
+  } else {
+    await airportRepository.updateAirport(reqBody, id);
+    const getAirport = await airportRepository.findAirportById(id);
+
+    return {
+      id: getAirport.id,
+      airportName: getAirport.airportName,
+      city: getAirport.city,
+      cityCode: getAirport.cityCode,
+      createdAt: getAirport.createdAt,
+      updatedAt: getAirport.updatedAt,
+    };
+  }
+};
+
 module.exports = {
   createAirport,
   getAirport,
   getAirportById,
+  updateAirport,
 };

@@ -26,9 +26,25 @@ const getAirportById = (id) => {
     },
   });
 };
+
+const findAirportById = (id) => {
+  const find = airport.findOne({
+    where: {
+      id,
+    },
+  });
+  return find;
+};
+
+const updateAirport = async (reqBody, id) => {
+  return await airport.update(reqBody, { where: { id } });
+};
+
 module.exports = {
   findAirport,
   createAirport,
   getAirport,
   getAirportById,
+  findAirportById,
+  updateAirport,
 };

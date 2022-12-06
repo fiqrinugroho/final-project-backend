@@ -47,8 +47,24 @@ const getAirportById = (req, res, next) => {
     });
 };
 
+const updateAirport = (req, res, next) => {
+  airportService
+    .updateAirport(req.body, req.params.id)
+    .then((airport) => {
+      res.status(200).json({
+        status: "OK",
+        message: "Success Update Airport",
+        data: airport,
+      });
+    })
+    .catch((err) => {
+      next(err);
+    });
+};
+
 module.exports = {
   createAirport,
   getAirport,
   getAirportById,
+  updateAirport,
 };
