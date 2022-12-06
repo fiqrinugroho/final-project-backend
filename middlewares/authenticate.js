@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const { users } = require("../app/models");
+const { user } = require("../app/models");
 
 module.exports = function (req, res, next) {
   // req is an object
@@ -20,7 +20,7 @@ module.exports = function (req, res, next) {
     const payload = jwt.verify(token, "rahasia");
     // eslint-disable-next-line no-console
     console.log("Payload:", payload);
-    users.findByPk(payload.id).then((instance) => {
+    user.findByPk(payload.id).then((instance) => {
       req.user = instance;
       next();
     });
