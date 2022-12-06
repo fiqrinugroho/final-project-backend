@@ -14,6 +14,10 @@
     {
       "name": "Auth",
       "description": "Auth API Collection"
+    },
+    {
+      "name": "Airport",
+      "description": "Airport API Collection"
     }
   ],
   "paths": {
@@ -87,7 +91,7 @@
                     },
                     "message": {
                       "type": "string",
-                      "example": "user with email : vito@mail.com already taken"
+                      "example": "email already taken"
                     }
                   }
                 }
@@ -179,12 +183,385 @@
                     },
                     "message": {
                       "type": "string",
-                      "example": "user with email : not-found@mail.com  is not found"
+                      "example": "user not found"
                     }
                   }
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/api/auth/login/admin": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "Login Admin",
+        "requestBody": {
+          "description": "Login for Admin",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "example": "fiqri@mail.com"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "qwerty123"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success Login For Admin",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Success Login Admin"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/loginAdmin"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Incorrect Password",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Failed"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "The password you entered is incorrect"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "$ref":"#/components/responses/isAdmin"
+          },
+          "404": {
+            "description": "Email Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Failed"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "user not found"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/airport/": {
+      "get": {
+        "summary": "Get All Airport Data",
+        "description": "This API for see all airport data",
+        "tags": [
+          "Airport"
+        ],
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],  
+        "responses": {
+          "200": {
+            "description": "User and admin can see this data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "totalData": {
+                      "type": "integer",
+                      "example": "1"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/airport"        
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
+        }
+      }
+    },  
+    "/api/airport/{id}": {
+      "get": {
+        "summary": "Get Airport Data By Id",
+        "description": "This API for see airport data by Id",
+        "tags": [
+          "Airport"
+        ],
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "description": "input id airport",
+            "name": "id",
+            "required": true
+          }
+        ],    
+        "responses": {
+          "200": {
+            "description": "User and admin can see this data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/airport"        
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/airportNotFound"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
+        }
+      }
+    },  
+    "/api/airport/create": {
+      "post": {
+        "summary": "Create New Airport Data",
+        "tags": [
+          "Airport"
+        ],
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBody/airportBody"
+        },
+        "responses": {
+          "201": {
+            "description": "Success Create New Airport",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "message": {
+                      "type": "string",
+                     "example": "Success Create New Airport"
+                    },
+                    "data": {
+                      "type": "object",
+                      "$ref":"#/components/schemas/airport"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Empty value",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Failed"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "airport name cannot be empty"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/isAdmin"
+          }
+        }
+      }
+    },
+    "/api/airport/update/{id}": {
+      "put": {
+        "summary": "Update Airport Data By Id",
+        "tags": [
+          "Airport"
+        ],
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "description": "input id airport",
+            "name": "id",
+            "required": true
+          }
+        ],  
+        "requestBody": {
+          "$ref": "#/components/requestBody/airportBody"
+        },
+        "responses": {
+          "200": {
+            "description": "Success Update Airport Data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "message": {
+                      "type": "string",
+                     "example": "Success Update Airport"
+                    },
+                    "data": {
+                      "type": "object",
+                      "$ref":"#/components/schemas/airport"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/airportNotFound"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/isAdmin"
+          }
+        }
+      }
+    },
+    "/api/airport/delete/{id}": {
+      "delete": {
+        "summary": "Delete Airport Data By Id",
+        "tags": [
+          "Airport"
+        ],
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "description": "input id airport",
+            "name": "id",
+            "required": true
+          }
+        ], 
+        "responses": {
+          "200": {
+            "description": "Success Delete Data Airport",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "message": {
+                      "type": "string",
+                     "example": "Success Delete Airport"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/airportNotFound"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/isAdmin"
           }
         }
       }
@@ -205,7 +582,7 @@
                 },
                 "message": {
                   "type": "string",
-                  "example": "required authorization"
+                  "example": "Invalid Token"
                 }
               }
             }
@@ -226,6 +603,53 @@
                 "message": {
                   "type": "string",
                   "example": "only admin can access this page"
+                }
+              }
+            }
+          }
+        }
+      },
+      "airportNotFound": {
+        "description": "Data Not Found",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "Failed"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "airport not found"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "requestBody": {
+      "airportBody": {
+        "description": "Airport Data",
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "airportName": {
+                  "type": "string",
+                  "example": "Bandara Soekarno Hatta"
+                },
+                "city": {
+                  "type": "string",
+                  "example": "Jakarta"
+                },
+                "cityCode": {
+                  "type": "string",
+                  "example": "41333"
                 }
               }
             }
@@ -292,6 +716,35 @@
           }
         }
       },
+      "loginAdmin": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": "1"
+          },
+          "name": {
+            "type": "string",
+            "example": "Fiqri"
+          },
+          "email": {
+            "type": "string",
+            "example": "fiqri@mail.com"
+          },
+          "roleId": {
+            "type": "integer",
+            "example": "1"
+          },
+          "role": {
+            "type": "string",
+            "example": "Admin"
+          },
+          "token": {
+            "type": "string",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6ImZpcXJpIiwiZW1haWwiOiJmaXFyaUBtYWlsLmNvbSIsInJvbGVJZCI6MSwiaWF0IjoxNjcwMzA1MjQwfQ.3vQu0dNVmhZ1GuCnM2ZG4JXFY03lzFJWwSFE7X3zRYQ"
+          }
+        }
+      },
       "role": {
         "type": "object",
         "properties": {
@@ -310,6 +763,35 @@
           "updatedAt": {
             "type": "date",
             "example": "2022-10-17T14:04:48.389Z"
+          }
+        }
+      },
+      "airport": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": "1"
+          },
+          "airportName": {
+            "type": "string",
+            "example": "Bandara Soekarno Hatta"
+          },
+          "city": {
+            "type": "string",
+            "example": "Jakarta"
+          },
+          "cityCode": {
+            "type": "string",
+            "example": "41333"
+          },
+          "updatedAt": {
+            "type": "date",
+            "example": "2022-12-06T06:17:28.899Z"
+          },
+          "createdAt": {
+            "type": "date",
+            "example": "2022-12-06T06:17:28.899Z"
           }
         }
       }
