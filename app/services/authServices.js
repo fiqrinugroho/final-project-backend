@@ -115,10 +115,7 @@ const loginAdmin = async (reqBody) => {
 
   // gagal melanjutkan karena username nya tidak ada
   if (!user) {
-    throw new ApiError(
-      httpStatus.NOT_FOUND,
-      `admin with email : ${email} is not found`
-    );
+    throw new ApiError(httpStatus.NOT_FOUND, "user not found");
   }
   // check password user, jika success login dapat response yang isinya TOKEN
   const isPasswordCorrect = verifyPassword(password, user.password);
