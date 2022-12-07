@@ -4,7 +4,16 @@ const userRepository = require("../repositories/userRepository");
 
 const getUserById = async (id) => {
   const user = await userRepository.getUserById(id);
-  return user;
+
+  return {
+    id: user.id,
+    fullName: user.fullName,
+    address: user.address,
+    phoneNumber: user.phoneNumber,
+    avatar: user.avatar,
+    gender: user.gender,
+    updatedAt: user.updatedAt,
+  };
 };
 
 const updateUser = async (reqBody, id) => {
@@ -28,7 +37,18 @@ const updateUser = async (reqBody, id) => {
   }
 };
 
+const deleteUser = async (id) => {
+  const user = await userRepository.getUserById(id);
+
+  if (!user) {
+    throw new ApiError(httpStatus.NOT_FOUND, `user not found`);
+  } else {
+    return await userRepository.deleteUser(id);
+  }
+};
+
 module.exports = {
   getUserById,
   updateUser,
+  deleteUser,
 };
