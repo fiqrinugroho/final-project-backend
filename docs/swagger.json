@@ -294,12 +294,7 @@
         "description": "This API for see all airport data",
         "tags": [
           "Airport"
-        ],
-        "security": [
-          {
-            "bearerToken": []
-          }
-        ],  
+        ], 
         "responses": {
           "200": {
             "description": "User and admin can see this data",
@@ -340,11 +335,6 @@
         "description": "This API for see airport data by Id",
         "tags": [
           "Airport"
-        ],
-        "security": [
-          {
-            "bearerToken": []
-          }
         ],
         "parameters": [
           {
