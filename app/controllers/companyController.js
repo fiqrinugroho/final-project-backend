@@ -47,20 +47,20 @@ const getCompanyById = (req, res, next) => {
     });
 };
 
-// const updateCompany = (req, res, next) => {
-//   companyService
-//     .updateCompany(req.body, req.params.id)
-//     .then((company) => {
-//       res.status(200).json({
-//         status: "Success",
-//         message: "Success Update Company",
-//         data: company,
-//       });
-//     })
-//     .catch((err) => {
-//       next(err);
-//     });
-// };
+const updateCompany = (req, res, next) => {
+  companyService
+    .updateCompany(req.body.companyName, req.file, req.params.id)
+    .then((company) => {
+      res.status(200).json({
+        status: "Success",
+        message: "Success Update Company",
+        data: company,
+      });
+    })
+    .catch((err) => {
+      next(err);
+    });
+};
 
 // const deleteCompany = (req, res, next) => {
 //   companyService
@@ -80,6 +80,6 @@ module.exports = {
   createCompany,
   getCompany,
   getCompanyById,
-  // updateCompany,
+  updateCompany,
   // deleteCompany,
 };

@@ -27,9 +27,14 @@ const findCompanyById = (id) => {
   return find;
 };
 
+const updateCompany = async (reqBody, id) => {
+  return await company.update(reqBody, { where: { id } });
+};
+
 module.exports = {
   findCompany,
   createCompany,
   getCompany,
   findCompanyById,
+  updateCompany,
 };
