@@ -24,6 +24,6 @@ router.put(
   Uploader.single("image"),
   company.updateCompany
 );
-// router.delete("/delete/:id", Authentication, isAdmin, company.deleteCompany);
+router.delete("/delete/:id", Authentication, isAdmin, company.deleteCompany);
 
 module.exports = router;
