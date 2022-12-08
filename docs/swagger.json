@@ -4,6 +4,12 @@
     "title": "Final Project API",
     "version": "1.0.0"
   },
+  "_servers": [
+    {
+      "url": "http:/localhost:3001",
+      "description": "localhost"
+    }
+  ],
   "tags": [
     {
       "name": "Auth",
