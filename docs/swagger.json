@@ -4,12 +4,6 @@
     "title": "Final Project API",
     "version": "1.0.0"
   },
-  "_servers": [
-    {
-      "url": "http:/localhost:3001",
-      "description": "localhost"
-    }
-  ],
   "tags": [
     {
       "name": "Auth",
@@ -18,6 +12,10 @@
     {
       "name": "Airport",
       "description": "Airport API Collection"
+    },
+    {
+      "name": "Company",
+      "description": "Company API Collection"
     }
   ],
   "paths": {
@@ -322,9 +320,6 @@
                 }
               }
             }
-          },
-          "401": {
-            "$ref": "#/components/responses/Unauthorized"
           }
         }
       }
@@ -370,9 +365,6 @@
           },
           "404": {
             "$ref": "#/components/responses/airportNotFound"
-          },
-          "401": {
-            "$ref": "#/components/responses/Unauthorized"
           }
         }
       }
@@ -555,6 +547,270 @@
           }
         }
       }
+    },
+    "/api/company": {
+      "get": {
+        "summary": "Get All Company Data",
+        "description": "This API for see all company data",
+        "tags": [
+          "Company"
+        ], 
+        "responses": {
+          "200": {
+            "description": "User and admin can see this data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "totalData": {
+                      "type": "integer",
+                      "example": "1"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/company"        
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },  
+    "/api/company/{id}": {
+      "get": {
+        "summary": "Get Company Data By Id",
+        "description": "This API for see company data by Id",
+        "tags": [
+          "Company"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "description": "input id company",
+            "name": "id",
+            "required": true
+          }
+        ],    
+        "responses": {
+          "200": {
+            "description": "User and admin can see this data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/company"        
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/companyNotFound"
+          }
+        }
+      }
+    },
+    "/api/company/create": {
+      "post": {
+        "summary": "Create New Company Data",
+        "tags": [
+          "Company"
+        ],
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
+        "description": "companyName and image cannot be blank",
+        "requestBody": {
+          "$ref": "#/components/requestBody/companyBody"
+        },
+        "responses": {
+          "201": {
+            "description": "Success Create New Company",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "message": {
+                      "type": "string",
+                     "example": "Success Create New Company"
+                    },
+                    "data": {
+                      "type": "object",
+                      "$ref":"#/components/schemas/airport"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Empty value",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Failed"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "company name cannot be empty"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/isAdmin"
+          }
+        }
+      }
+    },
+    "/api/company/update/{id}": {
+      "put": {
+        "summary": "Update Company Data By Id",
+        "tags": [
+          "Company"
+        ],
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
+        "description": "companyName cannot be blank, and if you don't upload an image then the image used is still the previous image",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "input id company",
+            "name": "id",
+            "required": true
+          }
+        ],  
+        "requestBody": {
+          "$ref": "#/components/requestBody/companyBody"
+        },
+        "responses": {
+          "200": {
+            "description": "Success Update Company Data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "message": {
+                      "type": "string",
+                     "example": "Success Update Company"
+                    },
+                    "data": {
+                      "type": "object",
+                      "$ref":"#/components/schemas/company"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/companyNotFound"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/isAdmin"
+          }
+        }
+      }
+    },
+    "/api/company/delete/{id}": {
+      "delete": {
+        "summary": "Delete Company Data By Id",
+        "tags": [
+          "Company"
+        ],
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "description": "input id company",
+            "name": "id",
+            "required": true
+          }
+        ], 
+        "responses": {
+          "200": {
+            "description": "Success Delete Data Company",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "message": {
+                      "type": "string",
+                     "example": "Success Delete Company"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/companyNotFound"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/isAdmin"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -618,6 +874,26 @@
             }
           }
         }
+      },
+      "companyNotFound": {
+        "description": "Data Not Found",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "Failed"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "company not found"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "requestBody": {
@@ -640,6 +916,29 @@
                 "cityCode": {
                   "type": "string",
                   "example": "41333"
+                }
+              }
+            }
+          }
+        }
+      },
+      "companyBody": {
+        "description": "Company Data",
+        "required": true,
+        "content": {
+          "multipart/form-data": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "companyName": {
+                  "type": "string",
+                  "example": "LION AIR",
+                  "required": true
+                },
+                "image":{
+                  "type": "string",
+                  "format": "binary",
+                  "required": true
                 }
               }
             }
@@ -782,6 +1081,31 @@
           "createdAt": {
             "type": "date",
             "example": "2022-12-06T06:17:28.899Z"
+          }
+        }
+      },
+      "company": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": "1"
+          },
+          "companyName": {
+            "type": "string",
+            "example": "LION AIR"
+          },
+          "companyImage": {
+            "type": "string",
+            "example": "https://ik.imagekit.io/mfn/IMG-1670478922501_rUSD3C2ff.png"
+          },
+          "updatedAt": {
+            "type": "date",
+            "example": "2022-12-08T05:55:36.861Z"
+          },
+          "createdAt": {
+            "type": "date",
+            "example": "2022-12-08T05:55:36.861Z"
           }
         }
       }
