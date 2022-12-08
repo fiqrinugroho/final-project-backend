@@ -49,15 +49,15 @@ const getCompany = async () => {
   return await companyRepository.getCompany();
 };
 
-// const getCompanyById = async (id) => {
-//   const company = await companyRepository.findCompanyById(id);
+const getCompanyById = async (id) => {
+  const company = await companyRepository.findCompanyById(id);
 
-//   if (!company) {
-//     throw new ApiError(httpStatus.NOT_FOUND, `company not found`);
-//   } else {
-//     return company;
-//   }
-// };
+  if (!company) {
+    throw new ApiError(httpStatus.NOT_FOUND, `company not found`);
+  } else {
+    return company;
+  }
+};
 
 // const updateCompany = async (reqBody, id) => {
 //   const company = await companyRepository.findCompanyById(id);
@@ -92,7 +92,7 @@ const getCompany = async () => {
 module.exports = {
   createCompany,
   getCompany,
-  // getCompanyById,
+  getCompanyById,
   // updateCompany,
   // deleteCompany,
 };

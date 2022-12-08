@@ -18,8 +18,18 @@ const getCompany = () => {
   return company.findAll();
 };
 
+const findCompanyById = (id) => {
+  const find = company.findOne({
+    where: {
+      id,
+    },
+  });
+  return find;
+};
+
 module.exports = {
   findCompany,
   createCompany,
   getCompany,
+  findCompanyById,
 };
