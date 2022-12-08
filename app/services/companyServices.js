@@ -1,7 +1,7 @@
 const httpStatus = require("http-status");
 const ApiError = require("../../utils/ApiError");
 const companyRepository = require("../repositories/companyRepository");
-const imagekit = require("../../lib/imageKit");
+const imagekit = require("../../lib/imagekit");
 
 const createCompany = async (companyName, file) => {
   // validasi data yang kosong
