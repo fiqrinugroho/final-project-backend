@@ -17,7 +17,13 @@ router.post(
 );
 router.get("/", company.getCompany);
 router.get("/:id", company.getCompanyById);
-// router.put("/update/:id", Authentication, isAdmin, company.updateCompany);
+router.put(
+  "/update/:id",
+  Authentication,
+  isAdmin,
+  Uploader.single("image"),
+  company.updateCompany
+);
 // router.delete("/delete/:id", Authentication, isAdmin, company.deleteCompany);
 
 module.exports = router;
