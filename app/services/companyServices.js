@@ -62,9 +62,13 @@ const getCompanyById = async (id) => {
 const updateCompany = async (companyName, file, id) => {
   const company = await companyRepository.findCompanyById(id);
 
+  if (!companyName)
+    throw new ApiError(httpStatus.BAD_REQUEST, "company name cannot be empty");
+
   if (!company) {
     throw new ApiError(httpStatus.NOT_FOUND, `company not found`);
   }
+
   if (file == null) {
     const newCompany = {
       companyName,
