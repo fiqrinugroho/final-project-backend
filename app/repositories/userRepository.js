@@ -1,4 +1,4 @@
-const {user, profile, role } = require("../models");
+const { user, profile, role } = require("../models");
 
 const getUserById = (id) => {
   return user.findOne({
@@ -6,8 +6,8 @@ const getUserById = (id) => {
       id,
     },
     include: {
-      model :profile,
-    }
+      model: profile,
+    },
   });
 };
 // untuk mencari data user dan profile

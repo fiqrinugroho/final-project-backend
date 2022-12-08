@@ -28,7 +28,7 @@ const getUserById = async (id) => {
 const updateUser = async (reqBody, id) => {
   const { firstName, lastName, address, phoneNumber, avatar, gender } = reqBody;
   const getUser = await userRepository.findUser(id);
-  
+
   if (!getUser) {
     throw new ApiError(httpStatus.NOT_FOUND, `user not found`);
   } else {
