@@ -62,24 +62,24 @@ const updateCompany = (req, res, next) => {
     });
 };
 
-// const deleteCompany = (req, res, next) => {
-//   companyService
-//     .deleteCompany(req.params.id)
-//     .then(() => {
-//       res.status(200).json({
-//         status: "Success",
-//         message: "Success Delete Company",
-//       });
-//     })
-//     .catch((err) => {
-//       next(err);
-//     });
-// };
+const deleteCompany = (req, res, next) => {
+  companyService
+    .deleteCompany(req.params.id)
+    .then(() => {
+      res.status(200).json({
+        status: "Success",
+        message: "Success Delete Company",
+      });
+    })
+    .catch((err) => {
+      next(err);
+    });
+};
 
 module.exports = {
   createCompany,
   getCompany,
   getCompanyById,
   updateCompany,
-  // deleteCompany,
+  deleteCompany,
 };

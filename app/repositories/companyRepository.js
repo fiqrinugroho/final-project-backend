@@ -31,10 +31,15 @@ const updateCompany = async (reqBody, id) => {
   return await company.update(reqBody, { where: { id } });
 };
 
+const deleteCompany = async (id) => {
+  return await company.destroy({ where: { id } });
+};
+
 module.exports = {
   findCompany,
   createCompany,
   getCompany,
   findCompanyById,
   updateCompany,
+  deleteCompany,
 };

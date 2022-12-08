@@ -99,20 +99,20 @@ const updateCompany = async (companyName, file, id) => {
   return await companyRepository.findCompanyById(id);
 };
 
-// const deleteCompany = async (id) => {
-//   const company = await companyRepository.findCompanyById(id);
+const deleteCompany = async (id) => {
+  const company = await companyRepository.findCompanyById(id);
 
-//   if (!company) {
-//     throw new ApiError(httpStatus.NOT_FOUND, `company not found`);
-//   } else {
-//     return await companyRepository.deleteCompany(id);
-//   }
-// };
+  if (!company) {
+    throw new ApiError(httpStatus.NOT_FOUND, `company not found`);
+  } else {
+    return await companyRepository.deleteCompany(id);
+  }
+};
 
 module.exports = {
   createCompany,
   getCompany,
   getCompanyById,
   updateCompany,
-  // deleteCompany,
+  deleteCompany,
 };
