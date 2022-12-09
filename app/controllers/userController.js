@@ -16,8 +16,10 @@ const getUserById = (req, res, next) => {
 };
 
 const updateUser = (req, res, next) => {
+  console.log(req.file);
+  console.log(req.body);
   userService
-    .updateUser(req.body, req.user.id)
+    .updateUser(req.body, req.file, req.user.id)
     .then((user) => {
       res.status(200).json({
         status: "Success",
