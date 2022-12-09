@@ -16,8 +16,6 @@ const getUserById = (req, res, next) => {
 };
 
 const updateUser = (req, res, next) => {
-  console.log(req.file);
-  console.log(req.body);
   userService
     .updateUser(req.body, req.file, req.user.id)
     .then((user) => {

@@ -28,12 +28,12 @@ const getUserById = async (id) => {
 
 const updateUser = async (reqBody, file, id) => {
   const { firstName, lastName, address, phoneNumber, gender } = reqBody;
-  
+
   const getUser = await userRepository.findUser(id);
 
-    if (!getUser) {
-      throw new ApiError(httpStatus.NOT_FOUND, `user not found`);
-    }
+  if (!getUser) {
+    throw new ApiError(httpStatus.NOT_FOUND, `user not found`);
+  }
 
   if (!file) {
     const user = { firstName, lastName };
@@ -41,11 +41,10 @@ const updateUser = async (reqBody, file, id) => {
     const profile = { fullName, address, phoneNumber, gender };
     await userRepository.updateUser(user, id);
     await userRepository.updateProfile(profile, id);
-    
   } else {
-    const validFormat = 
-      file.mimetype == "image/png" || 
-      file.mimetype == "image/jpg" || 
+    const validFormat =
+      file.mimetype == "image/png" ||
+      file.mimetype == "image/jpg" ||
       file.mimetype == "image/jpeg";
     if (!validFormat) {
       throw new ApiError(httpStatus.BAD_REQUEST, "Wrong Image Format");
@@ -62,7 +61,7 @@ const updateUser = async (reqBody, file, id) => {
 
     const user = { firstName, lastName };
     const fullName = firstName + " " + lastName;
-    const profile = { 
+    const profile = {
       fullName,
       address,
       phoneNumber,
@@ -71,8 +70,6 @@ const updateUser = async (reqBody, file, id) => {
     };
     await userRepository.updateUser(user, id);
     await userRepository.updateProfile(profile, id);
-
-    
   }
   const getNewUser = await userRepository.findUser(id);
 
