@@ -48,6 +48,8 @@ const getCompanyById = (req, res, next) => {
 };
 
 const updateCompany = (req, res, next) => {
+  console.log(req.file);
+  console.log(req.body);
   companyService
     .updateCompany(req.body.companyName, req.file, req.params.id)
     .then((company) => {

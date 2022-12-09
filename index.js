@@ -24,7 +24,7 @@ app.locals.moment = require("moment");
 app.use(express.json());
 app.use(cors());
 // parse requests of content-type - application/x-www-form-urlencoded
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 
 app.use(morgan("dev"));
 app.use(router);
