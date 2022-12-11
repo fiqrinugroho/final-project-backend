@@ -1,0 +1,1128 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Final Project API",
+    "version": "1.0.0"
+  },
+  "_servers": [
+    {
+      "url": "http:/localhost:3001",
+      "description": "localhost"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Auth",
+      "description": "Auth API Collection"
+    },
+    {
+      "name": "Airport",
+      "description": "Airport API Collection"
+    },
+    {
+      "name": "Company",
+      "description": "Company API Collection"
+    }
+  ],
+  "paths": {
+    "/api/auth/register": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "Register a New User",
+        "requestBody": {
+          "description": "Register New User",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "firstName": {
+                    "type": "string",
+                    "example": "Zidane"
+                  },
+                  "lastName": {
+                    "type": "string",
+                    "example": "Arvito"
+                  },
+                  "email": {
+                    "type": "string",
+                    "example": "vito@mail.com"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "p@ssw0rd"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success Register New User",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Success Register New User"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/registerUser"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Email Already Exists",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Failed"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "email already taken"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/auth/login": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "Login User",
+        "requestBody": {
+          "description": "Login User",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "example": "vito@mail.com"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "p@ssw0rd"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success Login",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Success Login"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/loginUser"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Incorrect Password",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Failed"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "The password you entered is incorrect"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Email Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Failed"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "user not found"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/auth/login/admin": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "Login Admin",
+        "requestBody": {
+          "description": "Login for Admin",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "example": "fiqri@mail.com"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "qwerty123"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success Login For Admin",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Success Login Admin"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/loginAdmin"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Incorrect Password",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Failed"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "The password you entered is incorrect"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "$ref":"#/components/responses/isAdmin"
+          },
+          "404": {
+            "description": "Email Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Failed"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "user not found"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/airport/": {
+      "get": {
+        "summary": "Get All Airport Data",
+        "description": "This API for see all airport data",
+        "tags": [
+          "Airport"
+        ], 
+        "responses": {
+          "200": {
+            "description": "User and admin can see this data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "totalData": {
+                      "type": "integer",
+                      "example": "1"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/airport"        
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },  
+    "/api/airport/{id}": {
+      "get": {
+        "summary": "Get Airport Data By Id",
+        "description": "This API for see airport data by Id",
+        "tags": [
+          "Airport"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "description": "input id airport",
+            "name": "id",
+            "required": true
+          }
+        ],    
+        "responses": {
+          "200": {
+            "description": "User and admin can see this data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/airport"        
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/airportNotFound"
+          }
+        }
+      }
+    },  
+    "/api/airport/create": {
+      "post": {
+        "summary": "Create New Airport Data",
+        "tags": [
+          "Airport"
+        ],
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBody/airportBody"
+        },
+        "responses": {
+          "201": {
+            "description": "Success Create New Airport",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "message": {
+                      "type": "string",
+                     "example": "Success Create New Airport"
+                    },
+                    "data": {
+                      "type": "object",
+                      "$ref":"#/components/schemas/airport"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Empty value",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Failed"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "airport name cannot be empty"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/isAdmin"
+          }
+        }
+      }
+    },
+    "/api/airport/update/{id}": {
+      "put": {
+        "summary": "Update Airport Data By Id",
+        "tags": [
+          "Airport"
+        ],
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "description": "input id airport",
+            "name": "id",
+            "required": true
+          }
+        ],  
+        "requestBody": {
+          "$ref": "#/components/requestBody/airportBody"
+        },
+        "responses": {
+          "200": {
+            "description": "Success Update Airport Data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "message": {
+                      "type": "string",
+                     "example": "Success Update Airport"
+                    },
+                    "data": {
+                      "type": "object",
+                      "$ref":"#/components/schemas/airport"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/airportNotFound"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/isAdmin"
+          }
+        }
+      }
+    },
+    "/api/airport/delete/{id}": {
+      "delete": {
+        "summary": "Delete Airport Data By Id",
+        "tags": [
+          "Airport"
+        ],
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "description": "input id airport",
+            "name": "id",
+            "required": true
+          }
+        ], 
+        "responses": {
+          "200": {
+            "description": "Success Delete Data Airport",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "message": {
+                      "type": "string",
+                     "example": "Success Delete Airport"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/airportNotFound"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/isAdmin"
+          }
+        }
+      }
+    },
+    "/api/company": {
+      "get": {
+        "summary": "Get All Company Data",
+        "description": "This API for see all company data",
+        "tags": [
+          "Company"
+        ], 
+        "responses": {
+          "200": {
+            "description": "User and admin can see this data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "totalData": {
+                      "type": "integer",
+                      "example": "1"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/company"        
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },  
+    "/api/company/{id}": {
+      "get": {
+        "summary": "Get Company Data By Id",
+        "description": "This API for see company data by Id",
+        "tags": [
+          "Company"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "description": "input id company",
+            "name": "id",
+            "required": true
+          }
+        ],    
+        "responses": {
+          "200": {
+            "description": "User and admin can see this data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/company"        
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/companyNotFound"
+          }
+        }
+      }
+    },
+    "/api/company/create": {
+      "post": {
+        "summary": "Create New Company Data",
+        "tags": [
+          "Company"
+        ],
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
+        "description": "companyName and image cannot be blank",
+        "requestBody": {
+          "$ref": "#/components/requestBody/companyBody"
+        },
+        "responses": {
+          "201": {
+            "description": "Success Create New Company",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "message": {
+                      "type": "string",
+                     "example": "Success Create New Company"
+                    },
+                    "data": {
+                      "type": "object",
+                      "$ref":"#/components/schemas/airport"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Empty value",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Failed"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "company name cannot be empty"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/isAdmin"
+          }
+        }
+      }
+    },
+    "/api/company/update/{id}": {
+      "put": {
+        "summary": "Update Company Data By Id",
+        "tags": [
+          "Company"
+        ],
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
+        "description": "companyName cannot be blank, and if you don't upload an image then the image used is still the previous image",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "input id company",
+            "name": "id",
+            "required": true
+          }
+        ],  
+        "requestBody": {
+          "$ref": "#/components/requestBody/companyBody"
+        },
+        "responses": {
+          "200": {
+            "description": "Success Update Company Data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "message": {
+                      "type": "string",
+                     "example": "Success Update Company"
+                    },
+                    "data": {
+                      "type": "object",
+                      "$ref":"#/components/schemas/company"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/companyNotFound"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/isAdmin"
+          }
+        }
+      }
+    },
+    "/api/company/delete/{id}": {
+      "delete": {
+        "summary": "Delete Company Data By Id",
+        "tags": [
+          "Company"
+        ],
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "description": "input id company",
+            "name": "id",
+            "required": true
+          }
+        ], 
+        "responses": {
+          "200": {
+            "description": "Success Delete Data Company",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "message": {
+                      "type": "string",
+                     "example": "Success Delete Company"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/companyNotFound"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/isAdmin"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "Unauthorized": {
+        "description": "Need Token for access",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "fail"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Invalid Token"
+                }
+              }
+            }
+          }
+        }
+      },
+      "isAdmin": {
+        "description": "Member Can't Access This page",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "Unauthorized Access"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "only admin can access this page"
+                }
+              }
+            }
+          }
+        }
+      },
+      "airportNotFound": {
+        "description": "Data Not Found",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "Failed"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "airport not found"
+                }
+              }
+            }
+          }
+        }
+      },
+      "companyNotFound": {
+        "description": "Data Not Found",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "Failed"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "company not found"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "requestBody": {
+      "airportBody": {
+        "description": "Airport Data",
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "airportName": {
+                  "type": "string",
+                  "example": "Bandara Soekarno Hatta"
+                },
+                "city": {
+                  "type": "string",
+                  "example": "Jakarta"
+                },
+                "cityCode": {
+                  "type": "string",
+                  "example": "41333"
+                }
+              }
+            }
+          }
+        }
+      },
+      "companyBody": {
+        "description": "Company Data",
+        "required": true,
+        "content": {
+          "multipart/form-data": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "companyName": {
+                  "type": "string",
+                  "example": "LION AIR",
+                  "required": true
+                },
+                "image":{
+                  "type": "string",
+                  "format": "binary",
+                  "required": true
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "registerUser": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": "6"
+          },
+          "name": {
+            "type": "string",
+            "example": "Zidane"
+          },
+          "email": {
+            "type": "string",
+            "example": "vito@mail.com"
+          },
+          "roleId": {
+            "type": "integer",
+            "example": "2"
+          },
+          "role": {
+            "type": "string",
+            "example": "Member"
+          },
+          "accessToken": {
+            "type": "string",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiZW1haWwiOiJ2aXRvQG1haWwuY29tIiwicm9sZUlkIjoyLCJpYXQiOjE2Njk2NjMzMTR9.CtkS22YXgl5zPR0SItR629YoC4hOp9RHnk3sFFnv9Yg"
+          }
+        }
+      },
+      "loginUser": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": "6"
+          },
+          "name": {
+            "type": "string",
+            "example": "Zidane"
+          },
+          "email": {
+            "type": "string",
+            "example": "vito@mail.com"
+          },
+          "roleId": {
+            "type": "integer",
+            "example": "2"
+          },
+          "role": {
+            "type": "string",
+            "example": "Member"
+          },
+          "token": {
+            "type": "string",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiZW1haWwiOiJ2aXRvQG1haWwuY29tIiwicm9sZUlkIjoyLCJpYXQiOjE2Njk2NjM2MDB9.t-mS8RHauM7M5fiIGbXRDaJg7pVE2O82HwfTyY7Z98E"
+          }
+        }
+      },
+      "loginAdmin": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": "1"
+          },
+          "name": {
+            "type": "string",
+            "example": "Fiqri"
+          },
+          "email": {
+            "type": "string",
+            "example": "fiqri@mail.com"
+          },
+          "roleId": {
+            "type": "integer",
+            "example": "1"
+          },
+          "role": {
+            "type": "string",
+            "example": "Admin"
+          },
+          "token": {
+            "type": "string",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6ImZpcXJpIiwiZW1haWwiOiJmaXFyaUBtYWlsLmNvbSIsInJvbGVJZCI6MSwiaWF0IjoxNjcwMzA1MjQwfQ.3vQu0dNVmhZ1GuCnM2ZG4JXFY03lzFJWwSFE7X3zRYQ"
+          }
+        }
+      },
+      "role": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": "2"
+          },
+          "roleName": {
+            "type": "string",
+            "example": "Member"
+          },
+          "createdAt": {
+            "type": "date",
+            "example": "2022-10-17T14:04:48.389Z"
+          },
+          "updatedAt": {
+            "type": "date",
+            "example": "2022-10-17T14:04:48.389Z"
+          }
+        }
+      },
+      "airport": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": "1"
+          },
+          "airportName": {
+            "type": "string",
+            "example": "Bandara Soekarno Hatta"
+          },
+          "city": {
+            "type": "string",
+            "example": "Jakarta"
+          },
+          "cityCode": {
+            "type": "string",
+            "example": "41333"
+          },
+          "updatedAt": {
+            "type": "date",
+            "example": "2022-12-06T06:17:28.899Z"
+          },
+          "createdAt": {
+            "type": "date",
+            "example": "2022-12-06T06:17:28.899Z"
+          }
+        }
+      },
+      "company": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": "1"
+          },
+          "companyName": {
+            "type": "string",
+            "example": "LION AIR"
+          },
+          "companyImage": {
+            "type": "string",
+            "example": "https://ik.imagekit.io/mfn/IMG-1670478922501_rUSD3C2ff.png"
+          },
+          "updatedAt": {
+            "type": "date",
+            "example": "2022-12-08T05:55:36.861Z"
+          },
+          "createdAt": {
+            "type": "date",
+            "example": "2022-12-08T05:55:36.861Z"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerToken": {
+        "description": "Insert Token, You can get it after login",
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}

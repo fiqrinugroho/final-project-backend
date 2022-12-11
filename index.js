@@ -1,42 +1,49 @@
 // import statement itu simpen paling atas
 
 // karena menggunakan .env variable, jd lakuin import ini di awal aplikasi jalan
-require('dotenv').config()
+require("dotenv").config();
 
-const express = require('express')
+const express = require("express");
 // menggunakan logger morgan
-const morgan = require('morgan')
+const morgan = require("morgan");
 // import routing
-// const router = require('./config/routes')
+const router = require("./config/routes");
 
-const cors = require('cors')
+const cors = require("cors");
 // error handler
-// const errorHandler = require('./middlewares/errorHandler')
-// const ApiError = require('./utils/ApiError')
-// const httpStatus = require('http-status')
+const errorHandler = require("./middlewares/errorHandler");
+const ApiError = require("./utils/ApiError");
+const httpStatus = require("http-status");
 
-const port = process.env.PORT
+const port = process.env.PORT;
 // inisialisasi setelah import statement
-const app = express()
+const app = express();
 // basic express configurasi
-app.locals.moment = require('moment')
+app.locals.moment = require("moment");
 // Middleware to Parse JSON
-app.use(express.json())
-app.use(cors())
+app.use(express.json());
+app.use(cors());
 // parse requests of content-type - application/x-www-form-urlencoded
-app.use(express.urlencoded({ extended:false }))
+app.use(express.urlencoded({ extended: true }));
 
-app.use(morgan('dev'))
-// app.use(router)
+app.use(morgan("dev"));
+app.use(router);
 
 // middleware for page not found
-// app.use((req, res, next) => {
-//     next(new ApiError(httpStatus.NOT_FOUND, `Cannot Find EndPoint ${req.originalUrl} On This App ....`))
-// })
+app.use((req, res, next) => {
+  next(
+    new ApiError(
+      httpStatus.NOT_FOUND,
+      `Cannot Find EndPoint ${req.originalUrl} On This App ....`
+    )
+  );
+});
 // use middleware errorHandler
-// app.use(errorHandler)
+app.use(errorHandler);
 
 app.listen(port, () => {
-    console.log(`Server running on ${Date(Date.now)}`)
-    console.log(`Server listening on PORT: ${port}`)
-})
+  // eslint-disable-next-line no-console
+  console.log(`Server running on ${Date(Date.now)}`);
+  // eslint-disable-next-line no-console
+  console.log(`Server listening on PORT: ${port}`);
+});
