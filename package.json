@@ -4,7 +4,6 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon index",
     "lint": "eslint . --ext .js",
     "lint:fix": "eslint --fix --ext .js,.jsx .",
@@ -14,6 +13,7 @@
     "db:migrate:undo": "sequelize db:migrate:undo:all",
     "db:seed": "sequelize db:seed:all",
     "db:drop": "sequelize db:drop",
+    "test": "jest --setupFiles dotenv/config --coverage --colors --verbose --detectOpenHandles --forceExit"
   },
   "author": "FSW-C14",
   "license": "ISC",
