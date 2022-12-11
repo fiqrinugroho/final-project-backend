@@ -12,6 +12,7 @@ const createAirport = async (reqBody) => {
   if (!cityCode)
     throw new ApiError(httpStatus.BAD_REQUEST, "city code cannot be empty");
 
+    console.log('test')
   const airport = await airportRepository.findAirport(airportName);
   if (airport) {
     throw new ApiError(httpStatus.BAD_REQUEST, `this airport already exists`);
