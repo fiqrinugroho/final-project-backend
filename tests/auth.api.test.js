@@ -32,27 +32,27 @@ describe("API Login", () => {
   });
 });
 
-describe('API Register', () => {
-    it('Success register', async () => {
+describe("API Register", () => {
+    it("Success register", async () => {
       const newUser = {
         firstName: "Zidane",
         lastName: "Arvito",
         email: `vito${Date.now()}@binar.co.id`,
         password: "12345678",
       }
-      const response = await request(app).post('/api/auth/register').send(newUser)
+      const response = await request(app).post("/api/auth/register").send(newUser)
       expect(response.statusCode).toBe(201)
     })
   
-    it('Failed register : email already taken', async () => {
+    it("Failed register : email already taken", async () => {
       const failedNewUser = {
         firstName: "Fiqri",
         lastName: "Nugroho",
-        email: 'fiqri@mail.com',
-        password: '123456789',
+        email: "fiqri@mail.com",
+        password:"123456789",
       }
       const response = await request(app)
-        .post('/api/auth/register')
+        .post("/api/auth/register")
         .send(failedNewUser)
       expect(response.statusCode).toBe(400)
     })
