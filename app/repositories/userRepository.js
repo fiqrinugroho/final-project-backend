@@ -1,4 +1,4 @@
-const { user, profile, role } = require("../models");
+const { user, profile, role, } = require("../models");
 
 const getUserById = (id) => {
   return user.findOne({
@@ -30,15 +30,15 @@ const findUser = (id) => {
 };
 
 const updateProfile = async (reqBody, id) => {
-  return await profile.update(reqBody, { where: { id } });
+  return await profile.update(reqBody, { where: { id, }, });
 };
 
 const updateUser = async (reqBody, id) => {
-  return await user.update(reqBody, { where: { id } });
+  return await user.update(reqBody, { where: { id, }, });
 };
 
 const deleteUser = async (id) => {
-  return await profile.destroy({ where: { id } });
+  return await profile.destroy({ where: { id, }, });
 };
 
 module.exports = {

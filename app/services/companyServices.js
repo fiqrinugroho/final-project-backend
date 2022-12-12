@@ -53,7 +53,7 @@ const getCompanyById = async (id) => {
   const company = await companyRepository.findCompanyById(id);
 
   if (!company) {
-    throw new ApiError(httpStatus.NOT_FOUND, `company not found`);
+    throw new ApiError(httpStatus.NOT_FOUND, "company not found");
   } else {
     return company;
   }
@@ -62,11 +62,8 @@ const getCompanyById = async (id) => {
 const updateCompany = async (companyName, file, id) => {
   const company = await companyRepository.findCompanyById(id);
 
-  if (!companyName)
-    throw new ApiError(httpStatus.BAD_REQUEST, "company name cannot be empty");
-
   if (!company) {
-    throw new ApiError(httpStatus.NOT_FOUND, `company not found`);
+    throw new ApiError(httpStatus.NOT_FOUND, "company not found");
   }
 
   if (file == null) {
@@ -107,7 +104,7 @@ const deleteCompany = async (id) => {
   const company = await companyRepository.findCompanyById(id);
 
   if (!company) {
-    throw new ApiError(httpStatus.NOT_FOUND, `company not found`);
+    throw new ApiError(httpStatus.NOT_FOUND, "company not found");
   } else {
     return await companyRepository.deleteCompany(id);
   }

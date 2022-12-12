@@ -3,15 +3,15 @@ const jwt = require("jsonwebtoken");
 const httpStatus = require("http-status");
 const ApiError = require("../../utils/ApiError");
 const authRepository = require("../repositories/authRepository");
-const { JWT_SIGNATURE_KEY } = require("../../config/application");
+const { JWT_SIGNATURE_KEY, } = require("../../config/application");
 
 const login = async (reqBody) => {
-  const { email, password } = reqBody;
+  const { email, password, } = reqBody;
   const user = await authRepository.findUser(email);
 
   // gagal melanjutkan karena username nya tidak ada
   if (!user) {
-    throw new ApiError(httpStatus.NOT_FOUND, `user not found`);
+    throw new ApiError(httpStatus.NOT_FOUND, "user not found");
   }
   // check password user, jika success login dapat response yang isinya TOKEN
   const isPasswordCorrect = verifyPassword(password, user.password);
@@ -34,7 +34,7 @@ const login = async (reqBody) => {
 };
 
 const registerNewUser = async (reqBody) => {
-  const { firstName, lastName, email, password } = reqBody;
+  const { firstName, lastName, email, password, } = reqBody;
 
   // validasi data yang kosong
   if (!email)
@@ -47,7 +47,7 @@ const registerNewUser = async (reqBody) => {
 
   const user = await authRepository.findEmail(email);
   if (user) {
-    throw new ApiError(httpStatus.BAD_REQUEST, `email already exists`);
+    throw new ApiError(httpStatus.BAD_REQUEST, "email already exists");
   }
   // validasi minimum password length
   const passswordLength = password.length >= 8;
@@ -110,7 +110,7 @@ const verifyPassword = (password, encryptedPassword) => {
 };
 
 const loginAdmin = async (reqBody) => {
-  const { email, password } = reqBody;
+  const { email, password, } = reqBody;
   const user = await authRepository.findUser(email);
 
   // gagal melanjutkan karena username nya tidak ada
