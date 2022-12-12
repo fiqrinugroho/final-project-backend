@@ -7,7 +7,7 @@ const getUserById = async (id) => {
   const user = await userRepository.findUser(id);
 
   if (!user) {
-    throw new ApiError(httpStatus.NOT_FOUND, `user not found`);
+    throw new ApiError(httpStatus.NOT_FOUND, "user not found");
   } else {
     await userRepository.updateUser(id);
     const getUser = await userRepository.findUser(id);
@@ -27,18 +27,18 @@ const getUserById = async (id) => {
 };
 
 const updateUser = async (reqBody, file, id) => {
-  const { firstName, lastName, address, phoneNumber, gender } = reqBody;
+  const { firstName, lastName, address, phoneNumber, gender, } = reqBody;
 
   const getUser = await userRepository.findUser(id);
 
   if (!getUser) {
-    throw new ApiError(httpStatus.NOT_FOUND, `user not found`);
+    throw new ApiError(httpStatus.NOT_FOUND, "user not found");
   }
 
   if (!file) {
-    const user = { firstName, lastName };
+    const user = { firstName, lastName, };
     const fullName = firstName + " " + lastName;
-    const profile = { fullName, address, phoneNumber, gender };
+    const profile = { fullName, address, phoneNumber, gender, };
     await userRepository.updateUser(user, id);
     await userRepository.updateProfile(profile, id);
   } else {
@@ -59,7 +59,7 @@ const updateUser = async (reqBody, file, id) => {
       fileName: `IMG-${Date.now()}.${ext}`, //required
     });
 
-    const user = { firstName, lastName };
+    const user = { firstName, lastName, };
     const fullName = firstName + " " + lastName;
     const profile = {
       fullName,
@@ -90,7 +90,7 @@ const deleteUser = async (id) => {
   const user = await userRepository.getUserById(id);
 
   if (!user) {
-    throw new ApiError(httpStatus.NOT_FOUND, `user not found`);
+    throw new ApiError(httpStatus.NOT_FOUND, "user not found");
   } else {
     return await userRepository.deleteUser(id);
   }

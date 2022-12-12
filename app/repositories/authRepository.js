@@ -1,5 +1,5 @@
 // import models
-const { user, role, profile } = require("../models");
+const { user, role, profile, } = require("../models");
 
 // membuat user baru
 const createUser = (createArgs) => {
@@ -40,7 +40,7 @@ const findUser = (email) => {
 };
 
 const addProfile = (userId, fullName) => {
-  return profile.create({ fullName, userId });
+  return profile.create({ fullName, userId, });
 };
 
 module.exports = {

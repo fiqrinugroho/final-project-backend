@@ -3,7 +3,7 @@ const ApiError = require("../../utils/ApiError");
 const airportRepository = require("../repositories/airportRepository");
 
 const createAirport = async (reqBody) => {
-  const { airportName, city, cityCode } = reqBody;
+  const { airportName, city, cityCode, } = reqBody;
 
   // validasi data yang kosong
   if (!airportName)
@@ -14,7 +14,7 @@ const createAirport = async (reqBody) => {
 
   const airport = await airportRepository.findAirport(airportName);
   if (airport) {
-    throw new ApiError(httpStatus.BAD_REQUEST, `this airport already exists`);
+    throw new ApiError(httpStatus.BAD_REQUEST, "this airport already exists");
   } else {
     const newAirport = {
       airportName,
@@ -33,7 +33,7 @@ const getAirportById = async (id) => {
   const airport = await airportRepository.findAirportById(id);
 
   if (!airport) {
-    throw new ApiError(httpStatus.NOT_FOUND, `airport not found`);
+    throw new ApiError(httpStatus.NOT_FOUND, "airport not found");
   } else {
     return airport;
   }
@@ -43,7 +43,7 @@ const updateAirport = async (reqBody, id) => {
   const airport = await airportRepository.findAirportById(id);
 
   if (!airport) {
-    throw new ApiError(httpStatus.NOT_FOUND, `airport not found`);
+    throw new ApiError(httpStatus.NOT_FOUND, "airport not found");
   } else {
     await airportRepository.updateAirport(reqBody, id);
     const getAirport = await airportRepository.findAirportById(id);
@@ -63,7 +63,7 @@ const deleteAirport = async (id) => {
   const airport = await airportRepository.findAirportById(id);
 
   if (!airport) {
-    throw new ApiError(httpStatus.NOT_FOUND, `airport not found`);
+    throw new ApiError(httpStatus.NOT_FOUND, "airport not found");
   } else {
     return await airportRepository.deleteAirport(id);
   }
