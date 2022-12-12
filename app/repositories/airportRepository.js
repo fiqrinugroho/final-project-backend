@@ -1,4 +1,4 @@
-const { airport } = require("../models");
+const { airport, } = require("../models");
 
 // untuk mencari data sesuai dengan nama airport
 const findAirport = (airportName) => {
@@ -37,11 +37,11 @@ const findAirportById = (id) => {
 };
 
 const updateAirport = async (reqBody, id) => {
-  return await airport.update(reqBody, { where: { id } });
+  return await airport.update(reqBody, { where: { id, }, });
 };
 
 const deleteAirport = async (id) => {
-  return await airport.destroy({ where: { id } });
+  return await airport.destroy({ where: { id, }, });
 };
 
 module.exports = {

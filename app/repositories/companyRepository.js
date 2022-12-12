@@ -1,4 +1,4 @@
-const { company } = require("../models");
+const { company, } = require("../models");
 
 const findCompany = (companyName) => {
   // cari berdasarkan nama company
@@ -28,11 +28,11 @@ const findCompanyById = (id) => {
 };
 
 const updateCompany = async (reqBody, id) => {
-  return await company.update(reqBody, { where: { id } });
+  return await company.update(reqBody, { where: { id, }, });
 };
 
 const deleteCompany = async (id) => {
-  return await company.destroy({ where: { id } });
+  return await company.destroy({ where: { id, }, });
 };
 
 module.exports = {
