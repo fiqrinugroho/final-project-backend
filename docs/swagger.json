@@ -4,12 +4,6 @@
     "title": "Final Project API",
     "version": "1.0.0"
   },
-  "_servers": [
-    {
-      "url": "http:/localhost:3001",
-      "description": "localhost"
-    }
-  ],
   "tags": [
     {
       "name": "Auth",
@@ -22,6 +16,10 @@
     {
       "name": "Company",
       "description": "Company API Collection"
+    },
+    {
+      "name": "Airplane",
+      "description": "Airplane API Collection"
     }
   ],
   "paths": {
@@ -717,7 +715,7 @@
             "bearerToken": []
           }
         ],
-        "description": "companyName cannot be blank, and if you don't upload an image then the image used is still the previous image",
+        "description": "if req body is empty data not change",
         "parameters": [
           {
             "in": "path",
@@ -817,7 +815,269 @@
           }
         }
       }
-    }
+    },
+    "/api/airplane/": {
+      "get": {
+        "summary": "Get All Airplane Data",
+        "description": "This API for see all airplane data",
+        "tags": [
+          "Airplane"
+        ], 
+        "responses": {
+          "200": {
+            "description": "User and admin can see this data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "totalData": {
+                      "type": "integer",
+                      "example": "1"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/airplane"        
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/airplane/{id}": {
+      "get": {
+        "summary": "Get Airplane Data By Id",
+        "description": "This API for see airplane data by Id",
+        "tags": [
+          "Airplane"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "description": "input id airplane",
+            "name": "id",
+            "required": true
+          }
+        ],    
+        "responses": {
+          "200": {
+            "description": "User and admin can see this data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/airplane"        
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/airplaneNotFound"
+          }
+        }
+      }
+    },
+    "/api/airplane/create": {
+      "post": {
+        "summary": "Create New Airplane Data",
+        "tags": [
+          "Airplane"
+        ],
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBody/airplaneBody"
+        },
+        "responses": {
+          "201": {
+            "description": "Success Create New Airplane",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "message": {
+                      "type": "string",
+                     "example": "Success Create New Airplane"
+                    },
+                    "data": {
+                      "type": "object",
+                      "$ref":"#/components/schemas/airplane"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Empty value",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Failed"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "airplane name cannot be empty"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/isAdmin"
+          }
+        }
+      }
+    },
+    "/api/airplane/update/{id}": {
+      "put": {
+        "summary": "Update Airplane Data By Id",
+        "tags": [
+          "Airplane"
+        ],
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "description": "input id airplane",
+            "name": "id",
+            "required": true
+          }
+        ],  
+        "requestBody": {
+          "$ref": "#/components/requestBody/airplaneBody"
+        },
+        "responses": {
+          "200": {
+            "description": "Success Update Airplane Data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "message": {
+                      "type": "string",
+                     "example": "Success Update Airplane"
+                    },
+                    "data": {
+                      "type": "object",
+                      "$ref":"#/components/schemas/airplane"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/airplaneNotFound"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/isAdmin"
+          }
+        }
+      }
+    },
+    "/api/airplane/delete/{id}": {
+      "delete": {
+        "summary": "Delete Airplane Data By Id",
+        "tags": [
+          "Airplane"
+        ],
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "description": "input id airplane",
+            "name": "id",
+            "required": true
+          }
+        ], 
+        "responses": {
+          "200": {
+            "description": "Success Delete Data Airplane",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "message": {
+                      "type": "string",
+                     "example": "Success Delete Airplane"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/airplaneNotFound"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/isAdmin"
+          }
+        }
+      }
+    }  
   },
   "components": {
     "responses": {
@@ -900,6 +1160,26 @@
             }
           }
         }
+      },
+      "airplaneNotFound": {
+        "description": "Data Not Found",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "Failed"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "airplane not found"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "requestBody": {
@@ -945,6 +1225,31 @@
                   "type": "string",
                   "format": "binary",
                   "required": true
+                }
+              }
+            }
+          }
+        }
+      },
+      "airplaneBody": {
+        "description": "Airplane Data",
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "airplaneName": {
+                  "type": "string",
+                  "example": "Boeing 737-800"
+                },
+                "airplaneCode": {
+                  "type": "string",
+                  "example": "1212"
+                },
+                "companyName": {
+                  "type": "string",
+                  "example": "LION AIR"
                 }
               }
             }
@@ -1112,6 +1417,60 @@
           "createdAt": {
             "type": "date",
             "example": "2022-12-08T05:55:36.861Z"
+          }
+        }
+      },
+      "airplane": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": "1"
+          },
+          "airplaneName": {
+            "type": "string",
+            "example": "Boeing 737-800"
+          },
+          "airplaneCode": {
+            "type": "string",
+            "example": "1212"
+          },
+          "companyeName": {
+            "type": "string",
+            "example": "LION AIR"
+          },
+          "updatedAt": {
+            "type": "date",
+            "example": "2022-12-12T06:57:14.935Z"
+          },
+          "createdAt": {
+            "type": "date",
+            "example": "2022-12-12T06:57:14.935Z"
+          },
+          "company": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "example": "1"
+              },
+              "companyName": {
+                "type": "string",
+                "example": "LION AIR"
+              },
+              "companyImage": {
+                "type": "string",
+                "example": "https://ik.imagekit.io/mfn/IMG-1670478922501_rUSD3C2ff.png"
+              },
+              "updatedAt": {
+                "type": "date",
+                "example": "2022-12-08T05:55:36.861Z"
+              },
+              "createdAt": {
+                "type": "date",
+                "example": "2022-12-08T05:55:36.861Z"
+              }
+            }
           }
         }
       }

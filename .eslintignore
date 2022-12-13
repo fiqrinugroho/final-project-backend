@@ -1,5 +1,7 @@
 node_modules/
 database/
 app/models/
+tests/
+coverage/
 .eslintrc.js
 .env
