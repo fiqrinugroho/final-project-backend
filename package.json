@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon ./app/index",
+    "start": "node -r dotenv/config bin/www",
     "lint": "eslint . --ext .js",
     "lint:fix": "eslint --fix --ext .js,.jsx .",
     "db:config": "sequelize db:migrate && sequelize db:seed:all",
