@@ -41,6 +41,7 @@ jobs:
         run: npm run test
       - name: Notify Pull Request Made
         uses: rjstone/discord-webhook-notify@v1
+        if: always()
         with:
           severity: info
           details: Ada Pull Request di Repo BE Tim c14
