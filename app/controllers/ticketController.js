@@ -47,39 +47,39 @@ const getTicketById = (req, res, next) => {
     });
 };
 
-// const updateTicket = (req, res, next) => {
-//   ticketService
-//     .updateTicket(req.body, req.params.id)
-//     .then((ticket) => {
-//       res.status(200).json({
-//         status: "Success",
-//         message: "Success Update Ticket",
-//         data: ticket,
-//       });
-//     })
-//     .catch((err) => {
-//       next(err);
-//     });
-// };
+const updateTicket = (req, res, next) => {
+  ticketService
+    .updateTicket(req.body, req.params.id)
+    .then((ticket) => {
+      res.status(200).json({
+        status: "Success",
+        message: "Success Update Ticket",
+        data: ticket,
+      });
+    })
+    .catch((err) => {
+      next(err);
+    });
+};
 
-// const deleteTicket = (req, res, next) => {
-//   ticketService
-//     .deleteTicket(req.params.id)
-//     .then(() => {
-//       res.status(200).json({
-//         status: "Success",
-//         message: "Success Delete Ticket",
-//       });
-//     })
-//     .catch((err) => {
-//       next(err);
-//     });
-// };
+const deleteTicket = (req, res, next) => {
+  ticketService
+    .deleteTicket(req.params.id)
+    .then(() => {
+      res.status(200).json({
+        status: "Success",
+        message: "Success Delete Ticket",
+      });
+    })
+    .catch((err) => {
+      next(err);
+    });
+};
 
 module.exports = {
   createTicket,
   getTicket,
   getTicketById,
-//   updateTicket,
-//   deleteTicket,
+  updateTicket,
+  deleteTicket,
 };

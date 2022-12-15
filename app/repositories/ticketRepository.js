@@ -9,10 +9,16 @@ const findTicket = (code) => {
     },
     include: [
       {
-        model: airport,
+        model: airport, 
+        as:"origin",
       },
       {
-        model: airplane,
+        model: airport, 
+        as:"destination",
+      },
+      {
+        model: airplane, attributes: { exclude: ["seatCapacity",], },
+        include: company,
       },
     ],
   });
@@ -64,19 +70,19 @@ const findTicketById = (id) => {
   });
 };
 
-// const updateTicket = async (reqBody, id) => {
-//   return await ticket.update(reqBody, { where: { id, }, });
-// };
+const updateTicket = async (reqBody, id) => {
+  return await ticket.update(reqBody, { where: { id, }, });
+};
 
-// const deleteTicket = async (id) => {
-//   return await ticket.destroy({ where: { id, }, });
-// };
+const deleteTicket = async (id) => {
+  return await ticket.destroy({ where: { id, }, });
+};
 
 module.exports = {
   findTicket,
   createTicket,
   getTicket,
   findTicketById,
-//   updateTicket,
-//   deleteTicket,
+  updateTicket,
+  deleteTicket,
 };
