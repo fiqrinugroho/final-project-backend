@@ -61,15 +61,15 @@ const getTicket = async () => {
   return await ticketRepository.getTicket();
 };
   
-// const getTicketById = async (id) => {
-//   const ticket = await ticketRepository.findTicketById(id);
+const getTicketById = async (id) => {
+  const ticket = await ticketRepository.findTicketById(id);
   
-//   if (!ticket) {
-//     throw new ApiError(httpStatus.NOT_FOUND, "ticket not found");
-//   } else {
-//     return ticket;
-//   }
-// };
+  if (!ticket) {
+    throw new ApiError(httpStatus.NOT_FOUND, "ticket not found");
+  } else {
+    return ticket;
+  }
+};
   
 // const updateTicket = async (reqBody, id) => {
 //   const ticket = await ticketRepository.findTicketById(id);
@@ -104,7 +104,7 @@ const getTicket = async () => {
 module.exports = {
   createTicket,
   getTicket,
-//   getTicketById,
+  getTicketById,
 //   updateTicket,
 //   deleteTicket,
 };

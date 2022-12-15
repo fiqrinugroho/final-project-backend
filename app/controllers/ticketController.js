@@ -32,20 +32,20 @@ const getTicket = (req, res, next) => {
     });
 };
 
-// const getTicketById = (req, res, next) => {
-//   ticketService
-//     .getTicketById(req.params.id)
-//     .then((ticket) => {
-//       res.status(200).json({
-//         status: "OK",
-//         message: "Success",
-//         data: ticket,
-//       });
-//     })
-//     .catch((err) => {
-//       next(err);
-//     });
-// };
+const getTicketById = (req, res, next) => {
+  ticketService
+    .getTicketById(req.params.id)
+    .then((ticket) => {
+      res.status(200).json({
+        status: "OK",
+        message: "Success",
+        data: ticket,
+      });
+    })
+    .catch((err) => {
+      next(err);
+    });
+};
 
 // const updateTicket = (req, res, next) => {
 //   ticketService
@@ -79,7 +79,7 @@ const getTicket = (req, res, next) => {
 module.exports = {
   createTicket,
   getTicket,
-//   getTicketById,
+  getTicketById,
 //   updateTicket,
 //   deleteTicket,
 };
