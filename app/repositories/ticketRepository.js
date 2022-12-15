@@ -1,11 +1,11 @@
-const { ticket, airport, airplane, } = require("../models");
+const { ticket, airport, airplane, company, } = require("../models");
 
 // untuk mencari data sesuai dengan nama ticket
-const findTicket = (ticketName) => {
+const findTicket = (code) => {
   // cari berdasarkan nama ticket
   const find = ticket.findOne({
     where: {
-      ticketName,
+      code,
     },
     include: [
       {
@@ -23,29 +23,46 @@ const createTicket = (newTicket) => {
   return ticket.create(newTicket);
 };
 
-// const getTicket = () => {
-//   return ticket.findAll({
-//     attributes: { exclude: ["seatCapacity",], },
-//     // include: {
-//     //   model: airport, attributes: { exclude: ["createdAt", "updatedAt",], },
-//     // },
-//     include: {
-//       model: airport,
-//     },
-//   });
-// };
+const getTicket = () => {
+  return ticket.findAll({
+    include: [
+      {
+        model: airport, 
+        as:"origin",
+      },
+      {
+        model: airport, 
+        as:"destination",
+      },
+      {
+        model: airplane, attributes: { exclude: ["seatCapacity",], },
+        include: company,
+      },
+    ],
+  });
+};
 
-// const findTicketById = (id) => {
-//   return ticket.findOne({
-//     where: {
-//       id,
-//     },
-//     attributes: { exclude: ["seatCapacity",], },
-//     include: {
-//       model: airport,
-//     },
-//   });
-// };
+const findTicketById = (id) => {
+  return ticket.findOne({
+    where: {
+      id,
+    },
+    include: [
+      {
+        model: airport, 
+        as:"origin",
+      },
+      {
+        model: airport, 
+        as:"destination",
+      },
+      {
+        model: airplane, attributes: { exclude: ["seatCapacity",], },
+        include: company,
+      },
+    ],
+  });
+};
 
 // const updateTicket = async (reqBody, id) => {
 //   return await ticket.update(reqBody, { where: { id, }, });
@@ -58,8 +75,8 @@ const createTicket = (newTicket) => {
 module.exports = {
   findTicket,
   createTicket,
-//   getTicket,
-//   findTicketById,
+  getTicket,
+  findTicketById,
 //   updateTicket,
 //   deleteTicket,
 };

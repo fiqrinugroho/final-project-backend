@@ -16,21 +16,21 @@ const createTicket = (req, res, next) => {
     });
 };
 
-// const getTicket = (req, res, next) => {
-//   ticketService
-//     .getTicket()
-//     .then((ticket) => {
-//       res.status(200).json({
-//         status: "OK",
-//         message: "Success",
-//         totalData: ticket.length,
-//         data: ticket,
-//       });
-//     })
-//     .catch((err) => {
-//       next(err);
-//     });
-// };
+const getTicket = (req, res, next) => {
+  ticketService
+    .getTicket()
+    .then((ticket) => {
+      res.status(200).json({
+        status: "OK",
+        message: "Success",
+        totalData: ticket.length,
+        data: ticket,
+      });
+    })
+    .catch((err) => {
+      next(err);
+    });
+};
 
 // const getTicketById = (req, res, next) => {
 //   ticketService
@@ -78,7 +78,7 @@ const createTicket = (req, res, next) => {
 
 module.exports = {
   createTicket,
-//   getTicket,
+  getTicket,
 //   getTicketById,
 //   updateTicket,
 //   deleteTicket,

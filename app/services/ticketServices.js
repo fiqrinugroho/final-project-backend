@@ -30,8 +30,8 @@ const createTicket = async (reqBody) => {
   if (!airportOrigin) throw new ApiError(httpStatus.BAD_REQUEST, "origin airport not found");
   if (!airportDestination) throw new ApiError(httpStatus.BAD_REQUEST, "destination airport not found");
 
-
   const ticket = await ticketRepository.findTicket(code);
+
   if (ticket) {
     throw new ApiError(httpStatus.BAD_REQUEST, "ticket with this code already exists");
   } else {
@@ -43,13 +43,23 @@ const createTicket = async (reqBody) => {
       airplaneId:findAirplane.id,
       class:seatClass,
     };
-    return await ticketRepository.createTicket(newTicket);
+    const addTicket = await ticketRepository.createTicket(newTicket);
+    const viewTicket = {
+      id:addTicket.id,
+      code, departureDate, departureTime, arrivalDate, arrivalTime,
+      price, capacity, seatNumber,
+      class:seatClass,
+      flightFrom:airportOrigin,
+      flightTo:airportDestination,
+      airplane:findAirplane,
+    };
+    return viewTicket;
   }
 };
   
-// const getTicket = async () => {
-//   return await ticketRepository.getTicket();
-// };
+const getTicket = async () => {
+  return await ticketRepository.getTicket();
+};
   
 // const getTicketById = async (id) => {
 //   const ticket = await ticketRepository.findTicketById(id);
@@ -93,7 +103,7 @@ const createTicket = async (reqBody) => {
   
 module.exports = {
   createTicket,
-//   getTicket,
+  getTicket,
 //   getTicketById,
 //   updateTicket,
 //   deleteTicket,
