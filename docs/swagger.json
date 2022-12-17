@@ -20,6 +20,10 @@
     {
       "name": "Airplane",
       "description": "Airplane API Collection"
+    },
+    {
+      "name": "User",
+      "description": "User API Collection"
     }
   ],
   "paths": {
@@ -668,7 +672,7 @@
                     },
                     "data": {
                       "type": "object",
-                      "$ref":"#/components/schemas/airport"
+                      "$ref":"#/components/schemas/company"
                     }
                   }
                 }
@@ -1077,7 +1081,134 @@
           }
         }
       }
-    }  
+    },
+    "/api/user/": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Get user",
+        "description": "",
+        "operationId": "getUserById",
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/user"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
+        }
+      }
+    },
+    "/api/user/update/": {
+      "put": {
+        "summary": "Update user",
+        "tags": [
+          "User"
+        ],
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
+        "description": "if req body is empty data not change",
+        "requestBody": {
+          "$ref": "#/components/requestBody/userBody"
+        },
+        "responses": {
+          "200": {
+            "description": "Success Update Profile",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "message": {
+                      "type": "string",
+                     "example": "Success Update Profile"
+                    },
+                    "data": {
+                      "type": "object",
+                      "$ref":"#/components/schemas/user"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
+        }
+      }
+    },
+    "/api/user/delete/{id}": {
+      "delete": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Delete user by id",
+        "description": "This can only be done by the logged in user.",
+        "operationId": "deleteUser",
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id that needs to be deleted",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success Delete Data User",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "message": {
+                      "type": "string",
+                     "example": "Success Delete User"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
+        }
+      }
+    }
   },
   "components": {
     "responses": {
@@ -1201,7 +1332,7 @@
                 },
                 "cityCode": {
                   "type": "string",
-                  "example": "41333"
+                  "example": "JKT"
                 }
               }
             }
@@ -1250,6 +1381,29 @@
                 "companyName": {
                   "type": "string",
                   "example": "LION AIR"
+                }
+              }
+            }
+          }
+        }
+      },
+        "userBody": {
+        "description": "User Data",
+        "required": true,
+        "content": {
+          "multipart/form-data": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer",
+                  "example": "2",
+                  "required": true
+                },
+                "image":{
+                  "type": "string",
+                  "format": "binary",
+                  "required": true
                 }
               }
             }
@@ -1471,6 +1625,47 @@
                 "example": "2022-12-08T05:55:36.861Z"
               }
             }
+          }
+        }
+      },
+      "user": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": "2"
+          },
+          "firstName": {
+            "type": "string",
+            "example": "Rima"
+          },
+          "lastName": {
+            "type": "string",
+            "example": "Afy"
+          },
+          "address": {
+            "type": "string",
+            "example": "Bojonegoro"
+          },
+          "phoneNumber": {
+            "type": "string",
+            "example": "082247231584"
+          },
+          "avatar": {
+            "type": "string",
+            "example": "https://ik.imagekit.io/rima/default-image.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1665289661599"
+          },
+          "gender": {
+            "type": "string",
+            "example": "female"
+          },
+          "updatedAt": {
+            "type": "date",
+            "example": "2022-12-06T06:17:28.899Z"
+          },
+          "createdAt": {
+            "type": "date",
+            "example": "2022-12-06T06:17:28.899Z"
           }
         }
       }
