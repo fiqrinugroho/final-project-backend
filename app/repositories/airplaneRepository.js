@@ -7,6 +7,7 @@ const findAirplane = (airplaneName) => {
     where: {
       airplaneName,
     },
+    attributes: { exclude: ["seatCapacity",], },
     include: {
       model: company,
     },

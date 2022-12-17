@@ -13,16 +13,16 @@ module.exports = {
         type: Sequelize.STRING
       },
       departureDate: {
-        type: Sequelize.STRING
+        type: Sequelize.DATE
       },
       departureTime: {
-        type: Sequelize.STRING
+        type: Sequelize.TIME
       },
       arrivalDate: {
-        type: Sequelize.STRING
+        type: Sequelize.DATE
       },
       arrivalTime: {
-        type: Sequelize.STRING
+        type: Sequelize.TIME
       },
       flightFrom: {
         type: Sequelize.INTEGER
@@ -34,9 +34,12 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       price: {
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER
       },
       capacity: {
+        type: Sequelize.INTEGER
+      },
+      seatNumber: {
         type: Sequelize.STRING
       },
       class: {

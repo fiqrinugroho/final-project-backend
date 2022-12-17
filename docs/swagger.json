@@ -24,6 +24,10 @@
     {
       "name": "User",
       "description": "User API Collection"
+    },
+    {
+      "name": "Ticket",
+      "description": "Ticket API Collection"
     }
   ],
   "paths": {
@@ -1208,6 +1212,268 @@
           }
         }
       }
+    },
+    "/api/ticket/": {
+      "get": {
+        "summary": "Get All Ticket Data",
+        "description": "This API for see all ticket data",
+        "tags": [
+          "Ticket"
+        ], 
+        "responses": {
+          "200": {
+            "description": "User and admin can see this data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "totalData": {
+                      "type": "integer",
+                      "example": "1"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/ticket"        
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ticket/{id}": {
+      "get": {
+        "summary": "Get Ticket Data By Id",
+        "description": "This API for see ticket data by Id",
+        "tags": [
+          "Ticket"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "description": "input id ticket",
+            "name": "id",
+            "required": true
+          }
+        ],    
+        "responses": {
+          "200": {
+            "description": "User and admin can see this data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/ticket"        
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/ticketNotFound"
+          }
+        }
+      }
+    },
+    "/api/ticket/create": {
+      "post": {
+        "summary": "Create New Ticket Data",
+        "tags": [
+          "Ticket"
+        ],
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBody/ticketBody"
+        },
+        "responses": {
+          "201": {
+            "description": "Success Create New Ticket",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "message": {
+                      "type": "string",
+                     "example": "Success Create New Ticket"
+                    },
+                    "data": {
+                      "type": "object",
+                      "$ref":"#/components/schemas/ticket"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "duplicate ticket code",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Failed"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "ticket with this code already exists"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/isAdmin"
+          }
+        }
+      }
+    },
+    "/api/ticket/update/{id}": {
+      "put": {
+        "summary": "Update Ticket Data By Id",
+        "tags": [
+          "Ticket"
+        ],
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "description": "input id ticket",
+            "name": "id",
+            "required": true
+          }
+        ],  
+        "requestBody": {
+          "$ref": "#/components/requestBody/ticketBody"
+        },
+        "responses": {
+          "200": {
+            "description": "Success Update Ticket Data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "message": {
+                      "type": "string",
+                     "example": "Success Update Ticket"
+                    },
+                    "data": {
+                      "type": "object",
+                      "$ref":"#/components/schemas/ticket"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/ticketNotFound"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/isAdmin"
+          }
+        }
+      }
+    },
+    "/api/ticket/delete/{id}": {
+      "delete": {
+        "summary": "Delete Ticket Data By Id",
+        "tags": [
+          "Ticket"
+        ],
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "description": "input id ticket",
+            "name": "id",
+            "required": true
+          }
+        ], 
+        "responses": {
+          "200": {
+            "description": "Success Delete Data Ticket",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "message": {
+                      "type": "string",
+                     "example": "Success Delete Ticket"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/ticketNotFound"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/isAdmin"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -1311,6 +1577,26 @@
             }
           }
         }
+      },
+      "ticketNotFound": {
+        "description": "Data Not Found",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "Failed"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "ticket not found"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "requestBody": {
@@ -1387,7 +1673,7 @@
           }
         }
       },
-        "userBody": {
+      "userBody": {
         "description": "User Data",
         "required": true,
         "content": {
@@ -1404,6 +1690,67 @@
                   "type": "string",
                   "format": "binary",
                   "required": true
+                }
+              }
+            }
+          }
+        }
+      },
+      "ticketBody": {
+        "description": "Ticket Data",
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string",
+                  "example": "T302288"
+                },
+                "departureDate": {
+                  "type": "date",
+                  "example": "2022-12-06"
+                },
+                "departureTime": {
+                  "type": "time",
+                  "example": "11:35:00"
+                },
+                "arrivalDate": {
+                  "type": "date",
+                  "example": "2022-12-06"
+                },
+                "arrivalTime": {
+                  "type": "time",
+                  "example": "11:35:00"
+                },
+                "flightFrom": {
+                  "type": "integer",
+                  "example": "1"
+                },
+                "flightTo": {
+                  "type": "integer",
+                  "example": "2"
+                },
+                "airplaneId": {
+                  "type": "integer",
+                  "example": "1"
+                },
+                "price": {
+                  "type": "integer",
+                  "example": "750000"
+                },
+                "capacity": {
+                  "type": "integer",
+                  "example": "35"
+                },
+                "seatNumber": {
+                  "type": "string",
+                  "example": "E20"
+                },
+                "class": {
+                  "type": "string",
+                  "example": "EKONOMI"
                 }
               }
             }
@@ -1537,7 +1884,7 @@
           },
           "cityCode": {
             "type": "string",
-            "example": "41333"
+            "example": "JKT"
           },
           "updatedAt": {
             "type": "date",
@@ -1666,6 +2013,183 @@
           "createdAt": {
             "type": "date",
             "example": "2022-12-06T06:17:28.899Z"
+          }
+        }
+      },
+      "ticket": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": "1"
+          },
+          "code": {
+            "type": "string",
+            "example": "T302288"
+          },
+          "departureDate": {
+            "type": "date",
+            "example": "2022-12-06T00:00:00.000Z"
+          },
+          "departureTime": {
+            "type": "time",
+            "example": "11:35:00"
+          },
+          "arrivalDate": {
+            "type": "date",
+            "example": "2022-12-06T00:00:00.000Z"
+          },
+          "arrivalTime": {
+            "type": "time",
+            "example": "11:35:00"
+          },
+          "flightFrom": {
+            "type": "integer",
+            "example": "1"
+          },
+          "flightTo": {
+            "type": "integer",
+            "example": "2"
+          },
+          "airplaneId": {
+            "type": "integer",
+            "example": "1"
+          },
+          "price": {
+            "type": "integer",
+            "example": "750000"
+          },
+          "capacity": {
+            "type": "integer",
+            "example": "35"
+          },     
+          "seatNumber": {
+            "type": "string",
+            "example": "E20"
+          },
+          "class": {
+            "type": "string",
+            "example": "EKONOMI"
+          },
+          "createdAt": {
+            "type": "date",
+            "example": "2022-12-08T05:55:36.861Z"
+          },
+          "updatedAt": {
+            "type": "date",
+            "example": "2022-12-08T05:55:36.861Z"
+          },
+          "origin": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "example": "1"
+              },
+              "airportName": {
+                "type": "string",
+                "example": "Bandara Soekarno Hatta"
+              },
+              "city": {
+                "type": "string",
+                "example": "Jakarta"
+              },
+              "cityCode": {
+                "type": "string",
+                "example": "JKT"
+              },
+              "updatedAt": {
+                "type": "date",
+                "example": "2022-12-06T06:17:28.899Z"
+              },
+              "createdAt": {
+                "type": "date",
+                "example": "2022-12-06T06:17:28.899Z"
+              }
+            }
+          },
+          "destination": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "example": "2"
+              },
+              "airportName": {
+                "type": "string",
+                "example": "Bandara Ngurah Ray Bali"
+              },
+              "city": {
+                "type": "string",
+                "example": "Bali"
+              },
+              "cityCode": {
+                "type": "string",
+                "example": "BLI"
+              },
+              "updatedAt": {
+                "type": "date",
+                "example": "2022-12-06T06:17:28.899Z"
+              },
+              "createdAt": {
+                "type": "date",
+                "example": "2022-12-06T06:17:28.899Z"
+              }
+            }
+          },
+          "airplane": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "example": "1"
+              },
+              "airplaneName": {
+                "type": "string",
+                "example": "Boeing 737-800"
+              },
+              "airplaneCode": {
+                "type": "string",
+                "example": "1212"
+              },
+              "companyeName": {
+                "type": "string",
+                "example": "LION AIR"
+              },
+              "updatedAt": {
+                "type": "date",
+                "example": "2022-12-12T06:57:14.935Z"
+              },
+              "createdAt": {
+                "type": "date",
+                "example": "2022-12-12T06:57:14.935Z"
+              },
+              "company": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "example": "1"
+                  },
+                  "companyName": {
+                    "type": "string",
+                    "example": "LION AIR"
+                  },
+                  "companyImage": {
+                    "type": "string",
+                    "example": "https://ik.imagekit.io/mfn/IMG-1670478922501_rUSD3C2ff.png"
+                  },
+                  "updatedAt": {
+                    "type": "date",
+                    "example": "2022-12-08T05:55:36.861Z"
+                  },
+                  "createdAt": {
+                    "type": "date",
+                    "example": "2022-12-08T05:55:36.861Z"
+                  }
+                }
+              }
+            }
           }
         }
       }
