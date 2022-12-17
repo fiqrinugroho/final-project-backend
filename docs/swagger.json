@@ -1090,6 +1090,11 @@
         "summary": "Get user",
         "description": "",
         "operationId": "getUserById",
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success",
@@ -1107,7 +1112,7 @@
         }
       }
     },
-    "/api/company/update/": {
+    "/api/user/update/": {
       "put": {
         "summary": "Update user",
         "tags": [
@@ -1178,6 +1183,26 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Success Delete Data User",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "message": {
+                      "type": "string",
+                     "example": "Success Delete User"
+                    }
+                  }
+                }
+              }
+            }
+          },
           "401": {
             "$ref": "#/components/responses/Unauthorized"
           }
