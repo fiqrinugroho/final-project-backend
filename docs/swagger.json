@@ -672,7 +672,7 @@
                     },
                     "data": {
                       "type": "object",
-                      "$ref":"#/components/schemas/airport"
+                      "$ref":"#/components/schemas/company"
                     }
                   }
                 }
