@@ -3,7 +3,6 @@ const app = require("../app/index");
 const dotenv = require("dotenv");
 dotenv.config();
 
-
 describe("API Get All Airport", () => {
   it("success", async () => {
     const response = await request(app).get("/api/airport/");
@@ -30,7 +29,16 @@ describe("API create airport", () => {
       city: "tangerang",
       cityCode: "CGK",
     };
-    const response = await request(app).post("/api/airport/create").set("Authorization", `Bearer ${token}`).send(airport);
-    expect(response.statusCode).toBe(400);
+    const response = await request(app).post("/api/airport/create").set("Authorization", token).send(airport);
+    expect(response.statusCode).toBe(401);
   });
 });
+
+describe("API Get Airport By Id", () => {
+  it("Success", async () => {
+    const response = await request(app).get("/api/airport/2");
+    expect(response.statusCode).toBe(200);
+  });
+});
+
+
