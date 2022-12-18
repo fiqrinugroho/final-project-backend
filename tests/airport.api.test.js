@@ -11,19 +11,8 @@ describe("API Get All Airport", () => {
 });
 
 describe("API create airport", () => {
-  const token = "sdasokasdaspaskdpakkjdslkg";
+  const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6ImZpcXJpIiwiZW1haWwiOiJmaXFyaUBtYWlsLmNvbSIsInJvbGVJZCI6MSwiaWF0IjoxNjcwMzMyOTU3fQ.wXPmJ2TXeprs3wcw_8u4RONLiUm_KG9zcboaAibyooo";
   it("Unauthorized", async () => {
-    const airport = {
-      airportName: "soekarno hatta",
-      city: "tangerang",
-      cityCode: "CGK",
-    };
-    const response = await request(app).post("/api/airport/create").set("Authorization", `Bearer ${token}`).send(airport);
-    expect(response.statusCode).toBe(401);
-  });
-
-  it("Success Create New Airport", async () => {
-    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6ImZpcXJpIiwiZW1haWwiOiJmaXFyaUBtYWlsLmNvbSIsInJvbGVJZCI6MSwiaWF0IjoxNjcxMjY5MTM4fQ.PGRaVhoJP2k4knL0-b5D4qmtQlVdV39V5WefVsn2dO0";
     const airport = {
       airportName: "soekarno hatta",
       city: "tangerang",
@@ -41,4 +30,23 @@ describe("API Get Airport By Id", () => {
   });
 });
 
+describe("API Update Airport By Id", () => {
+  it("Unauthorized", async () => {
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiZW1haWwiOiJ2aXRvQG1haWwuY29tIiwicm9sZUlkIjoyLCJpYXQiOjE2Njk2NjM2MDB9.t-mS8RHauM7M5fiIGbXRDaJg7pVE2O82HwfTyY7Z98E";
+    const airport = {
+      airportName: "soekarno hatta",
+      city: "tangerang",
+      cityCode: "CGK",
+    };
+    const response = await request(app).put("/api/airport/update/2").set("Authorization", token).send(airport);
+    expect(response.statusCode).toBe(401);
+  });
+});
 
+describe("API Delete Airport", () => {
+  it("Unauthorized", async () => {
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiZW1haWwiOiJ2aXRvQG1haWwuY29tIiwicm9sZUlkIjoyLCJpYXQiOjE2Njk2NjM2MDB9.t-mS8RHauM7M5fiIGbXRDaJg7pVE2O82HwfTyY7Z98E";
+    const response = await request(app).delete("/api/airport/delete/2").set("Authorization", token);
+    expect(response.statusCode).toBe(401);
+  });
+});
