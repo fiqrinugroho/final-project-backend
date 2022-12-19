@@ -1664,9 +1664,9 @@
                   "type": "string",
                   "example": "1212"
                 },
-                "companyName": {
-                  "type": "string",
-                  "example": "LION AIR"
+                "companyId": {
+                  "type": "integer",
+                  "example": "1"
                 }
               }
             }
