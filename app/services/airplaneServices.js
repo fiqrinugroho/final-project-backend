@@ -5,29 +5,28 @@ const companyRepository = require("../repositories/companyRepository");
 
 
 const createAirplane = async (reqBody) => {
-  const { airplaneName, airplaneCode, companyName, } = reqBody;
-
+  const { airplaneName, airplaneCode, companyId, } = reqBody;
+  
   // validasi data yang kosong
   if (!airplaneName)
     throw new ApiError(httpStatus.BAD_REQUEST, "airplane name cannot be empty");
   if (!airplaneCode)
     throw new ApiError(httpStatus.BAD_REQUEST, "airplane code cannot be empty");
-  if (!companyName)
+  if (!companyId)
     throw new ApiError(httpStatus.BAD_REQUEST, "company cannot be empty");
 
-  const company = await companyRepository.findCompany(companyName);
+  const company = await companyRepository.findCompanyById(companyId);
   if (!company) {
     throw new ApiError(httpStatus.NOT_FOUND, "company not found");
   } else {
     const newAirplane = {
       airplaneName,
       airplaneCode,
-      companyId:company.id,
+      companyId,
     };
     const addAirplane = await airplaneRepository.createAirplane(newAirplane);
 
-    const newData = await airplaneRepository.findAirplaneById(addAirplane.id);
-    return newData;
+    return await airplaneRepository.findAirplaneById(addAirplane.id);
   }
 };
 
