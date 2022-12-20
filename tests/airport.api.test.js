@@ -14,9 +14,9 @@ describe("API create airport", () => {
   const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6ImZpcXJpIiwiZW1haWwiOiJmaXFyaUBtYWlsLmNvbSIsInJvbGVJZCI6MSwiaWF0IjoxNjcwMzMyOTU3fQ.wXPmJ2TXeprs3wcw_8u4RONLiUm_KG9zcboaAibyooo";
   it("Unauthorized", async () => {
     const airport = {
-      airportName: "soekarno hatta",
-      city: "tangerang",
-      cityCode: "CGK",
+      airportName: "Halim Perdanakusuma",
+      city: "Jakarta",
+      cityCode: "JKT",
     };
     const response = await request(app).post("/api/airport/create").set("Authorization", token).send(airport);
     expect(response.statusCode).toBe(401);
