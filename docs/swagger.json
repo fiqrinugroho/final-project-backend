@@ -1681,15 +1681,30 @@
             "schema": {
               "type": "object",
               "properties": {
-                "id": {
-                  "type": "integer",
-                  "example": "2",
-                  "required": true
+                "firstName": {
+                "type": "string",
+                "example": "Rima"
+                },
+                "lastName": {
+                  "type": "string",
+                  "example": "Afy"
+                },
+                "address": {
+                  "type": "string",
+                  "example": "Bojonegoro"
+                },
+                "phoneNumber": {
+                  "type": "string",
+                  "example": "082247231584"
                 },
                 "image":{
                   "type": "string",
                   "format": "binary",
                   "required": true
+                },
+                "gender": {
+                  "type": "string",
+                  "example": "female"
                 }
               }
             }
