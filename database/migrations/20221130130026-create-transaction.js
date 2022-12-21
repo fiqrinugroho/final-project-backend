@@ -10,13 +10,21 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       userId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'users',
+          key: 'id',
+        },
+        onDelete: 'CASCADE',
       },
       paymentId: {
         type: Sequelize.INTEGER
       },
       ticketId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.ARRAY(Sequelize.INTEGER)
+      },
+      passengerId: {
+        type: Sequelize.ARRAY(Sequelize.INTEGER)
       },
       status: {
         type: Sequelize.STRING
@@ -25,9 +33,6 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       totalPrice: {
-        type: Sequelize.STRING
-      },
-      seatNumber: {
         type: Sequelize.STRING
       },
       createdAt: {
