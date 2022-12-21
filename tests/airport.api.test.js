@@ -26,8 +26,36 @@ describe("API create airport", () => {
     expect(response.statusCode).toBe(201);
   });
 
+  it("Failed : airport name cannot be empty", async () => {
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6ImZpcXJpIiwiZW1haWwiOiJmaXFyaUBtYWlsLmNvbSIsInJvbGVJZCI6MSwiaWF0IjoxNjcwMzMyOTU3fQ.wXPmJ2TXeprs3wcw_8u4RONLiUm_KG9zcboaAibyooo";
+    const airport = {
+      airportName: "",
+      city: "",
+      cityCode: "",
+    };
+    const response = await request(app)
+      .post("/api/airport/create")
+      .set("Authorization", "Bearer " + token)
+      .send(airport);
+    expect(response.statusCode).toBe(400);
+  });
+
+  it("Failed : Need token for access", async () => {
+    const token = "";
+    const airport = {
+      airportName: "Halim Perdanakusuma",
+      city: "Jakarta",
+      cityCode: "JKT",
+    };
+    const response = await request(app)
+      .post("/api/airport/create")
+      .set("Authorization", "Bearer " + token)
+      .send(airport);
+    expect(response.statusCode).toBe(401);
+  });
+
   it("Unauthorized Access", async () => {
-    const token = "askdnasdasdasdwqe";
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6ImJhcnUiLCJlbWFpbCI6InZpdG9AbWFpbC5jb20iLCJyb2xlSWQiOjIsImlhdCI6MTY3MDU3MDAyNn0.E3Az0mujjVVO12oErhHqYoZxKVs9ErK4XSr5S1pWHXE";
     const airport = {
       airportName: "Halim Perdanakusuma",
       city: "Jakarta",
@@ -46,10 +74,11 @@ describe("API Get Airport By Id", () => {
     const response = await request(app).get("/api/airport/2");
     expect(response.statusCode).toBe(200);
   });
-    it("Failed : airport not found", async () => {
-      const response = await request(app).get("/api/airport/99");
-      expect(response.statusCode).toBe(404);
-    });
+  
+  it("Failed : airport not found", async () => {
+    const response = await request(app).get("/api/airport/99");
+    expect(response.statusCode).toBe(404);
+  });
 });
 
 describe("API Update Airport By Id", () => {
