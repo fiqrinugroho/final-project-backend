@@ -14,22 +14,22 @@ describe("API Create Ticket", () => {
   it("Success Create New Ticket", async () => {
     const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6ImZpcXJpIiwiZW1haWwiOiJmaXFyaUBtYWlsLmNvbSIsInJvbGVJZCI6MSwiaWF0IjoxNjcwMzMyOTU3fQ.wXPmJ2TXeprs3wcw_8u4RONLiUm_KG9zcboaAibyooo";
     const ticket = {
-      code: `T${Date.now()}`,
+      code: `T${Date.now}`,
       departureDate: "2022-12-06",
       departureTime: "11:35:00",
       arrivalDate: "2022-12-06",
       arrivalTime: "11:35:00",
       flightFrom: 1,
-      flightTo: 2,
+      flightTo: 3,
       airplaneId: 1,
       price: 750000,
       capacity: 35,
-      seatNumber: "E20",
+      seatNumber: "E21",
       class: "EKONOMI",
     };
     const response = await request(app)
       .post("/api/ticket/create")
-      .set("Authorization", 'Bearer ' + token)
+      .set("Authorization", "Bearer " + token)
       .send(ticket);
     expect(response.statusCode).toBe(201);
   });

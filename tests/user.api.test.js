@@ -20,3 +20,24 @@ describe("API Get User", () => {
     expect(response.statusCode).toBe(401);
   });
 });
+
+describe("API Update User", () => {
+  it("Success", async () => {
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiZW1haWwiOiJ2aXRvQG1haWwuY29tIiwicm9sZUlkIjoyLCJpYXQiOjE2Njk2NjMzMTR9.CtkS22YXgl5zPR0SItR629YoC4hOp9RHnk3sFFnv9Yg";
+    const user = {
+      firstName: "Upin",
+      lastName: "Arvito",
+      address: "Jakarta",
+      phoneNumber: "08123456789012",
+      avatar: "",
+      gender: "male",
+    };
+    const response = await request(app)
+      .put("/api/user/update/")
+      .set("Authorization", "Bearer " + token)
+      .send(user);
+    expect(response.statusCode).toBe(200);
+  });
+
+  
+});
