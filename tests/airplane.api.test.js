@@ -105,7 +105,7 @@ describe("API Update Airplane Data By Id", () => {
 describe("API Delete Airplane", () => {
   it("Unauthorized", async () => {
     const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiZW1haWwiOiJ2aXRvQG1haWwuY29tIiwicm9sZUlkIjoyLCJpYXQiOjE2Njk2NjM2MDB9.t-mS8RHauM7M5fiIGbXRDaJg7pVE2O82HwfTyY7Z98E";
-    const response = await request(app).delete("/api/airplane/delete/2").set("Authorization", token);
+    const response = await request(app).delete("/api/airplane/delete/2").set("Authorization", 'Bearer ' + token);
     expect(response.statusCode).toBe(401);
   });
 });
