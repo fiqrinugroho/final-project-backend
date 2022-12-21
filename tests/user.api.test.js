@@ -11,4 +11,12 @@ describe("API Get User", () => {
       .set("Authorization", "Bearer " + token);
     expect(response.statusCode).toBe(200);
   });
+
+  it("Invalid Token", async () => {
+    const token = "";
+    const response = await request(app)
+      .get("/api/user/")
+      .set("Authorization", "Bearer " + token);
+    expect(response.statusCode).toBe(401);
+  });
 });
