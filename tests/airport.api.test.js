@@ -109,7 +109,19 @@ describe("API Update Airport By Id", () => {
     expect(response.statusCode).toBe(401);
   });
 
-  
+  it("Unauthorized", async () => {
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6ImJhcnUiLCJlbWFpbCI6InZpdG9AbWFpbC5jb20iLCJyb2xlSWQiOjIsImlhdCI6MTY3MDU3MDAyNn0.E3Az0mujjVVO12oErhHqYoZxKVs9ErK4XSr5S1pWHXE";
+    const airport = {
+      airportName: "soekarno hatta",
+      city: "tangerang",
+      cityCode: "CGK",
+    };
+    const response = await request(app)
+      .put("/api/airport/update/2")
+      .set("Authorization", "Bearer " + token)
+      .send(airport);
+    expect(response.statusCode).toBe(403);
+  });
 });
 
 describe("API Delete Airport", () => {
