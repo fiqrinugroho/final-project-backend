@@ -39,5 +39,20 @@ describe("API Update User", () => {
     expect(response.statusCode).toBe(200);
   });
 
-  
+  it("Invalid Token", async () => {
+    const token = "";
+    const user = {
+      firstName: "Upin",
+      lastName: "Arvito",
+      address: "Jakarta",
+      phoneNumber: "08123456789012",
+      avatar: "",
+      gender: "male",
+    };
+    const response = await request(app)
+      .put("/api/user/update/")
+      .set("Authorization", "Bearer " + token)
+      .send(user);
+    expect(response.statusCode).toBe(401);
+  });
 });
