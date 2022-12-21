@@ -26,6 +26,9 @@ module.exports = {
       passengerId: {
         type: Sequelize.ARRAY(Sequelize.INTEGER)
       },
+      transactionCode : {
+        type: Sequelize.STRING
+      },
       status: {
         type: Sequelize.STRING
       },

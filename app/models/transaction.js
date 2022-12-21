@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "ticketId",
       });
       this.belongsTo(models.passenger, {
-        foreignKey: "passenger",
+        foreignKey: "passengerId",
       });
       this.belongsTo(models.payment, {
         foreignKey: "paymentId",
@@ -33,7 +33,8 @@ module.exports = (sequelize, DataTypes) => {
     userId: DataTypes.INTEGER,
     paymentId: DataTypes.INTEGER,
     ticketId: DataTypes.ARRAY(DataTypes.INTEGER),
-    passesngerId: DataTypes.ARRAY(DataTypes.INTEGER),
+    passengerId: DataTypes.ARRAY(DataTypes.INTEGER),
+    code : DataTypes.STRING,
     status: DataTypes.STRING,
     tripId: DataTypes.INTEGER,
     totalPrice: DataTypes.STRING,
