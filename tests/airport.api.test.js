@@ -11,19 +11,19 @@ describe("API Get All Airport", () => {
 });
 
 describe("API create airport", () => {
-  // it("Success Create New Airport", async () => {
-  //   const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6ImZpcXJpIiwiZW1haWwiOiJmaXFyaUBtYWlsLmNvbSIsInJvbGVJZCI6MSwiaWF0IjoxNjcwMzMyOTU3fQ.wXPmJ2TXeprs3wcw_8u4RONLiUm_KG9zcboaAibyooo";
-  //   const airport = {
-  //     airportName: "Halim Perdanakusuma",
-  //     city: "Jakarta",
-  //     cityCode: "JKT",
-  //   };
-  //   const response = await request(app)
-  //     .post("/api/airport/create")
-  //     .set("Authorization", 'Bearer ' + token)
-  //     .send(airport);
-  //   expect(response.statusCode).toBe(201);
-  // });
+  it("Success Create New Airport", async () => {
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6ImZpcXJpIiwiZW1haWwiOiJmaXFyaUBtYWlsLmNvbSIsInJvbGVJZCI6MSwiaWF0IjoxNjcwMzMyOTU3fQ.wXPmJ2TXeprs3wcw_8u4RONLiUm_KG9zcboaAibyooo";
+    const airport = {
+      airportName: `Bandara ${Date.now()}`,
+      city: "Jakarta",
+      cityCode: "JKT",
+    };
+    const response = await request(app)
+      .post("/api/airport/create")
+      .set("Authorization", 'Bearer ' + token)
+      .send(airport);
+    expect(response.statusCode).toBe(201);
+  });
 
   it("Failed : airport name cannot be empty", async () => {
     const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6ImZpcXJpIiwiZW1haWwiOiJmaXFyaUBtYWlsLmNvbSIsInJvbGVJZCI6MSwiaWF0IjoxNjcwMzMyOTU3fQ.wXPmJ2TXeprs3wcw_8u4RONLiUm_KG9zcboaAibyooo";
@@ -39,7 +39,7 @@ describe("API create airport", () => {
     expect(response.statusCode).toBe(400);
   });
 
-  it("Failed : Need token for access", async () => {
+  it("Invalid Token", async () => {
     const token = "";
     const airport = {
       airportName: "Halim Perdanakusuma",
@@ -134,7 +134,7 @@ describe("API Delete Airport", () => {
   it("Failed : Airport Not Found", async () => {
     const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6ImZpcXJpIiwiZW1haWwiOiJmaXFyaUBtYWlsLmNvbSIsInJvbGVJZCI6MSwiaWF0IjoxNjcwMzMyOTU3fQ.wXPmJ2TXeprs3wcw_8u4RONLiUm_KG9zcboaAibyooo";
     const response = await request(app)
-      .delete("/api/airport/delete/9 ")
+      .delete("/api/airport/delete/999")
       .set("Authorization", "Bearer " + token);
     expect(response.statusCode).toBe(404);
   });
