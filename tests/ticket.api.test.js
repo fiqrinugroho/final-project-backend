@@ -14,7 +14,7 @@ describe("API Create Ticket", () => {
   it("Success Create New Ticket", async () => {
     const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6ImZpcXJpIiwiZW1haWwiOiJmaXFyaUBtYWlsLmNvbSIsInJvbGVJZCI6MSwiaWF0IjoxNjcwMzMyOTU3fQ.wXPmJ2TXeprs3wcw_8u4RONLiUm_KG9zcboaAibyooo";
     const ticket = {
-      code: `T${Date.now}`,
+      code: `T${Date.now()}`,
       departureDate: "2022-12-06",
       departureTime: "11:35:00",
       arrivalDate: "2022-12-06",
@@ -102,11 +102,124 @@ describe("API Create Ticket", () => {
       .send(ticket);
     expect(response.statusCode).toBe(403);
   });
+  
 });
 
 describe("API Get Ticket By Id", () => {
   it("Success", async () => {
     const response = await request(app).get("/api/ticket/2");
     expect(response.statusCode).toBe(200);
+  });
+});
+
+describe("API Update ticket By Id", () => {
+  it("Success", async () => {
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6ImZpcXJpIiwiZW1haWwiOiJmaXFyaUBtYWlsLmNvbSIsInJvbGVJZCI6MSwiaWF0IjoxNjcwMzMyOTU3fQ.wXPmJ2TXeprs3wcw_8u4RONLiUm_KG9zcboaAibyooo";
+    const ticket = {
+      code: "T302287",
+      departureDate: "2022-12-06",
+      departureTime: "11:35:00",
+      arrivalDate: "2022-12-06",
+      arrivalTime: "11:35:00",
+      flightFrom: 1,
+      flightTo: 3,
+      airplaneId: 1,
+      price: 750000,
+      capacity: 35,
+      seatNumber: "E20",
+      class: "EKONOMI",
+    };
+    const response = await request(app)
+      .put("/api/ticket/update/2")
+      .set("Authorization", "Bearer " + token)
+      .send(ticket);
+    expect(response.statusCode).toBe(200);
+  });
+
+  it("Invalid Token", async () => {
+    const token = "";
+    const ticket = {
+      code: "T302287",
+      departureDate: "2022-12-06",
+      departureTime: "11:35:00",
+      arrivalDate: "2022-12-06",
+      arrivalTime: "11:35:00",
+      flightFrom: 1,
+      flightTo: 2,
+      airplaneId: 1,
+      price: 750000,
+      capacity: 35,
+      seatNumber: "E20",
+      class: "EKONOMI",
+    };
+    const response = await request(app)
+      .put("/api/ticket/update/2")
+      .set("Authorization", "Bearer " + token)
+      .send(ticket);
+    expect(response.statusCode).toBe(401);
+  });
+
+  it("Unauthorized Access", async () => {
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6ImJhcnUiLCJlbWFpbCI6InZpdG9AbWFpbC5jb20iLCJyb2xlSWQiOjIsImlhdCI6MTY3MDQ5Nzc4N30.oxL0rJLBqEqIk0W9opgS6jVZuuFzQij-GaZqMEcZ0AQ";
+    const ticket = {
+      code: "T302287",
+      departureDate: "2022-12-06",
+      departureTime: "11:35:00",
+      arrivalDate: "2022-12-06",
+      arrivalTime: "11:35:00",
+      flightFrom: 1,
+      flightTo: 2,
+      airplaneId: 1,
+      price: 750000,
+      capacity: 35,
+      seatNumber: "E20",
+      class: "EKONOMI",
+    };
+    const response = await request(app)
+      .put("/api/ticket/update/2")
+      .set("Authorization", "Bearer " + token)
+      .send(ticket);
+    expect(response.statusCode).toBe(403);
+  });
+
+  it("Failed : ticket Not found", async () => {
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6ImZpcXJpIiwiZW1haWwiOiJmaXFyaUBtYWlsLmNvbSIsInJvbGVJZCI6MSwiaWF0IjoxNjcwMzMyOTU3fQ.wXPmJ2TXeprs3wcw_8u4RONLiUm_KG9zcboaAibyooo";
+    const ticket = {
+      code: "T302287",
+      departureDate: "2022-12-06",
+      departureTime: "11:35:00",
+      arrivalDate: "2022-12-06",
+      arrivalTime: "11:35:00",
+      flightFrom: 1,
+      flightTo: 2,
+      airplaneId: 1,
+      price: 750000,
+      capacity: 35,
+      seatNumber: "E20",
+      class: "EKONOMI",
+    };
+    const response = await request(app)
+      .put("/api/ticket/update/99")
+      .set("Authorization", "Bearer " + token)
+      .send(ticket);
+    expect(response.statusCode).toBe(404);
+  });
+});
+
+describe("API Delete Ticket", () => {
+  it("Unauthorized Access", async () => {
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiZW1haWwiOiJ2aXRvQG1haWwuY29tIiwicm9sZUlkIjoyLCJpYXQiOjE2Njk2NjM2MDB9.t-mS8RHauM7M5fiIGbXRDaJg7pVE2O82HwfTyY7Z98E";
+    const response = await request(app)
+      .delete("/api/airport/delete/2 ")
+      .set("Authorization", "Bearer " + token);
+    expect(response.statusCode).toBe(403);
+  });
+
+  it("Failed : Ticket Not Found", async () => {
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6ImZpcXJpIiwiZW1haWwiOiJmaXFyaUBtYWlsLmNvbSIsInJvbGVJZCI6MSwiaWF0IjoxNjcwMzMyOTU3fQ.wXPmJ2TXeprs3wcw_8u4RONLiUm_KG9zcboaAibyooo";
+    const response = await request(app)
+      .delete("/api/airport/delete/999")
+      .set("Authorization", "Bearer " + token);
+    expect(response.statusCode).toBe(404);
   });
 });

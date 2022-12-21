@@ -104,13 +104,13 @@ describe("API Update Airport By Id", () => {
     };
     const response = await request(app)
       .put("/api/airport/update/4")
-      .set("Authorization", 'Bearer ' + token)
+      .set("Authorization", "Bearer " + token)
       .send(airport);
     expect(response.statusCode).toBe(401);
   });
 
-  it("Invalid Token", async () => {
-    const token = "";
+  it("Unauthorized Access", async () => {
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6ImJhcnUiLCJlbWFpbCI6InZpdG9AbWFpbC5jb20iLCJyb2xlSWQiOjIsImlhdCI6MTY3MDQ5Nzc4N30.oxL0rJLBqEqIk0W9opgS6jVZuuFzQij-GaZqMEcZ0AQ";
     const airport = {
       airportName: "soekarno hatta",
       city: "tangerang",
@@ -120,7 +120,21 @@ describe("API Update Airport By Id", () => {
       .put("/api/airport/update/4")
       .set("Authorization", "Bearer " + token)
       .send(airport);
-    expect(response.statusCode).toBe(401);
+    expect(response.statusCode).toBe(403);
+  });
+
+  it("Failed : airport Not found", async () => {
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6ImZpcXJpIiwiZW1haWwiOiJmaXFyaUBtYWlsLmNvbSIsInJvbGVJZCI6MSwiaWF0IjoxNjcwMzMyOTU3fQ.wXPmJ2TXeprs3wcw_8u4RONLiUm_KG9zcboaAibyooo";
+    const airport = {
+      airportName: "soekarno hatta",
+      city: "tangerang",
+      cityCode: "CGK",
+    };
+    const response = await request(app)
+      .put("/api/airport/update/99")
+      .set("Authorization", "Bearer " + token)
+      .send(airport);
+    expect(response.statusCode).toBe(404);
   });
 });
 
