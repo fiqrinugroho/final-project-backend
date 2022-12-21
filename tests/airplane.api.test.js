@@ -11,7 +11,7 @@ describe("API Get All Airplane Data", () => {
 });
 
 describe("API Create Airplane", () => {
-  it("Unauthorized", async () => {
+  it("Success Create New Airplane", async () => {
     const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6ImZpcXJpIiwiZW1haWwiOiJmaXFyaUBtYWlsLmNvbSIsInJvbGVJZCI6MSwiaWF0IjoxNjcwMzMyOTU3fQ.wXPmJ2TXeprs3wcw_8u4RONLiUm_KG9zcboaAibyooo";
     const airplane = {
       airplaneName: "Boeing 737-800",
@@ -103,9 +103,25 @@ describe("API Update Airplane Data By Id", () => {
 });
 
 describe("API Delete Airplane", () => {
-  it("Unauthorized", async () => {
+   it("Invalid Token", async () => {
+     const token = "";
+     const response = await request(app)
+       .delete("/api/airplane/delete/2")
+       .set("Authorization", "Bearer " + token);
+     expect(response.statusCode).toBe(401);
+   });
+
+  it("Unauthorized Access", async () => {
     const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiZW1haWwiOiJ2aXRvQG1haWwuY29tIiwicm9sZUlkIjoyLCJpYXQiOjE2Njk2NjM2MDB9.t-mS8RHauM7M5fiIGbXRDaJg7pVE2O82HwfTyY7Z98E";
     const response = await request(app).delete("/api/airplane/delete/2").set("Authorization", 'Bearer ' + token);
-    expect(response.statusCode).toBe(401);
+    expect(response.statusCode).toBe(403);
+  });
+
+  it("Unauthorized Access", async () => {
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiZW1haWwiOiJ2aXRvQG1haWwuY29tIiwicm9sZUlkIjoyLCJpYXQiOjE2Njk2NjM2MDB9.t-mS8RHauM7M5fiIGbXRDaJg7pVE2O82HwfTyY7Z98E";
+    const response = await request(app)
+      .delete("/api/airplane/delete/2")
+      .set("Authorization", "Bearer " + token);
+    expect(response.statusCode).toBe(403);
   });
 });
