@@ -34,7 +34,7 @@ module.exports = (sequelize, DataTypes) => {
     paymentId: DataTypes.INTEGER,
     ticketId: DataTypes.ARRAY(DataTypes.INTEGER),
     passengerId: DataTypes.ARRAY(DataTypes.INTEGER),
-    code : DataTypes.STRING,
+    transactionCode : DataTypes.STRING,
     status: DataTypes.STRING,
     tripId: DataTypes.INTEGER,
     totalPrice: DataTypes.STRING,
