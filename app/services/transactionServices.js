@@ -14,7 +14,6 @@ const addTransaction = async (reqBody, id) => {
   const transactionCode = "TR"+waktu[3]+waktu[2]+menit[1]+detik[0];
 
   const from =  await ticketRepository.findTicketById(ticketFrom);
-  const to =  await ticketRepository.findTicketById(ticketTo);
   if(!from){
     throw new ApiError(httpStatus.BAD_REQUEST, "ticket not found");
   }
@@ -23,7 +22,8 @@ const addTransaction = async (reqBody, id) => {
     throw new ApiError(httpStatus.BAD_REQUEST, "transaction with this code already exists");
   } else {
     const passenger = await passengerRepository.create(reqBody);
-    if (to){
+    if (tripId == 2){
+      const to =  await ticketRepository.findTicketById(ticketTo);
       const totalPrice = from.price + to.price;
       const newTransaction = {
         transactionCode, 
@@ -55,6 +55,9 @@ const addTransaction = async (reqBody, id) => {
   }
 };
 
+const getTransactionByToken = async (id) => {
+  return await transactionRepository.getTransactionByUserId(id);
+};
 // const getTransaction = async () => {
 //   return await transactionRepository.getTransaction();
 // };
@@ -101,6 +104,7 @@ const addTransaction = async (reqBody, id) => {
 
 module.exports = {
   addTransaction,
+  getTransactionByToken,
 //   getTransaction,
 //   getTransactionById,
 //   updateTransaction,

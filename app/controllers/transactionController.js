@@ -16,21 +16,21 @@ const addTransaction = (req, res, next) => {
     });
 };
 
-// const getTransaction = (req, res, next) => {
-//   transactionService
-//     .getTransaction()
-//     .then((transaction) => {
-//       res.status(200).json({
-//         status: "OK",
-//         message: "Success",
-//         totalData: transaction.length,
-//         data: transaction,
-//       });
-//     })
-//     .catch((err) => {
-//       next(err);
-//     });
-// };
+const getTransactionByToken = (req, res, next) => {
+  transactionService
+    .getTransactionByToken(req.user.id)
+    .then((transaction) => {
+      res.status(200).json({
+        status: "OK",
+        message: "Success",
+        totalData: transaction.length,
+        data: transaction,
+      });
+    })
+    .catch((err) => {
+      next(err);
+    });
+};
 
 // const getTransactionById = (req, res, next) => {
 //   transactionService
@@ -78,6 +78,7 @@ const addTransaction = (req, res, next) => {
 
 module.exports = {
   addTransaction,
+  getTransactionByToken,
 //   getTransaction,
 //   getTransactionById,
 //   updateTransaction,

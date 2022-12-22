@@ -8,6 +8,7 @@ const Authentication = require("../../middlewares/authenticate");
 const isAdmin = require("../../middlewares/isAdmin");
 
 router.post("/add", Authentication, isAdmin, transaction.addTransaction);
+router.get("/",  Authentication, transaction.getTransactionByToken);
 // router.get("/", ticket.getTicket);
 // router.get("/:id", ticket.getTicketById);
 // router.put("/update/:id", Authentication, isAdmin, ticket.updateTicket);
