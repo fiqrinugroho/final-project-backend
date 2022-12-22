@@ -7,6 +7,7 @@ const findTicket = (code) => {
     where: {
       code,
     },
+    attributes: { exclude: ["seatNumber",], },
     include: [
       {
         model: airport, 
@@ -31,6 +32,7 @@ const createTicket = (newTicket) => {
 
 const getTicket = () => {
   return ticket.findAll({
+    attributes: { exclude: ["seatNumber",], },
     include: [
       {
         model: airport, 
@@ -53,6 +55,7 @@ const findTicketById = (id) => {
     where: {
       id,
     },
+    attributes: { exclude: ["seatNumber",], },
     include: [
       {
         model: airport, 
