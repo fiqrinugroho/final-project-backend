@@ -20,11 +20,14 @@ module.exports = {
       paymentId: {
         type: Sequelize.INTEGER
       },
-      ticketId: {
-        type: Sequelize.ARRAY(Sequelize.INTEGER)
+      ticketFrom: {
+        type: Sequelize.INTEGER
+      },
+      ticketTo: {
+        type: Sequelize.INTEGER
       },
       passengerId: {
-        type: Sequelize.ARRAY(Sequelize.INTEGER)
+        type: Sequelize.INTEGER
       },
       transactionCode : {
         type: Sequelize.STRING
