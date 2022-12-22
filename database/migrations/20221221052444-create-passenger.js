@@ -16,7 +16,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       NIK: {
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
       brithDate: {
         type: Sequelize.DATE

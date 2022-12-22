@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
   passenger.init({
     firstName: DataTypes.STRING,
     lastName: DataTypes.STRING,
-    NIK: DataTypes.INTEGER,
+    NIK: DataTypes.STRING,
     brithDate: DataTypes.DATE
   }, {
     sequelize,
