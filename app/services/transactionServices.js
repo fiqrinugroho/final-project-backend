@@ -37,7 +37,7 @@ const addTransaction = async (reqBody, id) => {
       };
       const add = await 
       transactionRepository.createTransaction(newTransaction);;
-      return await transactionRepository.getTransaction(add.id);
+      return await transactionRepository.getTransactionById(add.id);
     }else {
       const newTransaction = {
         transactionCode, 
@@ -50,7 +50,7 @@ const addTransaction = async (reqBody, id) => {
       };
       const add = await 
       transactionRepository.createTransaction(newTransaction);;
-      return await transactionRepository.getTransaction(add.id);
+      return await transactionRepository.getTransactionById(add.id);
     }
   }
 };
@@ -58,55 +58,95 @@ const addTransaction = async (reqBody, id) => {
 const getTransactionByToken = async (id) => {
   return await transactionRepository.getTransactionByUserId(id);
 };
-// const getTransaction = async () => {
-//   return await transactionRepository.getTransaction();
-// };
 
-// const getTransactionById = async (id) => {
-//   const transaction = await transactionRepository.findTransactionById(id);
+const getTransactionByTokenAndId = async (userId, id) => {
+  const transaction = 
+  await transactionRepository.getTransactionByUserIdAndId(userId, id);
 
-//   if (!transaction) {
-//     throw new ApiError(httpStatus.NOT_FOUND, "transaction not found");
-//   } else {
-//     return transaction;
-//   }
-// };
+  if (transaction.length == 0 ) {
+    throw new ApiError(httpStatus.NOT_FOUND, "transaction not found");
+  } else {
+    return await transactionRepository.getTransactionById(id);
+  }
+};
 
-// const updateTransaction = async (reqBody, id) => {
-//   const transaction = await transactionRepository.findTransactionById(id);
+const getTransaction = async () => {
+  return await transactionRepository.getTransaction();
+};
 
-//   if (!transaction) {
-//     throw new ApiError(httpStatus.NOT_FOUND, "transaction not found");
-//   } else {
-//     await transactionRepository.updateTransaction(reqBody, id);
-//     const getTransaction = await transactionRepository.findTransactionById(id);
+const getTransactionById = async (id) => {
+  const transaction = await transactionRepository.getTransactionById(id);
 
-//     return {
-//       id: getTransaction.id,
-//       firstName: getTransaction.firstName,
-//       price: getTransaction.price,
-//       priceCode: getTransaction.priceCode,
-//       createdAt: getTransaction.createdAt,
-//       updatedAt: getTransaction.updatedAt,
-//     };
-//   }
-// };
+  if (!transaction) {
+    throw new ApiError(httpStatus.NOT_FOUND, "transaction not found");
+  } else {
+    return transaction;
+  }
+};
 
-// const deleteTransaction = async (id) => {
-//   const transaction = await transactionRepository.findTransactionById(id);
+const updateTransaction = async (reqBody, userId, id) => {
+  const transaction = 
+  await transactionRepository.getTransactionByUserIdAndId(userId, id);
 
-//   if (!transaction) {
-//     throw new ApiError(httpStatus.NOT_FOUND, "transaction not found");
-//   } else {
-//     return await transactionRepository.deleteTransaction(id);
-//   }
-// };
+  if (transaction.length == 0) {
+    throw new ApiError(httpStatus.NOT_FOUND, "transaction not found");
+  } else {
+    const data = 
+    await transactionRepository.getTransactionById(id);
+    await passengerRepository.updatePassenger(reqBody, data.passengerId);
+    await transactionRepository.updateTransaction(reqBody, userId, id);
+
+    return await transactionRepository.getTransactionById(id);
+  }
+
+};
+
+const deleteTransaction = async (userId, id) => {
+  const transaction = 
+  await transactionRepository.getTransactionByUserIdAndId(userId, id);
+
+  if (transaction.length == 0) {
+    throw new ApiError(httpStatus.NOT_FOUND, "transaction not found");
+  } else {
+    const data = 
+    await transactionRepository.getTransactionById(id);
+    await passengerRepository.deletePassenger(data.passengerId);
+    return await transactionRepository.deleteTransactionAdmin(id);
+  }
+};
+
+const updateTransactionAdmin = async (reqBody, id) => {
+  const transaction = await transactionRepository.getTransactionById(id);
+
+  if (!transaction) {
+    throw new ApiError(httpStatus.NOT_FOUND, "transaction not found");
+  } else {
+    await passengerRepository.updatePassenger(reqBody, transaction.passengerId);
+    await transactionRepository.updateTransactionAdmin(reqBody, id);
+
+    return await transactionRepository.getTransactionById(id);
+  }
+};
+
+const deleteTransactionAdmin = async (id) => {
+  const transaction = await transactionRepository.getTransactionById(id);
+
+  if (!transaction) {
+    throw new ApiError(httpStatus.NOT_FOUND, "transaction not found");
+  } else {
+    await passengerRepository.deletePassenger(transaction.passengerId);
+    return await transactionRepository.deleteTransactionAdmin(id);
+  }
+};
 
 module.exports = {
   addTransaction,
   getTransactionByToken,
-//   getTransaction,
-//   getTransactionById,
-//   updateTransaction,
-//   deleteTransaction,
+  getTransactionByTokenAndId,
+  getTransaction,
+  getTransactionById,
+  updateTransaction,
+  deleteTransaction,
+  updateTransactionAdmin,
+  deleteTransactionAdmin,
 };
