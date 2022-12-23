@@ -1759,10 +1759,6 @@
                   "type": "integer",
                   "example": "35"
                 },
-                "seatNumber": {
-                  "type": "string",
-                  "example": "E20"
-                },
                 "class": {
                   "type": "string",
                   "example": "EKONOMI"
@@ -2078,10 +2074,6 @@
             "type": "integer",
             "example": "35"
           },     
-          "seatNumber": {
-            "type": "string",
-            "example": "E20"
-          },
           "class": {
             "type": "string",
             "example": "EKONOMI"
