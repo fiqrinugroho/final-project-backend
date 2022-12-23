@@ -47,6 +47,22 @@ const getTransactionByTokenAndId = (req, res, next) => {
     });
 };
 
+const getTransactionByTokenAndStatus = (req, res, next) => {
+  transactionService
+    . getTransactionByTokenAndStatus(req.user.id, req.query)
+    .then((transaction) => {
+      res.status(200).json({
+        status: "OK",
+        message: "Success",
+        totalData: transaction.length,
+        data: transaction,
+      });
+    })
+    .catch((err) => {
+      next(err);
+    });
+};
+
 const getTransaction = (req, res, next) => {
   transactionService
     .getTransaction()
@@ -70,6 +86,22 @@ const getTransactionById = (req, res, next) => {
       res.status(200).json({
         status: "OK",
         message: "Success",
+        data: transaction,
+      });
+    })
+    .catch((err) => {
+      next(err);
+    });
+};
+
+const getTransactionByStatus = (req, res, next) => {
+  transactionService
+    . getTransactionByStatus(req.query)
+    .then((transaction) => {
+      res.status(200).json({
+        status: "OK",
+        message: "Success",
+        totalData: transaction.length,
         data: transaction,
       });
     })
@@ -106,6 +138,7 @@ const deleteTransaction= (req, res, next) => {
       next(err);
     });
 };
+
 const updateTransactionAdmin = (req, res, next) => {
   transactionService
     .updateTransactionAdmin(req.body, req.params.id)
@@ -139,8 +172,10 @@ module.exports = {
   addTransaction,
   getTransactionByToken,
   getTransaction,
+  getTransactionByStatus,
   getTransactionById,
   getTransactionByTokenAndId,
+  getTransactionByTokenAndStatus, 
   updateTransaction,
   deleteTransaction,
   updateTransactionAdmin,

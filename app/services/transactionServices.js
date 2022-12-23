@@ -70,6 +70,33 @@ const getTransactionByTokenAndId = async (userId, id) => {
   }
 };
 
+const getTransactionByTokenAndStatus = async (userId, reqQuery) => {
+  const {status,}= reqQuery;
+
+  const transaction = 
+  await transactionRepository.getTransactionUserByStatus(userId, status);
+
+  if (transaction.length == 0 ) {
+    throw new ApiError(httpStatus.NOT_FOUND, "transaction not found");
+  } else {
+    return await transactionRepository
+      .getTransactionUserByStatus(userId, status);
+  }
+};
+
+const getTransactionByStatus = async (reqQuery) => {
+  const {status,}= reqQuery;
+  const transaction = 
+  await transactionRepository.getTransactionAdminByStatus(status);
+
+  if (transaction.length == 0 ) {
+    throw new ApiError(httpStatus.NOT_FOUND, "transaction not found");
+  } else {
+    return await transactionRepository
+      .getTransactionAdminByStatus(status);
+  }
+};
+
 const getTransaction = async () => {
   return await transactionRepository.getTransaction();
 };
@@ -145,6 +172,8 @@ module.exports = {
   getTransactionByTokenAndId,
   getTransaction,
   getTransactionById,
+  getTransactionByTokenAndStatus,
+  getTransactionByStatus,
   updateTransaction,
   deleteTransaction,
   updateTransactionAdmin,
