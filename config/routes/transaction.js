@@ -20,6 +20,6 @@ router.get("/", Authentication, transaction.getTransactionByToken);
 router.get("/:id", Authentication, transaction.getTransactionByTokenAndId);
 router.post("/add", Authentication, transaction.addTransaction);
 router.put("/update/:id", Authentication, transaction.updateTransaction);
-router.delete("/delete/:id", Authentication, transaction.deleteTransaction);
+router.put("/cancel/:id", Authentication, transaction.cancelTransaction);
 
 module.exports = router;

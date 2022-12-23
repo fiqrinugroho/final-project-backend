@@ -128,17 +128,19 @@ const updateTransaction = async (reqBody, userId, id) => {
 
 };
 
-const deleteTransaction = async (userId, id) => {
+const cancelTransaction = async (id) => {
   const transaction = 
-  await transactionRepository.getTransactionByUserIdAndId(userId, id);
+  await transactionRepository.getTransactionById(id);
 
   if (transaction.length == 0) {
     throw new ApiError(httpStatus.NOT_FOUND, "transaction not found");
   } else {
-    const data = 
-    await transactionRepository.getTransactionById(id);
-    await passengerRepository.deletePassenger(data.passengerId);
-    return await transactionRepository.deleteTransactionAdmin(id);
+    const cancel ={
+      status:"canceled",
+    };
+    await transactionRepository.updateTransactionAdmin(cancel, id);
+
+    return await transactionRepository.getTransactionById(id);
   }
 };
 
@@ -175,7 +177,7 @@ module.exports = {
   getTransactionByTokenAndStatus,
   getTransactionByStatus,
   updateTransaction,
-  deleteTransaction,
+  cancelTransaction,
   updateTransactionAdmin,
   deleteTransactionAdmin,
 };

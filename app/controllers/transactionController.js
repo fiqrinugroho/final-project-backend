@@ -125,13 +125,13 @@ const updateTransaction = (req, res, next) => {
     });
 };
 
-const deleteTransaction= (req, res, next) => {
+const cancelTransaction = (req, res, next) => {
   transactionService
-    .deleteTransaction(req.user.id, req.params.id)
+    .cancelTransaction(req.params.id)
     .then(() => {
       res.status(200).json({
         status: "Success",
-        message: "Success Delete Transaction",
+        message: "Success Cancel Transaction",
       });
     })
     .catch((err) => {
@@ -177,7 +177,7 @@ module.exports = {
   getTransactionByTokenAndId,
   getTransactionByTokenAndStatus, 
   updateTransaction,
-  deleteTransaction,
+  cancelTransaction,
   updateTransactionAdmin,
   deleteTransactionAdmin,
 };
