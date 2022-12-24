@@ -316,10 +316,129 @@ const getTransactionUserByStatus= async (userId, status) => {
   });
 };
 
+const getTransactionUserByTripId = async (userId, tripId) => {
+  return await transaction.findAll({
+    where: {
+      [Op.and]: [
+        { userId, },
+        { tripId, },
+      ],
+    },
+    include: [
+      {
+        model: user, attributes: { exclude: ["password",], },
+      },
+      {
+        model: typeTrip,
+      },
+      {
+        model: passenger,
+      },
+      {
+        model: ticket, 
+        include: [
+          {
+            model: airport, 
+            as:"origin",
+          },
+          {
+            model: airport, 
+            as:"destination",
+          },
+          {
+            model: airplane, attributes: { exclude: ["seatCapacity",], },
+            include: company,
+          },
+        ],
+        attributes: { exclude: ["seatNumber",], },
+        as:"from",
+      },
+      {
+        model: ticket,
+        include: [
+          {
+            model: airport, 
+            as:"origin",
+          },
+          {
+            model: airport, 
+            as:"destination",
+          },
+          {
+            model: airplane, attributes: { exclude: ["seatCapacity",], },
+            include: company,
+          },
+        ],
+        attributes: { exclude: ["seatNumber",], },
+        as:"to",
+        
+      },
+    ],
+  });
+};
+
 const getTransactionAdminByStatus = async (status) => {
   return await transaction.findAll({
     where: {
       status, 
+    },
+    include: [
+      {
+        model: user, attributes: { exclude: ["password",], },
+      },
+      {
+        model: typeTrip,
+      },
+      {
+        model: passenger,
+      },
+      {
+        model: ticket, 
+        include: [
+          {
+            model: airport, 
+            as:"origin",
+          },
+          {
+            model: airport, 
+            as:"destination",
+          },
+          {
+            model: airplane, attributes: { exclude: ["seatCapacity",], },
+            include: company,
+          },
+        ],
+        attributes: { exclude: ["seatNumber",], },
+        as:"from",
+      },
+      {
+        model: ticket,
+        include: [
+          {
+            model: airport, 
+            as:"origin",
+          },
+          {
+            model: airport, 
+            as:"destination",
+          },
+          {
+            model: airplane, attributes: { exclude: ["seatCapacity",], },
+            include: company,
+          },
+        ],
+        attributes: { exclude: ["seatNumber",], },
+        as:"to",
+        
+      },
+    ],
+  });
+};
+
+const getTransactionAdminByTripId = async (tripId) => {
+  return await transaction.findAll({
+    where: {
+      tripId, 
     },
     include: [
       {
@@ -410,7 +529,9 @@ module.exports = {
   getTransactionByUserId,
   getTransactionByUserIdAndId,
   getTransactionUserByStatus,
+  getTransactionUserByTripId, 
   getTransactionAdminByStatus,
+  getTransactionAdminByTripId,
   updateTransaction,
   deleteTransaction,
   updateTransactionAdmin,

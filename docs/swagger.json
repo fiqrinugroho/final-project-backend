@@ -1563,6 +1563,63 @@
                       "example": "1"
                     },
                     "data": {
+                      "type": "array",
+                      "$ref": "#/components/schemas/transaksi"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/transaksiNotFound"
+          }
+        }
+      }
+    },
+    "/api/transaction/trip/": {
+      "get": {
+        "summary": "Get Transaction Data By user and type trip ",
+        "description": "see transaction data by token and type trip, this can be used for history user",
+        "tags": ["Transaction"],
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "description": "tripId (1 = One way, 2 = Round Trip)",
+            "name": "tripId",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success responses",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "totalData": {
+                      "type": "integer",
+                      "example": "1"
+                    },
+                    "data": {
+                      "type": "array",
                       "$ref": "#/components/schemas/transaksi"
                     }
                   }
@@ -1880,6 +1937,66 @@
                       "example": "1"
                     },
                     "data": {
+                      "type": "array",
+                      "$ref": "#/components/schemas/transaksi"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/isAdmin"
+          },
+          "404": {
+            "$ref": "#/components/responses/transaksiNotFound"
+          }
+        }
+      }
+    },
+    "/api/transaction/admin/trip": {
+      "get": {
+        "summary": "Get Transaction Data By Type Trip ",
+        "description": "see transaction data by Type trip, this can be used for admin",
+        "tags": ["Transaction"],
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "description": "tripId (1 = One way, 2 = Round Trip)",
+            "name": "tripId",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success responses",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "totalData": {
+                      "type": "integer",
+                      "example": "1"
+                    },
+                    "data": {
+                      "type": "array",
                       "$ref": "#/components/schemas/transaksi"
                     }
                   }

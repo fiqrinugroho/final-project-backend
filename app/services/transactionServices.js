@@ -84,6 +84,20 @@ const getTransactionByTokenAndStatus = async (userId, reqQuery) => {
   }
 };
 
+const getTransactionByTokenAndTripId= async (userId, reqQuery) => {
+  const {tripId,}= reqQuery;
+
+  const transaction = 
+  await transactionRepository.getTransactionUserByTripId(userId, tripId);
+
+  if (transaction.length == 0 ) {
+    throw new ApiError(httpStatus.NOT_FOUND, "transaction not found");
+  } else {
+    return await transactionRepository
+      .getTransactionUserByTripId(userId, tripId);
+  }
+};
+
 const getTransactionByStatus = async (reqQuery) => {
   const {status,}= reqQuery;
   const transaction = 
@@ -94,6 +108,19 @@ const getTransactionByStatus = async (reqQuery) => {
   } else {
     return await transactionRepository
       .getTransactionAdminByStatus(status);
+  }
+};
+
+const getTransactionByTripId = async (reqQuery) => {
+  const {tripId,}= reqQuery;
+  const transaction = 
+  await transactionRepository.getTransactionAdminByTripId(tripId);
+
+  if (transaction.length == 0 ) {
+    throw new ApiError(httpStatus.NOT_FOUND, "transaction not found");
+  } else {
+    return await transactionRepository
+      .getTransactionAdminByTripId(tripId);
   }
 };
 
@@ -175,7 +202,9 @@ module.exports = {
   getTransaction,
   getTransactionById,
   getTransactionByTokenAndStatus,
+  getTransactionByTokenAndTripId,
   getTransactionByStatus,
+  getTransactionByTripId,
   updateTransaction,
   cancelTransaction,
   updateTransactionAdmin,

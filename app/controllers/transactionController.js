@@ -63,6 +63,22 @@ const getTransactionByTokenAndStatus = (req, res, next) => {
     });
 };
 
+const getTransactionByTokenAndTripId = (req, res, next) => {
+  transactionService
+    . getTransactionByTokenAndTripId(req.user.id, req.query)
+    .then((transaction) => {
+      res.status(200).json({
+        status: "OK",
+        message: "Success",
+        totalData: transaction.length,
+        data: transaction,
+      });
+    })
+    .catch((err) => {
+      next(err);
+    });
+};
+
 const getTransaction = (req, res, next) => {
   transactionService
     .getTransaction()
@@ -97,6 +113,22 @@ const getTransactionById = (req, res, next) => {
 const getTransactionByStatus = (req, res, next) => {
   transactionService
     . getTransactionByStatus(req.query)
+    .then((transaction) => {
+      res.status(200).json({
+        status: "OK",
+        message: "Success",
+        totalData: transaction.length,
+        data: transaction,
+      });
+    })
+    .catch((err) => {
+      next(err);
+    });
+};
+
+const getTransactionByTripId = (req, res, next) => {
+  transactionService
+    . getTransactionByTripId(req.query)
     .then((transaction) => {
       res.status(200).json({
         status: "OK",
@@ -173,9 +205,11 @@ module.exports = {
   getTransactionByToken,
   getTransaction,
   getTransactionByStatus,
+  getTransactionByTripId,
   getTransactionById,
   getTransactionByTokenAndId,
   getTransactionByTokenAndStatus, 
+  getTransactionByTokenAndTripId, 
   updateTransaction,
   cancelTransaction,
   updateTransactionAdmin,
