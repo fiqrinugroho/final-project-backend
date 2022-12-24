@@ -273,7 +273,7 @@
             }
           },
           "403": {
-            "$ref":"#/components/responses/isAdmin"
+            "$ref": "#/components/responses/isAdmin"
           },
           "404": {
             "description": "Email Not Found",
@@ -302,9 +302,7 @@
       "get": {
         "summary": "Get All Airport Data",
         "description": "This API for see all airport data",
-        "tags": [
-          "Airport"
-        ], 
+        "tags": ["Airport"],
         "responses": {
           "200": {
             "description": "User and admin can see this data",
@@ -326,7 +324,7 @@
                       "example": "1"
                     },
                     "data": {
-                      "$ref": "#/components/schemas/airport"        
+                      "$ref": "#/components/schemas/airport"
                     }
                   }
                 }
@@ -335,14 +333,12 @@
           }
         }
       }
-    },  
+    },
     "/api/airport/{id}": {
       "get": {
         "summary": "Get Airport Data By Id",
         "description": "This API for see airport data by Id",
-        "tags": [
-          "Airport"
-        ],
+        "tags": ["Airport"],
         "parameters": [
           {
             "in": "path",
@@ -350,7 +346,7 @@
             "name": "id",
             "required": true
           }
-        ],    
+        ],
         "responses": {
           "200": {
             "description": "User and admin can see this data",
@@ -368,7 +364,7 @@
                       "example": "Success"
                     },
                     "data": {
-                      "$ref": "#/components/schemas/airport"        
+                      "$ref": "#/components/schemas/airport"
                     }
                   }
                 }
@@ -380,13 +376,11 @@
           }
         }
       }
-    },  
+    },
     "/api/airport/create": {
       "post": {
         "summary": "Create New Airport Data",
-        "tags": [
-          "Airport"
-        ],
+        "tags": ["Airport"],
         "security": [
           {
             "bearerToken": []
@@ -409,11 +403,11 @@
                     },
                     "message": {
                       "type": "string",
-                     "example": "Success Create New Airport"
+                      "example": "Success Create New Airport"
                     },
                     "data": {
                       "type": "object",
-                      "$ref":"#/components/schemas/airport"
+                      "$ref": "#/components/schemas/airport"
                     }
                   }
                 }
@@ -452,9 +446,7 @@
     "/api/airport/update/{id}": {
       "put": {
         "summary": "Update Airport Data By Id",
-        "tags": [
-          "Airport"
-        ],
+        "tags": ["Airport"],
         "security": [
           {
             "bearerToken": []
@@ -467,7 +459,7 @@
             "name": "id",
             "required": true
           }
-        ],  
+        ],
         "requestBody": {
           "$ref": "#/components/requestBody/airportBody"
         },
@@ -485,11 +477,11 @@
                     },
                     "message": {
                       "type": "string",
-                     "example": "Success Update Airport"
+                      "example": "Success Update Airport"
                     },
                     "data": {
                       "type": "object",
-                      "$ref":"#/components/schemas/airport"
+                      "$ref": "#/components/schemas/airport"
                     }
                   }
                 }
@@ -511,9 +503,7 @@
     "/api/airport/delete/{id}": {
       "delete": {
         "summary": "Delete Airport Data By Id",
-        "tags": [
-          "Airport"
-        ],
+        "tags": ["Airport"],
         "security": [
           {
             "bearerToken": []
@@ -526,7 +516,7 @@
             "name": "id",
             "required": true
           }
-        ], 
+        ],
         "responses": {
           "200": {
             "description": "Success Delete Data Airport",
@@ -541,7 +531,7 @@
                     },
                     "message": {
                       "type": "string",
-                     "example": "Success Delete Airport"
+                      "example": "Success Delete Airport"
                     }
                   }
                 }
@@ -564,9 +554,7 @@
       "get": {
         "summary": "Get All Company Data",
         "description": "This API for see all company data",
-        "tags": [
-          "Company"
-        ], 
+        "tags": ["Company"],
         "responses": {
           "200": {
             "description": "User and admin can see this data",
@@ -588,7 +576,7 @@
                       "example": "1"
                     },
                     "data": {
-                      "$ref": "#/components/schemas/company"        
+                      "$ref": "#/components/schemas/company"
                     }
                   }
                 }
@@ -597,14 +585,12 @@
           }
         }
       }
-    },  
+    },
     "/api/company/{id}": {
       "get": {
         "summary": "Get Company Data By Id",
         "description": "This API for see company data by Id",
-        "tags": [
-          "Company"
-        ],
+        "tags": ["Company"],
         "parameters": [
           {
             "in": "path",
@@ -612,7 +598,7 @@
             "name": "id",
             "required": true
           }
-        ],    
+        ],
         "responses": {
           "200": {
             "description": "User and admin can see this data",
@@ -630,7 +616,7 @@
                       "example": "Success"
                     },
                     "data": {
-                      "$ref": "#/components/schemas/company"        
+                      "$ref": "#/components/schemas/company"
                     }
                   }
                 }
@@ -646,9 +632,7 @@
     "/api/company/create": {
       "post": {
         "summary": "Create New Company Data",
-        "tags": [
-          "Company"
-        ],
+        "tags": ["Company"],
         "security": [
           {
             "bearerToken": []
@@ -672,11 +656,11 @@
                     },
                     "message": {
                       "type": "string",
-                     "example": "Success Create New Company"
+                      "example": "Success Create New Company"
                     },
                     "data": {
                       "type": "object",
-                      "$ref":"#/components/schemas/company"
+                      "$ref": "#/components/schemas/company"
                     }
                   }
                 }
@@ -715,9 +699,7 @@
     "/api/company/update/{id}": {
       "put": {
         "summary": "Update Company Data By Id",
-        "tags": [
-          "Company"
-        ],
+        "tags": ["Company"],
         "security": [
           {
             "bearerToken": []
@@ -731,7 +713,7 @@
             "name": "id",
             "required": true
           }
-        ],  
+        ],
         "requestBody": {
           "$ref": "#/components/requestBody/companyBody"
         },
@@ -749,11 +731,11 @@
                     },
                     "message": {
                       "type": "string",
-                     "example": "Success Update Company"
+                      "example": "Success Update Company"
                     },
                     "data": {
                       "type": "object",
-                      "$ref":"#/components/schemas/company"
+                      "$ref": "#/components/schemas/company"
                     }
                   }
                 }
@@ -775,9 +757,7 @@
     "/api/company/delete/{id}": {
       "delete": {
         "summary": "Delete Company Data By Id",
-        "tags": [
-          "Company"
-        ],
+        "tags": ["Company"],
         "security": [
           {
             "bearerToken": []
@@ -790,7 +770,7 @@
             "name": "id",
             "required": true
           }
-        ], 
+        ],
         "responses": {
           "200": {
             "description": "Success Delete Data Company",
@@ -805,7 +785,7 @@
                     },
                     "message": {
                       "type": "string",
-                     "example": "Success Delete Company"
+                      "example": "Success Delete Company"
                     }
                   }
                 }
@@ -828,9 +808,7 @@
       "get": {
         "summary": "Get All Airplane Data",
         "description": "This API for see all airplane data",
-        "tags": [
-          "Airplane"
-        ], 
+        "tags": ["Airplane"],
         "responses": {
           "200": {
             "description": "User and admin can see this data",
@@ -852,7 +830,7 @@
                       "example": "1"
                     },
                     "data": {
-                      "$ref": "#/components/schemas/airplane"        
+                      "$ref": "#/components/schemas/airplane"
                     }
                   }
                 }
@@ -866,9 +844,7 @@
       "get": {
         "summary": "Get Airplane Data By Id",
         "description": "This API for see airplane data by Id",
-        "tags": [
-          "Airplane"
-        ],
+        "tags": ["Airplane"],
         "parameters": [
           {
             "in": "path",
@@ -876,7 +852,7 @@
             "name": "id",
             "required": true
           }
-        ],    
+        ],
         "responses": {
           "200": {
             "description": "User and admin can see this data",
@@ -894,7 +870,7 @@
                       "example": "Success"
                     },
                     "data": {
-                      "$ref": "#/components/schemas/airplane"        
+                      "$ref": "#/components/schemas/airplane"
                     }
                   }
                 }
@@ -910,9 +886,7 @@
     "/api/airplane/create": {
       "post": {
         "summary": "Create New Airplane Data",
-        "tags": [
-          "Airplane"
-        ],
+        "tags": ["Airplane"],
         "security": [
           {
             "bearerToken": []
@@ -935,11 +909,11 @@
                     },
                     "message": {
                       "type": "string",
-                     "example": "Success Create New Airplane"
+                      "example": "Success Create New Airplane"
                     },
                     "data": {
                       "type": "object",
-                      "$ref":"#/components/schemas/airplane"
+                      "$ref": "#/components/schemas/airplane"
                     }
                   }
                 }
@@ -978,9 +952,7 @@
     "/api/airplane/update/{id}": {
       "put": {
         "summary": "Update Airplane Data By Id",
-        "tags": [
-          "Airplane"
-        ],
+        "tags": ["Airplane"],
         "security": [
           {
             "bearerToken": []
@@ -993,7 +965,7 @@
             "name": "id",
             "required": true
           }
-        ],  
+        ],
         "requestBody": {
           "$ref": "#/components/requestBody/airplaneBody"
         },
@@ -1011,11 +983,11 @@
                     },
                     "message": {
                       "type": "string",
-                     "example": "Success Update Airplane"
+                      "example": "Success Update Airplane"
                     },
                     "data": {
                       "type": "object",
-                      "$ref":"#/components/schemas/airplane"
+                      "$ref": "#/components/schemas/airplane"
                     }
                   }
                 }
@@ -1037,9 +1009,7 @@
     "/api/airplane/delete/{id}": {
       "delete": {
         "summary": "Delete Airplane Data By Id",
-        "tags": [
-          "Airplane"
-        ],
+        "tags": ["Airplane"],
         "security": [
           {
             "bearerToken": []
@@ -1052,7 +1022,7 @@
             "name": "id",
             "required": true
           }
-        ], 
+        ],
         "responses": {
           "200": {
             "description": "Success Delete Data Airplane",
@@ -1067,7 +1037,7 @@
                     },
                     "message": {
                       "type": "string",
-                     "example": "Success Delete Airplane"
+                      "example": "Success Delete Airplane"
                     }
                   }
                 }
@@ -1088,9 +1058,7 @@
     },
     "/api/user/": {
       "get": {
-        "tags": [
-          "User"
-        ],
+        "tags": ["User"],
         "summary": "Get user",
         "description": "",
         "operationId": "getUserById",
@@ -1119,9 +1087,7 @@
     "/api/user/update/": {
       "put": {
         "summary": "Update user",
-        "tags": [
-          "User"
-        ],
+        "tags": ["User"],
         "security": [
           {
             "bearerToken": []
@@ -1145,11 +1111,11 @@
                     },
                     "message": {
                       "type": "string",
-                     "example": "Success Update Profile"
+                      "example": "Success Update Profile"
                     },
                     "data": {
                       "type": "object",
-                      "$ref":"#/components/schemas/user"
+                      "$ref": "#/components/schemas/user"
                     }
                   }
                 }
@@ -1164,9 +1130,7 @@
     },
     "/api/user/delete/{id}": {
       "delete": {
-        "tags": [
-          "User"
-        ],
+        "tags": ["User"],
         "summary": "Delete user by id",
         "description": "This can only be done by the logged in user.",
         "operationId": "deleteUser",
@@ -1200,7 +1164,7 @@
                     },
                     "message": {
                       "type": "string",
-                     "example": "Success Delete User"
+                      "example": "Success Delete User"
                     }
                   }
                 }
@@ -1217,9 +1181,7 @@
       "get": {
         "summary": "Get All Ticket Data",
         "description": "This API for see all ticket data",
-        "tags": [
-          "Ticket"
-        ], 
+        "tags": ["Ticket"],
         "responses": {
           "200": {
             "description": "User and admin can see this data",
@@ -1241,7 +1203,7 @@
                       "example": "1"
                     },
                     "data": {
-                      "$ref": "#/components/schemas/ticket"        
+                      "$ref": "#/components/schemas/ticket"
                     }
                   }
                 }
@@ -1255,9 +1217,7 @@
       "get": {
         "summary": "Get Ticket Data By Id",
         "description": "This API for see ticket data by Id",
-        "tags": [
-          "Ticket"
-        ],
+        "tags": ["Ticket"],
         "parameters": [
           {
             "in": "path",
@@ -1265,7 +1225,7 @@
             "name": "id",
             "required": true
           }
-        ],    
+        ],
         "responses": {
           "200": {
             "description": "User and admin can see this data",
@@ -1283,7 +1243,7 @@
                       "example": "Success"
                     },
                     "data": {
-                      "$ref": "#/components/schemas/ticket"        
+                      "$ref": "#/components/schemas/ticket"
                     }
                   }
                 }
@@ -1299,9 +1259,7 @@
     "/api/ticket/create": {
       "post": {
         "summary": "Create New Ticket Data",
-        "tags": [
-          "Ticket"
-        ],
+        "tags": ["Ticket"],
         "security": [
           {
             "bearerToken": []
@@ -1324,11 +1282,11 @@
                     },
                     "message": {
                       "type": "string",
-                     "example": "Success Create New Ticket"
+                      "example": "Success Create New Ticket"
                     },
                     "data": {
                       "type": "object",
-                      "$ref":"#/components/schemas/ticket"
+                      "$ref": "#/components/schemas/ticket"
                     }
                   }
                 }
@@ -1367,9 +1325,7 @@
     "/api/ticket/update/{id}": {
       "put": {
         "summary": "Update Ticket Data By Id",
-        "tags": [
-          "Ticket"
-        ],
+        "tags": ["Ticket"],
         "security": [
           {
             "bearerToken": []
@@ -1382,7 +1338,7 @@
             "name": "id",
             "required": true
           }
-        ],  
+        ],
         "requestBody": {
           "$ref": "#/components/requestBody/ticketBody"
         },
@@ -1400,11 +1356,11 @@
                     },
                     "message": {
                       "type": "string",
-                     "example": "Success Update Ticket"
+                      "example": "Success Update Ticket"
                     },
                     "data": {
                       "type": "object",
-                      "$ref":"#/components/schemas/ticket"
+                      "$ref": "#/components/schemas/ticket"
                     }
                   }
                 }
@@ -1426,9 +1382,7 @@
     "/api/ticket/delete/{id}": {
       "delete": {
         "summary": "Delete Ticket Data By Id",
-        "tags": [
-          "Ticket"
-        ],
+        "tags": ["Ticket"],
         "security": [
           {
             "bearerToken": []
@@ -1441,7 +1395,7 @@
             "name": "id",
             "required": true
           }
-        ], 
+        ],
         "responses": {
           "200": {
             "description": "Success Delete Data Ticket",
@@ -1456,7 +1410,7 @@
                     },
                     "message": {
                       "type": "string",
-                     "example": "Success Delete Ticket"
+                      "example": "Success Delete Ticket"
                     }
                   }
                 }
@@ -1471,6 +1425,697 @@
           },
           "403": {
             "$ref": "#/components/responses/isAdmin"
+          }
+        }
+      }
+    },
+    "/api/transaction/": {
+      "get": {
+        "summary": "Get All Transaction Data By user in token ",
+        "description": "see all transaction data by token, this can be used for history user",
+        "tags": ["Transaction"],
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success responses",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "totalData": {
+                      "type": "integer",
+                      "example": "1"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/transaksi"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
+        }
+      }
+    },
+    "/api/transaction/{id}": {
+      "get": {
+        "summary": "Get transaction Data By Id",
+        "description": "This API for see transaction data by Id",
+        "tags": ["Transaction"],
+        "parameters": [
+          {
+            "in": "path",
+            "description": "input id transaction",
+            "name": "id",
+            "required": true
+          }
+        ],
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success responses",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/transaksi"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/transaksiNotFound"
+          }
+        }
+      }
+    },
+    "/api/transaction/filter/": {
+      "get": {
+        "summary": "Get Transaction Data By user and status ",
+        "description": "see transaction data by token and status, this can be used for history user",
+        "tags": ["Transaction"],
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "description": "status (success, pending, or canceled)",
+            "name": "status",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success responses",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "totalData": {
+                      "type": "integer",
+                      "example": "1"
+                    },
+                    "data": {
+                      "type": "array",
+                      "$ref": "#/components/schemas/transaksi"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/transaksiNotFound"
+          }
+        }
+      }
+    },
+    "/api/transaction/trip/": {
+      "get": {
+        "summary": "Get Transaction Data By user and type trip ",
+        "description": "see transaction data by token and type trip, this can be used for history user",
+        "tags": ["Transaction"],
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "description": "tripId (1 = One way, 2 = Round Trip)",
+            "name": "tripId",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success responses",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "totalData": {
+                      "type": "integer",
+                      "example": "1"
+                    },
+                    "data": {
+                      "type": "array",
+                      "$ref": "#/components/schemas/transaksi"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/transaksiNotFound"
+          }
+        }
+      }
+    },
+    "/api/transaction/add": {
+      "post": {
+        "summary": "Create New Transaction Data",
+        "tags": ["Transaction"],
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBody/transaksiBody"
+        },
+        "responses": {
+          "201": {
+            "description": "Success Create New Transaksi",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Success Create New Transaction"
+                    },
+                    "data": {
+                      "type": "object",
+                      "$ref": "#/components/schemas/transaksi"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "ticket in transaction not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Failed"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "ticket not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
+        }
+      }
+    },
+    "/api/transaction/update/{id}": {
+      "put": {
+        "summary": "Update Transaction Data By Id",
+        "tags": ["Transaction"],
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "description": "input id transaction",
+            "name": "id",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBody/transaksiBody"
+        },
+        "responses": {
+          "200": {
+            "description": "Success Update Transaction Data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Success Update Transaction"
+                    },
+                    "data": {
+                      "type": "object",
+                      "$ref": "#/components/schemas/transaksi"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/transaksiNotFound"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
+        }
+      }
+    },
+    "/api/transaction/cancel/{id}": {
+      "put": {
+        "summary": "Cancel Transaction Data By Id",
+        "tags": ["Transaction"],
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "description": "input id transaction",
+            "name": "id",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success Cancel Data Transaction",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Success Cancel Transaction"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/transaksiNotFound"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
+        }
+      }
+    },
+    "/api/transaction/admin/": {
+      "get": {
+        "summary": "Get All Transaction Data only for admin ",
+        "description": "see all transaction, this can be used for dashboar admin ",
+        "tags": ["Transaction"],
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success responses",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "totalData": {
+                      "type": "integer",
+                      "example": "1"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/transaksi"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/isAdmin"
+          }
+        }
+      }
+    },
+    "/api/transaction/admin/{id}": {
+      "get": {
+        "summary": "Get transaction Data By Id",
+        "description": "This API for see transaction data by Id",
+        "tags": ["Transaction"],
+        "parameters": [
+          {
+            "in": "path",
+            "description": "input id transaction",
+            "name": "id",
+            "required": true
+          }
+        ],
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success responses",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/transaksi"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/transaksiNotFound"
+          }
+        }
+      }
+    },
+    "/api/transaction/admin/filter/": {
+      "get": {
+        "summary": "Get Transaction Data By status ",
+        "description": "see transaction data by status, this can be used for admin",
+        "tags": ["Transaction"],
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "description": "status (success, pending, or canceled)",
+            "name": "status",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success responses",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "totalData": {
+                      "type": "integer",
+                      "example": "1"
+                    },
+                    "data": {
+                      "type": "array",
+                      "$ref": "#/components/schemas/transaksi"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/isAdmin"
+          },
+          "404": {
+            "$ref": "#/components/responses/transaksiNotFound"
+          }
+        }
+      }
+    },
+    "/api/transaction/admin/trip": {
+      "get": {
+        "summary": "Get Transaction Data By Type Trip ",
+        "description": "see transaction data by Type trip, this can be used for admin",
+        "tags": ["Transaction"],
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "description": "tripId (1 = One way, 2 = Round Trip)",
+            "name": "tripId",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success responses",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "totalData": {
+                      "type": "integer",
+                      "example": "1"
+                    },
+                    "data": {
+                      "type": "array",
+                      "$ref": "#/components/schemas/transaksi"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/isAdmin"
+          },
+          "404": {
+            "$ref": "#/components/responses/transaksiNotFound"
+          }
+        }
+      }
+    },
+    "/api/transaction/admin/update/{id}": {
+      "put": {
+        "summary": "Update Transaction Data By Id",
+        "tags": ["Transaction"],
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "description": "input id transaction",
+            "name": "id",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBody/transaksiBody"
+        },
+        "responses": {
+          "200": {
+            "description": "Success Update Transaction Data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Success Update Transaction"
+                    },
+                    "data": {
+                      "type": "object",
+                      "$ref": "#/components/schemas/transaksi"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/transaksiNotFound"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/isAdmin"
+          }
+        }
+      }
+    },
+    "/api/transaction/admin/delete/{id}": {
+      "delete": {
+        "summary": "Delete Transaction Data By Id",
+        "tags": ["Transaction"],
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "description": "input id transaction",
+            "name": "id",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success Delete Data Transaction",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Success Delete Transaction"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/transaksiNotFound"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
           }
         }
       }
@@ -1597,6 +2242,26 @@
             }
           }
         }
+      },
+      "transaksiNotFound": {
+        "description": "Data Not Found",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "Failed"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "transaction not found"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "requestBody": {
@@ -1638,7 +2303,7 @@
                   "example": "LION AIR",
                   "required": true
                 },
-                "image":{
+                "image": {
                   "type": "string",
                   "format": "binary",
                   "required": true
@@ -1682,8 +2347,8 @@
               "type": "object",
               "properties": {
                 "firstName": {
-                "type": "string",
-                "example": "Rima"
+                  "type": "string",
+                  "example": "Rima"
                 },
                 "lastName": {
                   "type": "string",
@@ -1697,7 +2362,7 @@
                   "type": "string",
                   "example": "082247231584"
                 },
-                "image":{
+                "image": {
                   "type": "string",
                   "format": "binary",
                   "required": true
@@ -1762,6 +2427,46 @@
                 "class": {
                   "type": "string",
                   "example": "EKONOMI"
+                }
+              }
+            }
+          }
+        }
+      },
+      "transaksiBody": {
+        "description": "transaction Data",
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "properties": {
+                "ticketFrom": {
+                  "type": "integer",
+                  "example": "1"
+                },
+                "ticketTo": {
+                  "type": "integer",
+                  "example": "2"
+                },
+                "tripId": {
+                  "type": "integer",
+                  "example": "2"
+                },
+                "firstName": {
+                  "type": "string",
+                  "example": "udin"
+                },
+                "lastName": {
+                  "type": "string",
+                  "example": "gambut"
+                },
+                "NIK": {
+                  "type": "string",
+                  "example": "32151314230402"
+                },
+                "brithDate": {
+                  "type": "date",
+                  "example": "2022-1-21"
                 }
               }
             }
@@ -2073,7 +2778,7 @@
           "capacity": {
             "type": "integer",
             "example": "35"
-          },     
+          },
           "class": {
             "type": "string",
             "example": "EKONOMI"
@@ -2193,6 +2898,489 @@
                   "createdAt": {
                     "type": "date",
                     "example": "2022-12-08T05:55:36.861Z"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "transaksi": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": "1"
+          },
+          "userId": {
+            "type": "integer",
+            "example": "3"
+          },
+          "paymentId": {
+            "type": "integer",
+            "default": null
+          },
+          "ticketFrom": {
+            "type": "integer",
+            "example": "1"
+          },
+          "ticketTo": {
+            "type": "integer",
+            "example": "2"
+          },
+          "passengerId": {
+            "type": "integer",
+            "example": "1"
+          },
+          "transactionCode": {
+            "type": "string",
+            "example": "TR2022225040"
+          },
+          "status": {
+            "type": "string",
+            "example": "pending"
+          },
+          "tripId": {
+            "type": "integer",
+            "example": "2"
+          },
+          "totalPrice": {
+            "type": "string",
+            "example": "10750000"
+          },
+          "createdAt": {
+            "type": "date",
+            "example": "2022-12-22T10:50:40.987Z"
+          },
+          "updatedAt": {
+            "type": "date",
+            "example": "2022-12-22T11:01:45.538Z"
+          },
+          "user": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "example": "3"
+              },
+              "firstName": {
+                "type": "string",
+                "example": "Reza"
+              },
+              "lastName": {
+                "type": "string",
+                "example": ""
+              },
+              "email": {
+                "type": "string",
+                "example": "rezaboyss@mail.com"
+              },
+              "roleId": {
+                "type": "integer",
+                "example": "2"
+              },
+              "createdAt": {
+                "type": "date",
+                "example": "2022-12-22T09:31:13.505Z"
+              },
+              "updatedAt": {
+                "type": "date",
+                "example": "2022-12-22T09:31:13.505Z"
+              }
+            }
+          },
+          "typeTrip": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "example": "1"
+              },
+              "type": {
+                "type": "string",
+                "example": "Round Trip"
+              },
+              "createdAt": {
+                "type": "date",
+                "example": "2022-12-21T05:20:32.642Z"
+              },
+              "updatedAt": {
+                "type": "date",
+                "example": "2022-12-21T05:20:32.642Z"
+              }
+            }
+          },
+          "passenger": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "example": "1"
+              },
+              "firstName": {
+                "type": "string",
+                "example": "andi"
+              },
+              "lastName": {
+                "type": "string",
+                "example": "baik"
+              },
+              "NIK": {
+                "type": "string",
+                "example": "3215135564738"
+              },
+              "brithDate": {
+                "type": "date",
+                "example": "2022-05-20T00:00:00.000Z"
+              },
+              "createdAt": {
+                "type": "date",
+                "example": "2022-12-22T10:50:40.968Z"
+              },
+              "updatedAt": {
+                "type": "date",
+                "example": "2022-12-22T11:01:45.527Z"
+              }
+            }
+          },
+          "from": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "example": "1"
+              },
+              "code": {
+                "type": "string",
+                "example": "T2023120"
+              },
+              "departureDate": {
+                "type": "date",
+                "example": "2022-12-06T00:00:00.000Z"
+              },
+              "departureTime": {
+                "type": "Time",
+                "example": "11:35:00"
+              },
+              "arrivalDate": {
+                "type": "string",
+                "example": "2022-12-06T00:00:00.000Z"
+              },
+              "arrivalTime": {
+                "type": "string",
+                "example": "16:00:00"
+              },
+              "flightFrom": {
+                "type": "integer",
+                "example": "1"
+              },
+              "flightTo": {
+                "type": "integer",
+                "example": "2"
+              },
+              "airplaneId": {
+                "type": "integer",
+                "example": "1"
+              },
+              "price": {
+                "type": "integer",
+                "example": "750000"
+              },
+              "capacity": {
+                "type": "integer",
+                "example": "35"
+              },
+              "class": {
+                "type": "string",
+                "example": "EKONOMI"
+              },
+              "createdAt": {
+                "type": "date",
+                "example": "2022-12-17T07:45:06.147Z"
+              },
+              "updatedAt": {
+                "type": "date",
+                "example": "2022-12-17T07:45:06.147Z"
+              },
+              "origin": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  },
+                  "airportName": {
+                    "type": "string",
+                    "example": "Bandara Soekarno Hatta"
+                  },
+                  "city": {
+                    "type": "string",
+                    "example": "Jakarta"
+                  },
+                  "cityCode": {
+                    "type": "string",
+                    "example": "JKT"
+                  },
+                  "createdAt": {
+                    "type": "date",
+                    "example": "2022-12-15T07:51:35.290Z"
+                  },
+                  "updatedAt": {
+                    "type": "date",
+                    "example": "2022-12-15T07:51:35.290Z"
+                  }
+                }
+              },
+              "destination": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "example": "2"
+                  },
+                  "airportName": {
+                    "type": "string",
+                    "example": "Bandara Ngurahray"
+                  },
+                  "city": {
+                    "type": "string",
+                    "example": "Bali"
+                  },
+                  "cityCode": {
+                    "type": "string",
+                    "example": "BLI"
+                  },
+                  "createdAt": {
+                    "type": "date",
+                    "example": "2022-12-15T07:51:12.750Z"
+                  },
+                  "updatedAt": {
+                    "type": "date",
+                    "example": "2022-12-15T07:51:12.750Z"
+                  }
+                }
+              },
+              "airplane": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "example": "1"
+                  },
+                  "airplaneName": {
+                    "type": "string",
+                    "example": "pesawat Terbang"
+                  },
+                  "airplaneCode": {
+                    "type": "string",
+                    "example": "2121"
+                  },
+                  "companyId": {
+                    "type": "integer"
+                  },
+                  "createdAt": {
+                    "type": "date",
+                    "example": "2022-12-15T07:54:09.794Z"
+                  },
+                  "updatedAt": {
+                    "type": "date",
+                    "example": "2022-12-15T07:54:09.794Z"
+                  },
+                  "company": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "example": "1"
+                      },
+                      "companyName": {
+                        "type": "string",
+                        "example": "Batik Air"
+                      },
+                      "companyImage": {
+                        "type": "string",
+                        "example": "https://ik.imagekit.io/mfn/IMG-1671090801008_h8UjrEzmZ.png"
+                      },
+                      "createdAt": {
+                        "type": "date",
+                        "example": "2022-12-15T07:53:36.690Z"
+                      },
+                      "updatedAt": {
+                        "type": "date",
+                        "example": "2022-12-15T07:53:36.690Z"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "to": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "example": "2"
+              },
+              "code": {
+                "type": "string",
+                "example": "T302288"
+              },
+              "departureDate": {
+                "type": "date",
+                "example": "2022-12-06T00:00:00.000Z"
+              },
+              "departureTime": {
+                "type": "time",
+                "example": "11:35:00"
+              },
+              "arrivalDate": {
+                "type": "date",
+                "example": "2022-12-06T00:00:00.000Z"
+              },
+              "arrivalTime": {
+                "type": "time",
+                "example": "11:35:00"
+              },
+              "flightFrom": {
+                "type": "integer",
+                "example": "2"
+              },
+              "flightTo": {
+                "type": "integer",
+                "example": "1"
+              },
+              "airplaneId": {
+                "type": "integer",
+                "example": "1"
+              },
+              "price": {
+                "type": "integer",
+                "example": "750000"
+              },
+              "capacity": {
+                "type": "integer",
+                "example": "35"
+              },
+              "class": {
+                "type": "string",
+                "example": "EKONOMI"
+              },
+              "createdAt": {
+                "type": "date",
+                "example": "2022-12-17T07:46:44.915Z"
+              },
+              "updatedAt": {
+                "type": "date",
+                "example": "2022-12-17T07:46:44.915Z"
+              },
+              "origin": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "example": "1"
+                  },
+                  "airportName": {
+                    "type": "string",
+                    "example": "Bandara Halim Perdanakusuma"
+                  },
+                  "city": {
+                    "type": "string",
+                    "example": "Jakarta"
+                  },
+                  "cityCode": {
+                    "type": "string",
+                    "example": "41333"
+                  },
+                  "createdAt": {
+                    "type": "date",
+                    "example": "2022-12-15T07:50:39.972Z"
+                  },
+                  "updatedAt": {
+                    "type": "date",
+                    "example": "2022-12-15T07:50:39.972Z"
+                  }
+                }
+              },
+              "destination": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "example": "2"
+                  },
+                  "airportName": {
+                    "type": "string",
+                    "example": "Bandara Ngurahray"
+                  },
+                  "city": {
+                    "type": "string",
+                    "example": "Bali"
+                  },
+                  "cityCode": {
+                    "type": "string",
+                    "example": "BLI"
+                  },
+                  "createdAt": {
+                    "type": "date",
+                    "example": "2022-12-15T07:51:12.750Z"
+                  },
+                  "updatedAt": {
+                    "type": "date",
+                    "example": "2022-12-15T07:51:12.750Z"
+                  }
+                }
+              },
+              "airplane": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "example": "1"
+                  },
+                  "airplaneName": {
+                    "type": "string",
+                    "example": "pesawat Terbang"
+                  },
+                  "airplaneCode": {
+                    "type": "string",
+                    "example": "2121"
+                  },
+                  "companyId": {
+                    "type": "integer"
+                  },
+                  "createdAt": {
+                    "type": "date",
+                    "example": "2022-12-15T07:54:09.794Z"
+                  },
+                  "updatedAt": {
+                    "type": "date",
+                    "example": "2022-12-15T07:54:09.794Z"
+                  },
+                  "company": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "example": "1"
+                      },
+                      "companyName": {
+                        "type": "string",
+                        "example": "Batik Air"
+                      },
+                      "companyImage": {
+                        "type": "string",
+                        "example": "https://ik.imagekit.io/mfn/IMG-1671090801008_h8UjrEzmZ.png"
+                      },
+                      "createdAt": {
+                        "type": "date",
+                        "example": "2022-12-15T07:53:36.690Z"
+                      },
+                      "updatedAt": {
+                        "type": "date",
+                        "example": "2022-12-15T07:53:36.690Z"
+                      }
+                    }
                   }
                 }
               }

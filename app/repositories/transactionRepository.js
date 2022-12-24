@@ -56,6 +56,20 @@ const getTransaction = () => {
       },
       {
         model: ticket,
+        include: [
+          {
+            model: airport, 
+            as:"origin",
+          },
+          {
+            model: airport, 
+            as:"destination",
+          },
+          {
+            model: airplane, attributes: { exclude: ["seatCapacity",], },
+            include: company,
+          },
+        ],
         attributes: { exclude: ["seatNumber",], },
         as:"to",
       },
@@ -100,6 +114,20 @@ const getTransactionById = (id) => {
       },
       {
         model: ticket,
+        include: [
+          {
+            model: airport, 
+            as:"origin",
+          },
+          {
+            model: airport, 
+            as:"destination",
+          },
+          {
+            model: airplane, attributes: { exclude: ["seatCapacity",], },
+            include: company,
+          },
+        ],
         attributes: { exclude: ["seatNumber",], },
         as:"to",
       },
@@ -144,8 +172,23 @@ const getTransactionByUserId = async (userId) => {
       },
       {
         model: ticket,
+        include: [
+          {
+            model: airport, 
+            as:"origin",
+          },
+          {
+            model: airport, 
+            as:"destination",
+          },
+          {
+            model: airplane, attributes: { exclude: ["seatCapacity",], },
+            include: company,
+          },
+        ],
         attributes: { exclude: ["seatNumber",], },
         as:"to",
+        
       },
     ],
   });
@@ -190,8 +233,261 @@ const getTransactionByUserIdAndId = async (userId, id) => {
       },
       {
         model: ticket,
+        include: [
+          {
+            model: airport, 
+            as:"origin",
+          },
+          {
+            model: airport, 
+            as:"destination",
+          },
+          {
+            model: airplane, attributes: { exclude: ["seatCapacity",], },
+            include: company,
+          },
+        ],
         attributes: { exclude: ["seatNumber",], },
         as:"to",
+        
+      },
+    ],
+  });
+};
+
+const getTransactionUserByStatus= async (userId, status) => {
+  return await transaction.findAll({
+    where: {
+      [Op.and]: [
+        { userId, },
+        { status, },
+      ],
+    },
+    include: [
+      {
+        model: user, attributes: { exclude: ["password",], },
+      },
+      {
+        model: typeTrip,
+      },
+      {
+        model: passenger,
+      },
+      {
+        model: ticket, 
+        include: [
+          {
+            model: airport, 
+            as:"origin",
+          },
+          {
+            model: airport, 
+            as:"destination",
+          },
+          {
+            model: airplane, attributes: { exclude: ["seatCapacity",], },
+            include: company,
+          },
+        ],
+        attributes: { exclude: ["seatNumber",], },
+        as:"from",
+      },
+      {
+        model: ticket,
+        include: [
+          {
+            model: airport, 
+            as:"origin",
+          },
+          {
+            model: airport, 
+            as:"destination",
+          },
+          {
+            model: airplane, attributes: { exclude: ["seatCapacity",], },
+            include: company,
+          },
+        ],
+        attributes: { exclude: ["seatNumber",], },
+        as:"to",
+        
+      },
+    ],
+  });
+};
+
+const getTransactionUserByTripId = async (userId, tripId) => {
+  return await transaction.findAll({
+    where: {
+      [Op.and]: [
+        { userId, },
+        { tripId, },
+      ],
+    },
+    include: [
+      {
+        model: user, attributes: { exclude: ["password",], },
+      },
+      {
+        model: typeTrip,
+      },
+      {
+        model: passenger,
+      },
+      {
+        model: ticket, 
+        include: [
+          {
+            model: airport, 
+            as:"origin",
+          },
+          {
+            model: airport, 
+            as:"destination",
+          },
+          {
+            model: airplane, attributes: { exclude: ["seatCapacity",], },
+            include: company,
+          },
+        ],
+        attributes: { exclude: ["seatNumber",], },
+        as:"from",
+      },
+      {
+        model: ticket,
+        include: [
+          {
+            model: airport, 
+            as:"origin",
+          },
+          {
+            model: airport, 
+            as:"destination",
+          },
+          {
+            model: airplane, attributes: { exclude: ["seatCapacity",], },
+            include: company,
+          },
+        ],
+        attributes: { exclude: ["seatNumber",], },
+        as:"to",
+        
+      },
+    ],
+  });
+};
+
+const getTransactionAdminByStatus = async (status) => {
+  return await transaction.findAll({
+    where: {
+      status, 
+    },
+    include: [
+      {
+        model: user, attributes: { exclude: ["password",], },
+      },
+      {
+        model: typeTrip,
+      },
+      {
+        model: passenger,
+      },
+      {
+        model: ticket, 
+        include: [
+          {
+            model: airport, 
+            as:"origin",
+          },
+          {
+            model: airport, 
+            as:"destination",
+          },
+          {
+            model: airplane, attributes: { exclude: ["seatCapacity",], },
+            include: company,
+          },
+        ],
+        attributes: { exclude: ["seatNumber",], },
+        as:"from",
+      },
+      {
+        model: ticket,
+        include: [
+          {
+            model: airport, 
+            as:"origin",
+          },
+          {
+            model: airport, 
+            as:"destination",
+          },
+          {
+            model: airplane, attributes: { exclude: ["seatCapacity",], },
+            include: company,
+          },
+        ],
+        attributes: { exclude: ["seatNumber",], },
+        as:"to",
+        
+      },
+    ],
+  });
+};
+
+const getTransactionAdminByTripId = async (tripId) => {
+  return await transaction.findAll({
+    where: {
+      tripId, 
+    },
+    include: [
+      {
+        model: user, attributes: { exclude: ["password",], },
+      },
+      {
+        model: typeTrip,
+      },
+      {
+        model: passenger,
+      },
+      {
+        model: ticket, 
+        include: [
+          {
+            model: airport, 
+            as:"origin",
+          },
+          {
+            model: airport, 
+            as:"destination",
+          },
+          {
+            model: airplane, attributes: { exclude: ["seatCapacity",], },
+            include: company,
+          },
+        ],
+        attributes: { exclude: ["seatNumber",], },
+        as:"from",
+      },
+      {
+        model: ticket,
+        include: [
+          {
+            model: airport, 
+            as:"origin",
+          },
+          {
+            model: airport, 
+            as:"destination",
+          },
+          {
+            model: airplane, attributes: { exclude: ["seatCapacity",], },
+            include: company,
+          },
+        ],
+        attributes: { exclude: ["seatNumber",], },
+        as:"to",
+        
       },
     ],
   });
@@ -232,6 +528,10 @@ module.exports = {
   getTransaction,
   getTransactionByUserId,
   getTransactionByUserIdAndId,
+  getTransactionUserByStatus,
+  getTransactionUserByTripId, 
+  getTransactionAdminByStatus,
+  getTransactionAdminByTripId,
   updateTransaction,
   deleteTransaction,
   updateTransactionAdmin,

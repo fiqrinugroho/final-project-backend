@@ -70,6 +70,60 @@ const getTransactionByTokenAndId = async (userId, id) => {
   }
 };
 
+const getTransactionByTokenAndStatus = async (userId, reqQuery) => {
+  const {status,}= reqQuery;
+
+  const transaction = 
+  await transactionRepository.getTransactionUserByStatus(userId, status);
+
+  if (transaction.length == 0 ) {
+    throw new ApiError(httpStatus.NOT_FOUND, "transaction not found");
+  } else {
+    return await transactionRepository
+      .getTransactionUserByStatus(userId, status);
+  }
+};
+
+const getTransactionByTokenAndTripId= async (userId, reqQuery) => {
+  const {tripId,}= reqQuery;
+
+  const transaction = 
+  await transactionRepository.getTransactionUserByTripId(userId, tripId);
+
+  if (transaction.length == 0 ) {
+    throw new ApiError(httpStatus.NOT_FOUND, "transaction not found");
+  } else {
+    return await transactionRepository
+      .getTransactionUserByTripId(userId, tripId);
+  }
+};
+
+const getTransactionByStatus = async (reqQuery) => {
+  const {status,}= reqQuery;
+  const transaction = 
+  await transactionRepository.getTransactionAdminByStatus(status);
+
+  if (transaction.length == 0 ) {
+    throw new ApiError(httpStatus.NOT_FOUND, "transaction not found");
+  } else {
+    return await transactionRepository
+      .getTransactionAdminByStatus(status);
+  }
+};
+
+const getTransactionByTripId = async (reqQuery) => {
+  const {tripId,}= reqQuery;
+  const transaction = 
+  await transactionRepository.getTransactionAdminByTripId(tripId);
+
+  if (transaction.length == 0 ) {
+    throw new ApiError(httpStatus.NOT_FOUND, "transaction not found");
+  } else {
+    return await transactionRepository
+      .getTransactionAdminByTripId(tripId);
+  }
+};
+
 const getTransaction = async () => {
   return await transactionRepository.getTransaction();
 };
@@ -101,17 +155,19 @@ const updateTransaction = async (reqBody, userId, id) => {
 
 };
 
-const deleteTransaction = async (userId, id) => {
+const cancelTransaction = async (id) => {
   const transaction = 
-  await transactionRepository.getTransactionByUserIdAndId(userId, id);
+  await transactionRepository.getTransactionById(id);
 
   if (transaction.length == 0) {
     throw new ApiError(httpStatus.NOT_FOUND, "transaction not found");
   } else {
-    const data = 
-    await transactionRepository.getTransactionById(id);
-    await passengerRepository.deletePassenger(data.passengerId);
-    return await transactionRepository.deleteTransactionAdmin(id);
+    const cancel ={
+      status:"canceled",
+    };
+    await transactionRepository.updateTransactionAdmin(cancel, id);
+
+    return await transactionRepository.getTransactionById(id);
   }
 };
 
@@ -145,8 +201,12 @@ module.exports = {
   getTransactionByTokenAndId,
   getTransaction,
   getTransactionById,
+  getTransactionByTokenAndStatus,
+  getTransactionByTokenAndTripId,
+  getTransactionByStatus,
+  getTransactionByTripId,
   updateTransaction,
-  deleteTransaction,
+  cancelTransaction,
   updateTransactionAdmin,
   deleteTransactionAdmin,
 };

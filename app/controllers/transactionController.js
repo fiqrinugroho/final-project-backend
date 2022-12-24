@@ -47,6 +47,38 @@ const getTransactionByTokenAndId = (req, res, next) => {
     });
 };
 
+const getTransactionByTokenAndStatus = (req, res, next) => {
+  transactionService
+    . getTransactionByTokenAndStatus(req.user.id, req.query)
+    .then((transaction) => {
+      res.status(200).json({
+        status: "OK",
+        message: "Success",
+        totalData: transaction.length,
+        data: transaction,
+      });
+    })
+    .catch((err) => {
+      next(err);
+    });
+};
+
+const getTransactionByTokenAndTripId = (req, res, next) => {
+  transactionService
+    . getTransactionByTokenAndTripId(req.user.id, req.query)
+    .then((transaction) => {
+      res.status(200).json({
+        status: "OK",
+        message: "Success",
+        totalData: transaction.length,
+        data: transaction,
+      });
+    })
+    .catch((err) => {
+      next(err);
+    });
+};
+
 const getTransaction = (req, res, next) => {
   transactionService
     .getTransaction()
@@ -78,6 +110,38 @@ const getTransactionById = (req, res, next) => {
     });
 };
 
+const getTransactionByStatus = (req, res, next) => {
+  transactionService
+    . getTransactionByStatus(req.query)
+    .then((transaction) => {
+      res.status(200).json({
+        status: "OK",
+        message: "Success",
+        totalData: transaction.length,
+        data: transaction,
+      });
+    })
+    .catch((err) => {
+      next(err);
+    });
+};
+
+const getTransactionByTripId = (req, res, next) => {
+  transactionService
+    . getTransactionByTripId(req.query)
+    .then((transaction) => {
+      res.status(200).json({
+        status: "OK",
+        message: "Success",
+        totalData: transaction.length,
+        data: transaction,
+      });
+    })
+    .catch((err) => {
+      next(err);
+    });
+};
+
 const updateTransaction = (req, res, next) => {
   transactionService
     .updateTransaction(req.body, req.user.id, req.params.id)
@@ -93,19 +157,20 @@ const updateTransaction = (req, res, next) => {
     });
 };
 
-const deleteTransaction= (req, res, next) => {
+const cancelTransaction = (req, res, next) => {
   transactionService
-    .deleteTransaction(req.user.id, req.params.id)
+    .cancelTransaction(req.params.id)
     .then(() => {
       res.status(200).json({
         status: "Success",
-        message: "Success Delete Transaction",
+        message: "Success Cancel Transaction",
       });
     })
     .catch((err) => {
       next(err);
     });
 };
+
 const updateTransactionAdmin = (req, res, next) => {
   transactionService
     .updateTransactionAdmin(req.body, req.params.id)
@@ -139,10 +204,14 @@ module.exports = {
   addTransaction,
   getTransactionByToken,
   getTransaction,
+  getTransactionByStatus,
+  getTransactionByTripId,
   getTransactionById,
   getTransactionByTokenAndId,
+  getTransactionByTokenAndStatus, 
+  getTransactionByTokenAndTripId, 
   updateTransaction,
-  deleteTransaction,
+  cancelTransaction,
   updateTransactionAdmin,
   deleteTransactionAdmin,
 };
