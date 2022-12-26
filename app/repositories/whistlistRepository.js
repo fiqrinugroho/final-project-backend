@@ -1,4 +1,4 @@
-const { user, ticket, whistlist } = require("../models");
+const { user, ticket, whistlist, } = require("../models");
 
 const createWish = async (newWish) => {
   return await whistlist.create(newWish);
@@ -35,7 +35,7 @@ const findWish = (userId) => {
 };
 
 const deleteWish = async (id) => {
-  return await whistlist.destroy({ where: { id } });
+  return await whistlist.destroy({ where: { id, }, });
 };
 
 module.exports = {

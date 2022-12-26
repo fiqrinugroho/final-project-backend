@@ -3,7 +3,7 @@ const ApiError = require("../../utils/ApiError");
 const whistlistRepository = require("../repositories/whistlistRepository");
 
 const createWish = async (reqBody, userId) => {
-  const { ticketId } = reqBody;
+  const { ticketId, } = reqBody;
   const newWish = {
     ticketId,
     userId,
@@ -27,12 +27,12 @@ const getWishById = async (userId) => {
 };
 
 const deleteWish = async (id) => {
-    return await whistlistRepository.deleteWish(id);
+  return await whistlistRepository.deleteWish(id);
 };
 
 module.exports = {
   createWish,
   getWish,
   getWishById,
-  deleteWish
+  deleteWish,
 };
