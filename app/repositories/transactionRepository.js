@@ -1,5 +1,5 @@
 const { ticket, user, transaction, passenger,
-  typeTrip, airport, airplane, company, } = require("../models");
+  typeTrip, airport, airplane, company, payment,} = require("../models");
 const { Op, } = require("sequelize");
 
 const createTransaction = (addTransaction) => {
@@ -28,6 +28,9 @@ const getTransaction = () => {
     include: [
       {
         model: user, attributes: { exclude: ["password",], },
+      },
+      {
+        model: payment,
       },
       {
         model: typeTrip,
@@ -88,6 +91,9 @@ const getTransactionById = (id) => {
         model: user, attributes: { exclude: ["password",], },
       },
       {
+        model: payment,
+      },
+      {
         model: typeTrip,
       },
       {
@@ -144,6 +150,9 @@ const getTransactionByUserId = async (userId) => {
     include: [
       {
         model: user, attributes: { exclude: ["password",], },
+      },
+      {
+        model: payment,
       },
       {
         model: typeTrip,
@@ -207,6 +216,9 @@ const getTransactionByUserIdAndId = async (userId, id) => {
         model: user, attributes: { exclude: ["password",], },
       },
       {
+        model: payment,
+      },
+      {
         model: typeTrip,
       },
       {
@@ -266,6 +278,9 @@ const getTransactionUserByStatus= async (userId, status) => {
     include: [
       {
         model: user, attributes: { exclude: ["password",], },
+      },
+      {
+        model: payment,
       },
       {
         model: typeTrip,
@@ -329,6 +344,9 @@ const getTransactionUserByTripId = async (userId, tripId) => {
         model: user, attributes: { exclude: ["password",], },
       },
       {
+        model: payment,
+      },
+      {
         model: typeTrip,
       },
       {
@@ -387,6 +405,9 @@ const getTransactionAdminByStatus = async (status) => {
         model: user, attributes: { exclude: ["password",], },
       },
       {
+        model: payment,
+      },
+      {
         model: typeTrip,
       },
       {
@@ -443,6 +464,9 @@ const getTransactionAdminByTripId = async (tripId) => {
     include: [
       {
         model: user, attributes: { exclude: ["password",], },
+      },
+      {
+        model: payment,
       },
       {
         model: typeTrip,
