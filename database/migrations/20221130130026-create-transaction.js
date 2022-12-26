@@ -20,10 +20,10 @@ module.exports = {
       paymentId: {
         type: Sequelize.INTEGER
       },
-      ticketFrom: {
+      ticketGo: {
         type: Sequelize.INTEGER
       },
-      ticketTo: {
+      ticketBack: {
         type: Sequelize.INTEGER
       },
       passengerId: {

@@ -12,7 +12,7 @@
     "db:migrate": "sequelize db:migrate",
     "db:migrate:undo": "sequelize db:migrate:undo:all",
     "db:fix:ticket": "sequelize db:migrate:undo --name 20221130125728-create-ticket.js && sequelize db:migrate",
-    "db:fix:transaction": "sequelize db:seed --seed 20221221051547-typeTrip.js && sequelize db:migrate:undo --name 20221130130026-create-transaction.js && sequelize db:migrate",
+    "db:fix:transaction": "sequelize db:migrate:undo --name 20221130130026-create-transaction.js && sequelize db:migrate",
     "db:seed": "sequelize db:seed:all",
     "db:drop": "sequelize db:drop",
     "test": "jest --setupFiles dotenv/config --coverage --forceExit --detectOpenHandles "

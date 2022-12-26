@@ -52,7 +52,7 @@ const getTransaction = () => {
           },
         ],
         attributes: { exclude: ["seatNumber",], },
-        as:"from",
+        as:"go",
       },
       {
         model: ticket,
@@ -71,7 +71,7 @@ const getTransaction = () => {
           },
         ],
         attributes: { exclude: ["seatNumber",], },
-        as:"to",
+        as:"back",
       },
     ],
   });
@@ -110,7 +110,7 @@ const getTransactionById = (id) => {
           },
         ],
         attributes: { exclude: ["seatNumber",], },
-        as:"from",
+        as:"go",
       },
       {
         model: ticket,
@@ -129,7 +129,7 @@ const getTransactionById = (id) => {
           },
         ],
         attributes: { exclude: ["seatNumber",], },
-        as:"to",
+        as:"back",
       },
     ],
   });
@@ -168,7 +168,7 @@ const getTransactionByUserId = async (userId) => {
           },
         ],
         attributes: { exclude: ["seatNumber",], },
-        as:"from",
+        as:"go",
       },
       {
         model: ticket,
@@ -187,7 +187,7 @@ const getTransactionByUserId = async (userId) => {
           },
         ],
         attributes: { exclude: ["seatNumber",], },
-        as:"to",
+        as:"back",
         
       },
     ],
@@ -229,7 +229,7 @@ const getTransactionByUserIdAndId = async (userId, id) => {
           },
         ],
         attributes: { exclude: ["seatNumber",], },
-        as:"from",
+        as:"go",
       },
       {
         model: ticket,
@@ -248,7 +248,7 @@ const getTransactionByUserIdAndId = async (userId, id) => {
           },
         ],
         attributes: { exclude: ["seatNumber",], },
-        as:"to",
+        as:"back",
         
       },
     ],
@@ -290,7 +290,7 @@ const getTransactionUserByStatus= async (userId, status) => {
           },
         ],
         attributes: { exclude: ["seatNumber",], },
-        as:"from",
+        as:"go",
       },
       {
         model: ticket,
@@ -309,7 +309,7 @@ const getTransactionUserByStatus= async (userId, status) => {
           },
         ],
         attributes: { exclude: ["seatNumber",], },
-        as:"to",
+        as:"back",
         
       },
     ],
@@ -351,7 +351,7 @@ const getTransactionUserByTripId = async (userId, tripId) => {
           },
         ],
         attributes: { exclude: ["seatNumber",], },
-        as:"from",
+        as:"go",
       },
       {
         model: ticket,
@@ -370,7 +370,7 @@ const getTransactionUserByTripId = async (userId, tripId) => {
           },
         ],
         attributes: { exclude: ["seatNumber",], },
-        as:"to",
+        as:"back",
         
       },
     ],
@@ -409,7 +409,7 @@ const getTransactionAdminByStatus = async (status) => {
           },
         ],
         attributes: { exclude: ["seatNumber",], },
-        as:"from",
+        as:"go",
       },
       {
         model: ticket,
@@ -428,7 +428,7 @@ const getTransactionAdminByStatus = async (status) => {
           },
         ],
         attributes: { exclude: ["seatNumber",], },
-        as:"to",
+        as:"back",
         
       },
     ],
@@ -467,7 +467,7 @@ const getTransactionAdminByTripId = async (tripId) => {
           },
         ],
         attributes: { exclude: ["seatNumber",], },
-        as:"from",
+        as:"go",
       },
       {
         model: ticket,
@@ -486,7 +486,7 @@ const getTransactionAdminByTripId = async (tripId) => {
           },
         ],
         attributes: { exclude: ["seatNumber",], },
-        as:"to",
+        as:"back",
         
       },
     ],

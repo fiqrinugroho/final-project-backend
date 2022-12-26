@@ -5,7 +5,7 @@ const passengerRepository = require("../repositories/passengerRepository");
 const ticketRepository = require("../repositories/ticketRepository");
 
 const addTransaction = async (reqBody, id) => {
-  const {tripId, ticketFrom, ticketTo,} = reqBody;
+  const {tripId, ticketGo, ticketBack,} = reqBody;
 
   const date = Date(Date.now);
   const menit = date.split(":");
@@ -13,7 +13,7 @@ const addTransaction = async (reqBody, id) => {
   const waktu = date.split(" ");
   const transactionCode = "TR"+waktu[3]+waktu[2]+menit[1]+detik[0];
 
-  const from =  await ticketRepository.findTicketById(ticketFrom);
+  const from =  await ticketRepository.findTicketById(ticketGo);
   if(!from){
     throw new ApiError(httpStatus.BAD_REQUEST, "ticket not found");
   }
@@ -23,13 +23,13 @@ const addTransaction = async (reqBody, id) => {
   } else {
     const passenger = await passengerRepository.create(reqBody);
     if (tripId == 2){
-      const to =  await ticketRepository.findTicketById(ticketTo);
+      const to =  await ticketRepository.findTicketById(ticketBack);
       const totalPrice = from.price + to.price;
       const newTransaction = {
         transactionCode, 
         userId:id,
-        ticketFrom, 
-        ticketTo, 
+        ticketGo, 
+        ticketBack, 
         tripId, 
         totalPrice,
         status: "pending",
@@ -42,7 +42,7 @@ const addTransaction = async (reqBody, id) => {
       const newTransaction = {
         transactionCode, 
         userId:id,
-        ticketFrom, 
+        ticketGo, 
         tripId, 
         totalPrice:from.price,
         status: "pending",
