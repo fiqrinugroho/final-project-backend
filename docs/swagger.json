@@ -3043,7 +3043,7 @@
               }
             }
           },
-          "from": {
+          "go": {
             "type": "object",
             "properties": {
               "id": {
@@ -3214,7 +3214,7 @@
               }
             }
           },
-          "to": {
+          "back": {
             "type": "object",
             "properties": {
               "id": {
