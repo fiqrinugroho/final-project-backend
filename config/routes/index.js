@@ -8,6 +8,7 @@ const company = require("./company");
 const airplane = require("./airplane");
 const ticket = require("./ticket");
 const transaction = require("./transaction");
+const whistlist = require("./whistlist");
 const payment = require("./payment");
 
 // API auth
@@ -19,6 +20,7 @@ router.use("/api/company/", company);
 router.use("/api/airplane/", airplane);
 router.use("/api/ticket/", ticket);
 router.use("/api/transaction/", transaction);
+router.use("/api/whistlist/", whistlist);
 router.use("/api/payment/", payment);
 
 module.exports = router;
