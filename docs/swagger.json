@@ -1177,6 +1177,79 @@
         }
       }
     },
+    "/api/ticket/search/": {
+      "get": {
+        "summary": "Search Ticket Data",
+        "description": "search ticket ",
+        "tags": ["Ticket"],
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "description": "format (2023-01-12)",
+            "name": "departureDate",
+            "required": true
+          },
+          {
+            "in": "query",
+            "description": "Jakarta (Case Sensitive)",
+            "name": "originCity",
+            "required": true
+          },
+          {
+            "in": "query",
+            "description": "Bali (Case Sensitive)",
+            "name": "destinationCity",
+            "required": true
+          },
+          {
+            "in": "query",
+            "description": "format (2023-01-12)",
+            "name": "returnDate"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success responses Note: response ticketGo and ticketBack is array of object",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "ticketGo":{
+                          "$ref": "#/components/schemas/ticket"
+                        },
+                        "ticketBack":{
+                          "$ref": "#/components/schemas/ticket"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/searchNotFound"
+          }
+        }
+      }
+    },
     "/api/ticket/": {
       "get": {
         "summary": "Get All Ticket Data",
@@ -2553,6 +2626,26 @@
                 "message": {
                   "type": "string",
                   "example": "transaction not found"
+                }
+              }
+            }
+          }
+        }
+      },
+      "searchNotFound": {
+        "description": "ticket with input departure Date Not Found",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "Failed"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Tiket Pergi Tidak Ditemukan"
                 }
               }
             }

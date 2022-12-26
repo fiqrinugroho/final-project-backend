@@ -1,4 +1,5 @@
 const { ticket, airport, airplane, company, } = require("../models");
+const { Op, } = require("sequelize");
 
 // untuk mencari data sesuai dengan nama ticket
 const findTicket = (code) => {
@@ -81,6 +82,36 @@ const deleteTicket = async (id) => {
   return await ticket.destroy({ where: { id, }, });
 };
 
+const searchTicket = async (departureDate, originCity, destinationCity) => {
+
+  return await ticket.findAll({ 
+    
+    where: { 
+      departureDate, 
+    },
+    attributes: { exclude: ["seatNumber",], },
+    include: [
+      {
+        model: airport, 
+        as:"origin",
+        where: {
+          city:{[Op.like]:`%${originCity}%`,},
+        },
+      },
+      {
+        model: airport, 
+        as:"destination",
+        where: {
+          city:{[Op.like]:`%${destinationCity}%`,},
+        },
+      },
+      {
+        model: airplane, attributes: { exclude: ["seatCapacity",], },
+        include: company,
+      },
+    ], });
+};
+
 module.exports = {
   findTicket,
   createTicket,
@@ -88,4 +119,5 @@ module.exports = {
   findTicketById,
   updateTicket,
   deleteTicket,
+  searchTicket,
 };
