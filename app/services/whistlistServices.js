@@ -16,8 +16,8 @@ const getWish = async () => {
   return await whistlistRepository.getWish();
 };
 
-const getWishById = async (id) => {
-  const whistlist = await whistlistRepository.findWish(id);
+const getWishById = async (userId) => {
+  const whistlist = await whistlistRepository.findWish(userId);
 
   if (!whistlist) {
     throw new ApiError(httpStatus.NOT_FOUND, "no wishlist found");
@@ -26,8 +26,13 @@ const getWishById = async (id) => {
   }
 };
 
+const deleteWish = async (id) => {
+    return await whistlistRepository.deleteWish(id);
+};
+
 module.exports = {
   createWish,
   getWish,
   getWishById,
+  deleteWish
 };

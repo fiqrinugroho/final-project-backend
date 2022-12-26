@@ -34,8 +34,13 @@ const findWish = (userId) => {
   return find;
 };
 
+const deleteWish = async (id) => {
+  return await whistlist.destroy({ where: { id } });
+};
+
 module.exports = {
   createWish,
   getWish,
   findWish,
+  deleteWish,
 };

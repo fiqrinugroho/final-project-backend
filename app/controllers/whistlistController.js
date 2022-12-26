@@ -46,8 +46,23 @@ const getWishById = (req, res, next) => {
     });
 };
 
+const deleteWish = (req, res, next) => {
+  whistlistService
+    .deleteWish(req.params.id)
+    .then(() => {
+      res.status(200).json({
+        status: "Success",
+        message: "Success Delete Wishlist",
+      });
+    })
+    .catch((err) => {
+      next(err);
+    });
+};
+
 module.exports = {
   createWish,
   getWish,
   getWishById,
+  deleteWish,
 };
