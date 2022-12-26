@@ -2156,7 +2156,7 @@
         }
       }
     },
-    "/api/payment/":{
+    "/api/payment/": {
       "put": {
         "summary": "Transaction Payment",
         "tags": ["Payment"],
@@ -2198,6 +2198,220 @@
           },
           "401": {
             "$ref": "#/components/responses/Unauthorized"
+          }
+        }
+      }
+    },
+    "/api/whistlist/": {
+      "get": {
+        "summary": "Get Users Wishlist",
+        "description": "This API used to be a Users Wishlist",
+        "tags": ["Wishlist"],
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Logged in User can see this data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "data": {
+                      "type": "array",
+                      "$ref": "#/components/schemas/wishlist"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Need Token for access",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "fail"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Invalid Token"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/whistlist/create": {
+      "post": {
+        "summary": "Add Users Wishlist",
+        "description": "Add Wishlist for User",
+        "tags": ["Wishlist"],
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
+        "requestBody": {
+          "description": "Add Wishlist for User",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "ticketId": {
+                    "type": "integer",
+                    "example": "2"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Logged in User can add this data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Success Add New Wishlist"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer",
+                          "example": "1"
+                        },
+                        "ticketId": {
+                          "type": "integer",
+                          "example": "2"
+                        },
+                        "userId": {
+                          "type": "integer",
+                          "example": "2"
+                        },
+                        "updatedAt": {
+                          "type": "date",
+                          "example": "2022-12-26T13:13:04.995Z"
+                        },
+                        "createdAt": {
+                          "type": "date",
+                          "example": "2022-12-26T13:13:04.995Z"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Need Token for access",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "fail"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Invalid Token"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/whistlist/delete/{id}": {
+      "delete": {
+        "summary": "delete wishlist by id",
+        "tags": ["Wishlist"],
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "description": "input id wishlist",
+            "name": "id",
+            "required": true
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Logged in User can delete this data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Success Delete Wishlist"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Need Token for access",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "fail"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Invalid Token"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -4041,6 +4255,133 @@
           "updatedAt": {
             "type": "date",
             "example": "2022-12-26T06:52:22.391Z"
+          }
+        }
+      },
+      "wishlist": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "userId": {
+            "type": "integer",
+            "example": "2"
+          },
+          "ticketId": {
+            "type": "integer",
+            "example": "1"
+          },
+          "createdAt": {
+            "type": "date",
+            "example": "2022-12-26T09:33:06.230Z"
+          },
+          "updatedAt": {
+            "type": "date",
+            "example": "2022-12-26T09:33:06.230Z"
+          },
+          "user": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "example": "2"
+              },
+              "firstName": {
+                "type": "string",
+                "example": "firstName"
+              },
+              "lastName": {
+                "type": "string",
+                "example": "lastName"
+              },
+              "email": {
+                "type": "string",
+                "example": "example@mail.com"
+              },
+              "password": {
+                "type": "string",
+                "example": "$2b$10$o0Ev1T6dYQMtbRplbtDK6O6.Q0L4tqqoPrKi5AmIDXH8J8IZ8i6Qu"
+              },
+              "roleId": {
+                "type": "integer",
+                "example": "2"
+              },
+              "createdAt": {
+                "type": "date",
+                "example": "2022-12-16T05:56:01.635Z"
+              },
+              "updatedAt": {
+                "type": "date",
+                "example": "2022-12-16T05:56:01.635Z"
+              }
+            }
+          },
+          "ticket": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "example": "1"
+              },
+              "code": {
+                "type": "string",
+                "example": "T302288"
+              },
+              "departureDate": {
+                "type": "date",
+                "example": "2022-12-06T00:00:00.000Z"
+              },
+              "departureTime": {
+                "type": "time",
+                "example": "11:35:00"
+              },
+              "arrivalDate": {
+                "type": "date",
+                "example": "2022-12-06T00:00:00.000Z"
+              },
+              "arrivalTime": {
+                "type": "time",
+                "example": "11:35:00"
+              },
+              "flightFrom": {
+                "type": "integer",
+                "example": "1"
+              },
+              "flightTo": {
+                "type": "integer",
+                "example": "2"
+              },
+              "airplaneId": {
+                "type": "integer",
+                "example": "1"
+              },
+              "price": {
+                "type": "integer",
+                "example": "750000"
+              },
+              "capacity": {
+                "type": "integer",
+                "example": "35"
+              },
+              "seatNumber": {
+                "type": "string",
+                "example": "E20"
+              },
+              "class": {
+                "type": "string",
+                "example": "EKONOMI"
+              },
+              "createdAt": {
+                "type": "date",
+                "example": "2022-12-20T15:55:55.466Z"
+              },
+              "updatedAt": {
+                "type": "date",
+                "example": "2022-12-20T15:55:55.466Z"
+              }
+            }
           }
         }
       }
