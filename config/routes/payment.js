@@ -6,7 +6,7 @@ const payment = require("../../app/controllers/paymentController");
 // middleware
 const Authentication = require("../../middlewares/authenticate");
 
-router.get("/", Authentication, payment.getPayment);
+router.get("/", payment.getPayment);
 router.put("/", Authentication, payment.createPayment);
 
 

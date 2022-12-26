@@ -16,7 +16,11 @@ const createPayment = async (reqBody) => {
     if (!transaction) {
       throw new ApiError(httpStatus.NOT_FOUND, "transaction not found");
     } else {
-      await paymentRepository.createPayment(reqBody, transactionId);
+      const newPayment = {
+        paymentId,
+        status:"success",
+      };
+      await paymentRepository.createPayment(newPayment, transactionId);
 
       return await transactionRepository.getTransactionById(transactionId);
     }
