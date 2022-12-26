@@ -2119,6 +2119,88 @@
           }
         }
       }
+    },
+    "/api/payment": {
+      "get": {
+        "summary": "Get All payment method Data",
+        "description": "This API for see all payment method data",
+        "tags": ["Payment"],
+        "responses": {
+          "200": {
+            "description": "User and admin can see this data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "totalData": {
+                      "type": "integer",
+                      "example": "1"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/payment"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/payment/":{
+      "put": {
+        "summary": "Transaction Payment",
+        "tags": ["Payment"],
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBody/paymentBody"
+        },
+        "responses": {
+          "200": {
+            "description": "Success Transaction Payment",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Payment Success"
+                    },
+                    "data": {
+                      "type": "object",
+                      "$ref": "#/components/schemas/createPayment"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/transaksiNotFound"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -2440,11 +2522,11 @@
           "application/json": {
             "schema": {
               "properties": {
-                "ticketFrom": {
+                "ticketGo": {
                   "type": "integer",
                   "example": "1"
                 },
-                "ticketTo": {
+                "ticketBack": {
                   "type": "integer",
                   "example": "2"
                 },
@@ -2467,6 +2549,27 @@
                 "brithDate": {
                   "type": "date",
                   "example": "2022-1-21"
+                }
+              }
+            }
+          }
+        }
+      },
+      "paymentBody": {
+        "description": "Payment Reqbody Data",
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "transactionId": {
+                  "type": "integer",
+                  "example": "1"
+                },
+                "paymentId": {
+                  "type": "integer",
+                  "example": "1"
                 }
               }
             }
@@ -2920,11 +3023,11 @@
             "type": "integer",
             "default": null
           },
-          "ticketFrom": {
+          "ticketGo": {
             "type": "integer",
             "example": "1"
           },
-          "ticketTo": {
+          "ticketBack": {
             "type": "integer",
             "example": "2"
           },
@@ -2989,6 +3092,10 @@
               }
             }
           },
+          "payment": {
+            "type": "object",
+            "properties": {}
+          },
           "typeTrip": {
             "type": "object",
             "properties": {
@@ -3043,7 +3150,7 @@
               }
             }
           },
-          "from": {
+          "go": {
             "type": "object",
             "properties": {
               "id": {
@@ -3214,7 +3321,7 @@
               }
             }
           },
-          "to": {
+          "back": {
             "type": "object",
             "properties": {
               "id": {
@@ -3385,6 +3492,555 @@
                 }
               }
             }
+          }
+        }
+      },
+      "createPayment": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": "1"
+          },
+          "userId": {
+            "type": "integer",
+            "example": "3"
+          },
+          "paymentId": {
+            "type": "integer",
+            "default": "1"
+          },
+          "ticketGo": {
+            "type": "integer",
+            "example": "1"
+          },
+          "ticketBack": {
+            "type": "integer",
+            "example": "2"
+          },
+          "passengerId": {
+            "type": "integer",
+            "example": "1"
+          },
+          "transactionCode": {
+            "type": "string",
+            "example": "TR2022225040"
+          },
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
+          "tripId": {
+            "type": "integer",
+            "example": "2"
+          },
+          "totalPrice": {
+            "type": "string",
+            "example": "10750000"
+          },
+          "createdAt": {
+            "type": "date",
+            "example": "2022-12-22T10:50:40.987Z"
+          },
+          "updatedAt": {
+            "type": "date",
+            "example": "2022-12-22T11:01:45.538Z"
+          },
+          "user": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "example": "3"
+              },
+              "firstName": {
+                "type": "string",
+                "example": "Reza"
+              },
+              "lastName": {
+                "type": "string",
+                "example": ""
+              },
+              "email": {
+                "type": "string",
+                "example": "rezaboyss@mail.com"
+              },
+              "roleId": {
+                "type": "integer",
+                "example": "2"
+              },
+              "createdAt": {
+                "type": "date",
+                "example": "2022-12-22T09:31:13.505Z"
+              },
+              "updatedAt": {
+                "type": "date",
+                "example": "2022-12-22T09:31:13.505Z"
+              }
+            }
+          },
+          "payment": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "example": 1
+              },
+              "bankLogo": {
+                "type": "string",
+                "example": "https://ik.imagekit.io/mfn/Bank_Logo/BRI.png"
+              },
+              "bankName": {
+                "type": "string",
+                "example": "Bank Rakyat Indonesia (BRI)"
+              },
+              "accountName": {
+                "type": "string",
+                "example": "Lets Flight Indonesia"
+              },
+              "accountNumber": {
+                "type": "string",
+                "example": "324525142882575"
+              },
+              "createdAt": {
+                "type": "date",
+                "example": "2022-12-26T06:52:22.391Z"
+              },
+              "updatedAt": {
+                "type": "date",
+                "example": "2022-12-26T06:52:22.391Z"
+              }
+            }
+          },
+          "typeTrip": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "example": "1"
+              },
+              "type": {
+                "type": "string",
+                "example": "Round Trip"
+              },
+              "createdAt": {
+                "type": "date",
+                "example": "2022-12-21T05:20:32.642Z"
+              },
+              "updatedAt": {
+                "type": "date",
+                "example": "2022-12-21T05:20:32.642Z"
+              }
+            }
+          },
+          "passenger": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "example": "1"
+              },
+              "firstName": {
+                "type": "string",
+                "example": "andi"
+              },
+              "lastName": {
+                "type": "string",
+                "example": "baik"
+              },
+              "NIK": {
+                "type": "string",
+                "example": "3215135564738"
+              },
+              "brithDate": {
+                "type": "date",
+                "example": "2022-05-20T00:00:00.000Z"
+              },
+              "createdAt": {
+                "type": "date",
+                "example": "2022-12-22T10:50:40.968Z"
+              },
+              "updatedAt": {
+                "type": "date",
+                "example": "2022-12-22T11:01:45.527Z"
+              }
+            }
+          },
+          "go": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "example": "1"
+              },
+              "code": {
+                "type": "string",
+                "example": "T2023120"
+              },
+              "departureDate": {
+                "type": "date",
+                "example": "2022-12-06T00:00:00.000Z"
+              },
+              "departureTime": {
+                "type": "Time",
+                "example": "11:35:00"
+              },
+              "arrivalDate": {
+                "type": "string",
+                "example": "2022-12-06T00:00:00.000Z"
+              },
+              "arrivalTime": {
+                "type": "string",
+                "example": "16:00:00"
+              },
+              "flightFrom": {
+                "type": "integer",
+                "example": "1"
+              },
+              "flightTo": {
+                "type": "integer",
+                "example": "2"
+              },
+              "airplaneId": {
+                "type": "integer",
+                "example": "1"
+              },
+              "price": {
+                "type": "integer",
+                "example": "750000"
+              },
+              "capacity": {
+                "type": "integer",
+                "example": "35"
+              },
+              "class": {
+                "type": "string",
+                "example": "EKONOMI"
+              },
+              "createdAt": {
+                "type": "date",
+                "example": "2022-12-17T07:45:06.147Z"
+              },
+              "updatedAt": {
+                "type": "date",
+                "example": "2022-12-17T07:45:06.147Z"
+              },
+              "origin": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  },
+                  "airportName": {
+                    "type": "string",
+                    "example": "Bandara Soekarno Hatta"
+                  },
+                  "city": {
+                    "type": "string",
+                    "example": "Jakarta"
+                  },
+                  "cityCode": {
+                    "type": "string",
+                    "example": "JKT"
+                  },
+                  "createdAt": {
+                    "type": "date",
+                    "example": "2022-12-15T07:51:35.290Z"
+                  },
+                  "updatedAt": {
+                    "type": "date",
+                    "example": "2022-12-15T07:51:35.290Z"
+                  }
+                }
+              },
+              "destination": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "example": "2"
+                  },
+                  "airportName": {
+                    "type": "string",
+                    "example": "Bandara Ngurahray"
+                  },
+                  "city": {
+                    "type": "string",
+                    "example": "Bali"
+                  },
+                  "cityCode": {
+                    "type": "string",
+                    "example": "BLI"
+                  },
+                  "createdAt": {
+                    "type": "date",
+                    "example": "2022-12-15T07:51:12.750Z"
+                  },
+                  "updatedAt": {
+                    "type": "date",
+                    "example": "2022-12-15T07:51:12.750Z"
+                  }
+                }
+              },
+              "airplane": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "example": "1"
+                  },
+                  "airplaneName": {
+                    "type": "string",
+                    "example": "pesawat Terbang"
+                  },
+                  "airplaneCode": {
+                    "type": "string",
+                    "example": "2121"
+                  },
+                  "companyId": {
+                    "type": "integer"
+                  },
+                  "createdAt": {
+                    "type": "date",
+                    "example": "2022-12-15T07:54:09.794Z"
+                  },
+                  "updatedAt": {
+                    "type": "date",
+                    "example": "2022-12-15T07:54:09.794Z"
+                  },
+                  "company": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "example": "1"
+                      },
+                      "companyName": {
+                        "type": "string",
+                        "example": "Batik Air"
+                      },
+                      "companyImage": {
+                        "type": "string",
+                        "example": "https://ik.imagekit.io/mfn/IMG-1671090801008_h8UjrEzmZ.png"
+                      },
+                      "createdAt": {
+                        "type": "date",
+                        "example": "2022-12-15T07:53:36.690Z"
+                      },
+                      "updatedAt": {
+                        "type": "date",
+                        "example": "2022-12-15T07:53:36.690Z"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "back": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "example": "2"
+              },
+              "code": {
+                "type": "string",
+                "example": "T302288"
+              },
+              "departureDate": {
+                "type": "date",
+                "example": "2022-12-06T00:00:00.000Z"
+              },
+              "departureTime": {
+                "type": "time",
+                "example": "11:35:00"
+              },
+              "arrivalDate": {
+                "type": "date",
+                "example": "2022-12-06T00:00:00.000Z"
+              },
+              "arrivalTime": {
+                "type": "time",
+                "example": "11:35:00"
+              },
+              "flightFrom": {
+                "type": "integer",
+                "example": "2"
+              },
+              "flightTo": {
+                "type": "integer",
+                "example": "1"
+              },
+              "airplaneId": {
+                "type": "integer",
+                "example": "1"
+              },
+              "price": {
+                "type": "integer",
+                "example": "750000"
+              },
+              "capacity": {
+                "type": "integer",
+                "example": "35"
+              },
+              "class": {
+                "type": "string",
+                "example": "EKONOMI"
+              },
+              "createdAt": {
+                "type": "date",
+                "example": "2022-12-17T07:46:44.915Z"
+              },
+              "updatedAt": {
+                "type": "date",
+                "example": "2022-12-17T07:46:44.915Z"
+              },
+              "origin": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "example": "1"
+                  },
+                  "airportName": {
+                    "type": "string",
+                    "example": "Bandara Halim Perdanakusuma"
+                  },
+                  "city": {
+                    "type": "string",
+                    "example": "Jakarta"
+                  },
+                  "cityCode": {
+                    "type": "string",
+                    "example": "41333"
+                  },
+                  "createdAt": {
+                    "type": "date",
+                    "example": "2022-12-15T07:50:39.972Z"
+                  },
+                  "updatedAt": {
+                    "type": "date",
+                    "example": "2022-12-15T07:50:39.972Z"
+                  }
+                }
+              },
+              "destination": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "example": "2"
+                  },
+                  "airportName": {
+                    "type": "string",
+                    "example": "Bandara Ngurahray"
+                  },
+                  "city": {
+                    "type": "string",
+                    "example": "Bali"
+                  },
+                  "cityCode": {
+                    "type": "string",
+                    "example": "BLI"
+                  },
+                  "createdAt": {
+                    "type": "date",
+                    "example": "2022-12-15T07:51:12.750Z"
+                  },
+                  "updatedAt": {
+                    "type": "date",
+                    "example": "2022-12-15T07:51:12.750Z"
+                  }
+                }
+              },
+              "airplane": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "example": "1"
+                  },
+                  "airplaneName": {
+                    "type": "string",
+                    "example": "pesawat Terbang"
+                  },
+                  "airplaneCode": {
+                    "type": "string",
+                    "example": "2121"
+                  },
+                  "companyId": {
+                    "type": "integer"
+                  },
+                  "createdAt": {
+                    "type": "date",
+                    "example": "2022-12-15T07:54:09.794Z"
+                  },
+                  "updatedAt": {
+                    "type": "date",
+                    "example": "2022-12-15T07:54:09.794Z"
+                  },
+                  "company": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "example": "1"
+                      },
+                      "companyName": {
+                        "type": "string",
+                        "example": "Batik Air"
+                      },
+                      "companyImage": {
+                        "type": "string",
+                        "example": "https://ik.imagekit.io/mfn/IMG-1671090801008_h8UjrEzmZ.png"
+                      },
+                      "createdAt": {
+                        "type": "date",
+                        "example": "2022-12-15T07:53:36.690Z"
+                      },
+                      "updatedAt": {
+                        "type": "date",
+                        "example": "2022-12-15T07:53:36.690Z"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "payment": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "bankLogo": {
+            "type": "string",
+            "example": "https://ik.imagekit.io/mfn/Bank_Logo/BRI.png"
+          },
+          "bankName": {
+            "type": "string",
+            "example": "Bank Rakyat Indonesia (BRI)"
+          },
+          "accountName": {
+            "type": "string",
+            "example": "Lets Flight Indonesia"
+          },
+          "accountNumber": {
+            "type": "string",
+            "example": "324525142882575"
+          },
+          "createdAt": {
+            "type": "date",
+            "example": "2022-12-26T06:52:22.391Z"
+          },
+          "updatedAt": {
+            "type": "date",
+            "example": "2022-12-26T06:52:22.391Z"
           }
         }
       }
