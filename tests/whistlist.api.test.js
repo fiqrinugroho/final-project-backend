@@ -46,3 +46,13 @@ describe("API Add Wishlist", () => {
     expect(response.statusCode).toBe(201);
   });
 });
+
+describe("API Delete Airplane", () => {
+  it("Invalid Token", async () => {
+    const token = "";
+    const response = await request(app)
+      .delete("/api/whistlist/delete/1")
+      .set("Authorization", "Bearer " + token);
+    expect(response.statusCode).toBe(401);
+  });
+});
