@@ -33,4 +33,16 @@ describe("API Add Wishlist", () => {
       .send(wishlist);
     expect(response.statusCode).toBe(201);
   });
+
+  it("Invalid Token", async () => {
+    const token = "";
+    const wishlist = {
+      ticketId: "1",
+    };
+    const response = await request(app)
+      .post("/api/whistlist/create")
+      .set("Authorization", "Bearer " + token)
+      .send(wishlist);
+    expect(response.statusCode).toBe(201);
+  });
 });
