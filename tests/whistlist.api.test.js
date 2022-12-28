@@ -21,3 +21,16 @@ describe("API Get Users Wishlist ", () => {
   });
 });
 
+describe("API Add Wishlist", () => {
+  it("Success Add New Wishlist", async () => {
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6IlppZGFuZSIsImVtYWlsIjoidml0b0BiaW5hci5jby5pZCIsInJvbGVJZCI6MiwiaWF0IjoxNjcyMDY0MTMzfQ.OGtiMGTjSAh182abF5NSQxl8A0eccP81iqAX9HNo5Ik";
+    const wishlist = {
+        ticketId: "1"
+    }
+    const response = await request(app)
+      .post("/api/whistlist/create")
+      .set("Authorization", "Bearer " + token)
+      .send(wishlist);
+    expect(response.statusCode).toBe(201);
+  });
+});
