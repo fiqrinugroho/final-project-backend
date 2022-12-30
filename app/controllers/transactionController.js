@@ -160,10 +160,10 @@ const updateTransaction = (req, res, next) => {
 const cancelTransaction = (req, res, next) => {
   transactionService
     .cancelTransaction(req.params.id)
-    .then(() => {
+    .then((cancel) => {
       res.status(200).json({
         status: "Success",
-        message: "Success Cancel Transaction",
+        data:cancel,
       });
     })
     .catch((err) => {

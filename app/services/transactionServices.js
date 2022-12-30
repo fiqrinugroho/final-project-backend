@@ -3,6 +3,7 @@ const ApiError = require("../../utils/ApiError");
 const transactionRepository = require("../repositories/transactionRepository");
 const passengerRepository = require("../repositories/passengerRepository");
 const ticketRepository = require("../repositories/ticketRepository");
+const notifService = require("./notifServices");
 
 const addTransaction = async (reqBody, id) => {
   const {tripId, ticketGo, ticketBack,} = reqBody;
@@ -37,7 +38,9 @@ const addTransaction = async (reqBody, id) => {
       };
       const add = await 
       transactionRepository.createTransaction(newTransaction);;
-      return await transactionRepository.getTransactionById(add.id);
+      return await notifService
+        .addNotification(id, add.status, add.transactionCode);
+
     }else {
       const newTransaction = {
         transactionCode, 
@@ -49,8 +52,9 @@ const addTransaction = async (reqBody, id) => {
         passengerId: passenger.id,
       };
       const add = await 
-      transactionRepository.createTransaction(newTransaction);;
-      return await transactionRepository.getTransactionById(add.id);
+      transactionRepository.createTransaction(newTransaction);
+      return await notifService
+        .addNotification(id, add.status, add.transactionCode);
     }
   }
 };
@@ -162,12 +166,17 @@ const cancelTransaction = async (id) => {
   if (transaction.length == 0) {
     throw new ApiError(httpStatus.NOT_FOUND, "transaction not found");
   } else {
+    if(transaction.status == "canceled"){
+      throw new ApiError(httpStatus.BAD_REQUEST, "transaction already canceled");
+    }
     const cancel ={
       status:"canceled",
     };
     await transactionRepository.updateTransactionAdmin(cancel, id);
 
-    return await transactionRepository.getTransactionById(id);
+    const result =  await transactionRepository.getTransactionById(id);
+    return await notifService
+      .addNotification(result.userId, result.status, result.transactionCode);
   }
 };
 
@@ -179,7 +188,7 @@ const updateTransactionAdmin = async (reqBody, id) => {
   } else {
     await passengerRepository.updatePassenger(reqBody, transaction.passengerId);
     await transactionRepository.updateTransactionAdmin(reqBody, id);
-
+    
     return await transactionRepository.getTransactionById(id);
   }
 };
