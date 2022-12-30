@@ -31,7 +31,12 @@ const getPayment = async () => {
   return await paymentRepository.getPaymentData();
 };
 
+const getPaymentById = async (id) => {
+  return await paymentRepository.getPaymentById(id);
+};
+
 module.exports = {
   createPayment,
   getPayment,
+  getPaymentById,
 };

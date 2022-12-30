@@ -32,7 +32,24 @@ const getPayment = (req, res, next) => {
     });
 };
 
+const getPaymentById = (req, res, next) => {
+  paymentService
+    .getPaymentById(req.params.id)
+    .then((payment) => {
+      res.status(200).json({
+        status: "OK",
+        message: "Success",
+        totalData: payment.length,
+        data: payment,
+      });
+    })
+    .catch((err) => {
+      next(err);
+    });
+};
+
 module.exports = {
   createPayment,
   getPayment,
+  getPaymentById,
 };

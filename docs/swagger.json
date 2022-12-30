@@ -1231,10 +1231,10 @@
                     "data": {
                       "type": "object",
                       "properties": {
-                        "ticketGo":{
+                        "ticketGo": {
                           "$ref": "#/components/schemas/ticket"
                         },
-                        "ticketBack":{
+                        "ticketBack": {
                           "$ref": "#/components/schemas/ticket"
                         }
                       }
@@ -2195,9 +2195,61 @@
     },
     "/api/payment": {
       "get": {
-        "summary": "Get All payment method Data",
-        "description": "This API for see all payment method data",
+        "summary": "Get method payment data By Id",
+        "description": "This API for see method payment data By Id",
         "tags": ["Payment"],
+        "parameters": [
+          {
+            "in": "path",
+            "description": "input id ",
+            "name": "id",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User and admin can see this data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "totalData": {
+                      "type": "integer",
+                      "example": "1"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/payment"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/payment/{id}": {
+      "get": {
+        "summary": "Get method payment data By Id",
+        "description": "This API for see method payment data By Id",
+        "tags": ["Payment"],
+        "parameters": [
+          {
+            "in": "path",
+            "description": "input id (1-7)",
+            "name": "id",
+            "required": true
+          }
+        ],
         "responses": {
           "200": {
             "description": "User and admin can see this data",
