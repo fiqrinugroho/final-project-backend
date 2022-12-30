@@ -2,7 +2,7 @@ const request = require("supertest");
 const app = require("../app/index");
 const dotenv = require("dotenv");
 dotenv.config();
-// npx jest -t API Admin Get All Transaction By Id --setupFiles dotenv/config --coverage --forceExit --detectOpenHandles
+
 describe("API Admin Get All Transaction", () => {
   it("success", async () => {
     const token =
