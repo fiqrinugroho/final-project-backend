@@ -116,14 +116,14 @@ describe("API Get Transaction Data By User and Type Trip", () => {
     expect(response.statusCode).toBe(200);
   });
 
-//   it("Invalid Token", async () => {
-//     const token = "";
-//     const status = "success";
-//     const response = await request(app)
-//       .get(`/api/transaction/filter?status=${status}`)
-//       .set("Authorization", "Bearer " + token);
-//     expect(response.statusCode).toBe(401);
-//   });
+  it("Invalid Token", async () => {
+    const token = "";
+    const tripId = 2;
+    const response = await request(app)
+      .get(`/api/transaction/trip?tripId=${tripId}`)
+      .set("Authorization", "Bearer " + token);
+    expect(response.statusCode).toBe(401);
+  });
 
 //   it("Not Found", async () => {
 //     const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiZW1haWwiOiJ2aXRvQG1haWwuY29tIiwicm9sZUlkIjoyLCJpYXQiOjE2Njk2NjM2MDB9.t-mS8RHauM7M5fiIGbXRDaJg7pVE2O82HwfTyY7Z98E";
