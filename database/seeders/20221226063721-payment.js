@@ -69,7 +69,7 @@ module.exports = {
       },
       {
         id: 7,
-        bankLogo: "https://ik.imagekit.io/mfn/Bank_Logo/dana.png",
+        bankLogo: "https://ik.imagekit.io/mfn/Bank_Logo/ovo.png",
         bankName: "OVO",
         accountName: "Lets Flight Indonesia",
         accountNumber: "087774254729",
