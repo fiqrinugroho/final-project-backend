@@ -124,15 +124,6 @@ describe("API Get Transaction Data By User and Type Trip", () => {
       .set("Authorization", "Bearer " + token);
     expect(response.statusCode).toBe(401);
   });
-
-//   it("Not Found", async () => {
-//     const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiZW1haWwiOiJ2aXRvQG1haWwuY29tIiwicm9sZUlkIjoyLCJpYXQiOjE2Njk2NjM2MDB9.t-mS8RHauM7M5fiIGbXRDaJg7pVE2O82HwfTyY7Z98E";
-//     const status = "invalid";
-//     const response = await request(app)
-//       .get(`/api/transaction/filter?status=${status}`)
-//       .set("Authorization", "Bearer " + token);
-//     expect(response.statusCode).toBe(404);
-//   });
 });
 
 describe("API Update transaction data by Id", () => {
