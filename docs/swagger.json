@@ -1731,15 +1731,15 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "example": "OK"
+                      "example": "success"
+                    },
+                    "notifId": {
+                      "type": "integer",
+                      "example": "1"
                     },
                     "message": {
                       "type": "string",
-                      "example": "Success Create New Transaction"
-                    },
-                    "data": {
-                      "type": "object",
-                      "$ref": "#/components/schemas/transaksi"
+                      "example": "Silahkan Lakukan Pembayaran Untuk Transaksi TR2022303109 Agar Transaksi Anda Dapat Segera di Proses"
                     }
                   }
                 }
@@ -1855,10 +1855,14 @@
                       "type": "string",
                       "example": "Success"
                     },
+                    "notifId": {
+                      "type": "integer",
+                      "example": "3"
+                    },
                     "message": {
                       "type": "string",
-                      "example": "Success Cancel Transaction"
-                    }
+                      "example": "Transaksi Dibatalkan, Transaksi Dengan Kode TR2022303109 Telah Dibatalkan"
+                    } 
                   }
                 }
               }
@@ -2305,13 +2309,13 @@
                       "type": "string",
                       "example": "Success"
                     },
+                    "notifId": {
+                      "type": "integer",
+                      "example": "2"
+                    },
                     "message": {
                       "type": "string",
-                      "example": "Payment Success"
-                    },
-                    "data": {
-                      "type": "object",
-                      "$ref": "#/components/schemas/createPayment"
+                      "example": "Transaksi Berhasil, Pembayaran Untuk Transaksi TR2022311546 Berhasil di Proses, Selamat Menikmati Penerbangan Anda"
                     }
                   }
                 }
@@ -2532,6 +2536,167 @@
                     "message": {
                       "type": "string",
                       "example": "Invalid Token"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/notification/": {
+      "post": {
+        "summary": "Create Costume Notification By userId",
+        "description": "This API for create costume notification for user in token",
+        "tags": ["Notification"],
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
+        "requestBody": {
+          "description": "create message Notification for User",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string",
+                    "example": "Selamat Datang di Let's Flight Indonesia"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "notifId": {
+                      "type": "integer",
+                      "example": "4"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Selamat Datang di Let's Flight Indonesia"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
+        }
+      }
+    },
+    "/api/notification": {
+      "get": {
+        "summary": "Get All Notification By userId",
+        "description": "This API for see all notification from user in token",
+        "tags": ["Notification"],
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "totalData": {
+                      "type": "integer",
+                      "example": "1"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/notification"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
+        }
+      }
+    },
+    "/api/notification/{id}": {
+      "get": {
+        "summary": "Get Notification By userId and id",
+        "description": "This API for see notification from user in token by id",
+        "tags": ["Notification"],
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "description": "input id ",
+            "name": "id",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/notification"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "description": "Data Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Failed"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "notification not found"
                     }
                   }
                 }
@@ -4527,6 +4692,27 @@
                 "example": "2022-12-20T15:55:55.466Z"
               }
             }
+          }
+        }
+      },
+      "notification":{
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": "1"
+          },
+          "message": {
+            "type": "string",
+            "example": "Silahkan Lakukan Pembayaran Untuk Transaksi TR2022315440 Agar Transaksi Anda Dapat Segera di Proses"
+          },
+          "createdAt": {
+            "type": "date",
+            "example": "2022-12-20T15:55:55.466Z"
+          },
+          "updatedAt": {
+            "type": "date",
+            "example": "2022-12-20T15:55:55.466Z"
           }
         }
       }

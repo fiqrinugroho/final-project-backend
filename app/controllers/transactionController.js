@@ -7,8 +7,8 @@ const addTransaction = (req, res, next) => {
     .then((transaction) => {
       res.status(201).json({
         status: "Success",
-        message: "Success Add New Transaction",
-        data: transaction,
+        notifId:transaction.id,
+        message:transaction.message,
       });
     })
     .catch((err) => {
@@ -160,10 +160,11 @@ const updateTransaction = (req, res, next) => {
 const cancelTransaction = (req, res, next) => {
   transactionService
     .cancelTransaction(req.params.id)
-    .then(() => {
+    .then((cancel) => {
       res.status(200).json({
         status: "Success",
-        message: "Success Cancel Transaction",
+        notifId:cancel.id,
+        message:cancel.message,
       });
     })
     .catch((err) => {

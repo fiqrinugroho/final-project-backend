@@ -2,6 +2,7 @@ const httpStatus = require("http-status");
 const ApiError = require("../../utils/ApiError");
 const paymentRepository = require("../repositories/paymentRepository");
 const transactionRepository = require("../repositories/transactionRepository");
+const notifService = require("./notifServices");
 
 const createPayment = async (reqBody) => {
   const { paymentId, transactionId, } = reqBody;
@@ -20,9 +21,10 @@ const createPayment = async (reqBody) => {
         paymentId,
         status:"success",
       };
-      await paymentRepository.createPayment(newPayment, transactionId);
-
-      return await transactionRepository.getTransactionById(transactionId);
+      await paymentRepository
+        .createPayment(newPayment, transactionId);
+      // eslint-disable-next-line max-len
+      return await notifService.addNotification(transaction.userId, transaction.status, transaction.transactionCode);
     }
   }
 };
