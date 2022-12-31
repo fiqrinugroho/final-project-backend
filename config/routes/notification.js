@@ -9,6 +9,6 @@ const Authentication = require("../../middlewares/authenticate");
 router.post("/", Authentication, notif.createNotification);
 router.get("/", Authentication, notif.getNotification);
 router.get("/:id", Authentication, notif.getNotificationById);
-router.delete("/delete/:id", Authentication, notif.deleteNotificationById);
+router.delete("/delete/:id", notif.deleteNotificationById);
 
 module.exports = router;
