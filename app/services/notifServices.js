@@ -20,6 +20,12 @@ const addNotification = async (userId, status, code) => {
   return await notifRepository.getNotifById(userId, result.id);
 };
 
+const  createNotification = async (userId, message) => {
+  const notif = {userId, message,};
+  const result = await notifRepository.addNotif(notif);
+  return await notifRepository.getNotifById(userId, result.id);
+};
+
 const getNotification = async (userId) => {
   return await notifRepository.getNotif(userId);
 };
@@ -35,5 +41,6 @@ module.exports = {
   addNotification,
   getNotification,
   getNotificationById,
+  createNotification,
 };
   

@@ -17,6 +17,21 @@ const getNotification = (req, res, next) => {
     });
 };
 
+const createNotification = (req, res, next) => {
+  notifService
+    .createNotification(req.user.id, req.body.message)
+    .then((notif) => {
+      res.status(200).json({
+        status: "OK",
+        totalData:notif.length,
+        data: notif,
+      });
+    })
+    .catch((err) => {
+      next(err);
+    });
+};
+
 const getNotificationById = (req, res, next) => {
   notifService
     .getNotificationById(req.user.id, req.params.id)
@@ -33,5 +48,6 @@ const getNotificationById = (req, res, next) => {
 
 module.exports = {
   getNotification,
+  createNotification,
   getNotificationById,
 };
