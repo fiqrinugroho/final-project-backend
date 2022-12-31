@@ -37,10 +37,19 @@ const getNotificationById = async (userId, id) => {
   }
 };
 
+const deleteNotificationById = async (id) => {
+  const find = await notifRepository.findNotifById(id);
+  if(!find){
+    throw new ApiError(httpStatus.NOT_FOUND, "notification not found");
+  }
+  return await notifRepository.deleteNotifById(id);
+};
+
 module.exports = {
   addNotification,
   getNotification,
   getNotificationById,
+  deleteNotificationById,
   createNotification,
 };
   
