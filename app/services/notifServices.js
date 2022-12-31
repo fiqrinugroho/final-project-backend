@@ -1,7 +1,9 @@
 /* eslint-disable max-len */
+const httpStatus = require("http-status");
+const ApiError = require("../../utils/ApiError");
 const notifRepository = require("../repositories/notifRepository");
 
-const addNotification = async (userId, status, code ) => {
+const addNotification = async (userId, status, code) => {
   let message = "";
 
   if(status == "pending"){
@@ -23,7 +25,10 @@ const getNotification = async (userId) => {
 };
   
 const getNotificationById = async (userId, id) => {
-  return await notifRepository.getNotifById(userId, id);
+  const find = await notifRepository.getNotifById(userId, id);
+  if(!find){
+    throw new ApiError(httpStatus.NOT_FOUND, "notification not found");
+  }
 };
 
 module.exports = {

@@ -4,10 +4,11 @@ const notifService = require("../services/notifServices");
 
 const getNotification = (req, res, next) => {
   notifService
-    .getNotification()
+    .getNotification(req.user.id)
     .then((notif) => {
       res.status(200).json({
         status: "OK",
+        totalData:notif.length,
         data: notif,
       });
     })
@@ -18,7 +19,7 @@ const getNotification = (req, res, next) => {
 
 const getNotificationById = (req, res, next) => {
   notifService
-    .getNotificationById(req.params.id)
+    .getNotificationById(req.user.id, req.params.id)
     .then((notif) => {
       res.status(200).json({
         status: "OK",

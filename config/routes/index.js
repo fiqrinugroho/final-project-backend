@@ -10,6 +10,7 @@ const ticket = require("./ticket");
 const transaction = require("./transaction");
 const whistlist = require("./whistlist");
 const payment = require("./payment");
+const notif = require("./notification");
 
 // API auth
 router.use("/api/auth/", auth);
@@ -22,5 +23,6 @@ router.use("/api/ticket/", ticket);
 router.use("/api/transaction/", transaction);
 router.use("/api/whistlist/", whistlist);
 router.use("/api/payment/", payment);
+router.use("/api/notification/", notif);
 
 module.exports = router;

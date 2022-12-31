@@ -7,8 +7,8 @@ const createPayment = (req, res, next) => {
     .then((payment) => {
       res.status(200).json({
         status: "Success",
-        message: "Payment Success",
-        data: payment,
+        notifId:payment.id,
+        message:payment.message,
       });
     })
     .catch((err) => {
