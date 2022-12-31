@@ -23,8 +23,8 @@ const createNotification = (req, res, next) => {
     .then((notif) => {
       res.status(200).json({
         status: "OK",
-        totalData:notif.length,
-        data: notif,
+        notifId:notif.id,
+        message:notif.message,
       });
     })
     .catch((err) => {
