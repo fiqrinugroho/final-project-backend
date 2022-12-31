@@ -76,10 +76,26 @@ const deleteTicket = (req, res, next) => {
     });
 };
 
+const searchTicket = (req, res, next) => {
+  ticketService
+    .searchTicket(req.query)
+    .then((ticket) => {
+      res.status(200).json({
+        status: "OK",
+        message: "Success",
+        data: ticket,
+      });
+    })
+    .catch((err) => {
+      next(err);
+    });
+};
+
 module.exports = {
   createTicket,
   getTicket,
   getTicketById,
   updateTicket,
   deleteTicket,
+  searchTicket,
 };

@@ -19,7 +19,7 @@ app.use(
 
 app.use(morgan("dev"));
 // basic express configurasi
-app.locals.moment = require("moment");
+// app.locals.moment = require("moment");/
 // Middleware to Parse JSON
 app.use(cors());
 app.use(express.json());

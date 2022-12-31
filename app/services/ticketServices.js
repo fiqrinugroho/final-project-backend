@@ -3,10 +3,11 @@ const ApiError = require("../../utils/ApiError");
 const ticketRepository = require("../repositories/ticketRepository");
 const airportRepository = require("../repositories/airportRepository");
 const airplaneRepository = require("../repositories/airplaneRepository");
-
+var moment = require("moment"); //
+moment().format();
 const createTicket = async (reqBody) => {
   const { code, departureDate, departureTime, arrivalDate, arrivalTime, 
-    flightFrom, flightTo, airplaneId,  price, capacity, seatNumber,} = reqBody;
+    flightFrom, flightTo, airplaneId,  price, capacity,} = reqBody;
   const seatClass = reqBody.class;
   // cari data 
   const airportOrigin = await airportRepository.findAirportById(flightFrom);
@@ -25,7 +26,6 @@ const createTicket = async (reqBody) => {
   if (!price) throw new ApiError(httpStatus.BAD_REQUEST, "ticket price cannot be empty");
   if (!capacity) throw new ApiError(httpStatus.BAD_REQUEST, "baggage capacity cannot be empty");
   if (!seatClass) throw new ApiError(httpStatus.BAD_REQUEST, "seat class cannot be empty");
-  if (!seatNumber) throw new ApiError(httpStatus.BAD_REQUEST, "seat number cannot be empty");
   if (!findAirplane) throw new ApiError(httpStatus.BAD_REQUEST, "airplane not found");
   if (!airportOrigin) throw new ApiError(httpStatus.BAD_REQUEST, "origin airport not found");
   if (!airportDestination) throw new ApiError(httpStatus.BAD_REQUEST, "destination airport not found");
@@ -76,11 +76,45 @@ const deleteTicket = async (id) => {
     return await ticketRepository.deleteTicket(id);
   }
 };
+
+const searchTicket = async (filter) => {
+  const {departureDate, originCity, 
+    destinationCity, returnDate, }= filter;
+
+  const date = formatTime(departureDate);
+  const ticketGo = await ticketRepository.
+    searchTicket(date, originCity, destinationCity);
   
+  if(returnDate){
+    const date = formatTime(returnDate);
+    const ticketBack = await ticketRepository.
+      searchTicket(date, destinationCity, originCity);
+    if(ticketBack.length == 0){
+      throw new ApiError(httpStatus.NOT_FOUND, "Tiket Pulang Tidak Ditemukan");
+    }else if (ticketGo.length == 0) {
+      throw new ApiError(httpStatus.NOT_FOUND, "Tiket Pergi Tidak Ditemukan");
+    }else {
+      return {ticketGo, ticketBack,};
+    }
+  }
+  if(!departureDate || ticketGo.length == 0 || !ticketGo){
+    throw new ApiError(httpStatus.NOT_FOUND, "Tiket Pergi Tidak Ditemukan");
+  }else {
+    return {ticketGo,};
+  }
+};
+
+const formatTime = (date) =>{
+  const localTime = moment().format(`${date}`); // store localTime
+  const proposedDate = localTime + "T00:00:00.000Z";
+  return proposedDate;
+};
+
 module.exports = {
   createTicket,
   getTicket,
   getTicketById,
   updateTicket,
   deleteTicket,
+  searchTicket,
 };
