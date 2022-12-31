@@ -2572,7 +2572,7 @@
           }
         },
         "responses": {
-          "200": {
+          "201": {
             "description": "success",
             "content": {
               "application/json": {
@@ -2581,15 +2581,23 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "example": "OK"
+                      "example": "success"
                     },
-                    "data": {
-                      "$ref": "#/components/schemas/notification"
+                    "notifId": {
+                      "type": "integer",
+                      "example": "4"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Selamat Datang di Let's Flight Indonesia"
                     }
                   }
                 }
               }
             }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
           }
         }
       }
@@ -2627,6 +2635,9 @@
                 }
               }
             }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
           }
         }
       }
@@ -2668,6 +2679,9 @@
                 }
               }
             }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
           },
           "404": {
             "description": "Data Not Found",
