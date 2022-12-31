@@ -38,9 +38,9 @@ const addTransaction = async (reqBody, id) => {
       };
       const add = await 
       transactionRepository.createTransaction(newTransaction);;
-      return await notifService
+      await notifService
         .addNotification(id, add.status, add.transactionCode);
-
+      return await transactionRepository.getTransactionById(add.id);
     }else {
       const newTransaction = {
         transactionCode, 
@@ -53,8 +53,9 @@ const addTransaction = async (reqBody, id) => {
       };
       const add = await 
       transactionRepository.createTransaction(newTransaction);
-      return await notifService
+      await notifService
         .addNotification(id, add.status, add.transactionCode);
+      return await transactionRepository.getTransactionById(add.id);
     }
   }
 };
