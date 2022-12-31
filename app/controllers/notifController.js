@@ -21,8 +21,8 @@ const createNotification = (req, res, next) => {
   notifService
     .createNotification(req.user.id, req.body.message)
     .then((notif) => {
-      res.status(200).json({
-        status: "OK",
+      res.status(201).json({
+        status: "success",
         notifId:notif.id,
         message:notif.message,
       });
