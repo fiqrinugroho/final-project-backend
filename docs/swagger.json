@@ -2705,6 +2705,62 @@
           }
         }
       }
+    },
+    "/api/notification/delete/{id}": {
+      "delete": {
+        "summary": "Delete Notification Data By Id",
+        "tags": ["Notification"],
+        "parameters": [
+          {
+            "in": "path",
+            "description": "input id notification",
+            "name": "id",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success Delete Data Notification",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "success delete notifikasi"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Data Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Failed"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "notification not found"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
