@@ -73,3 +73,25 @@ describe("API Get Notification By Token And Id", () => {
     expect(response.statusCode).toBe(404);
   });
 });
+
+describe("API Delete Notification By Id", () => {
+  it("success", async () => {
+    const token =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6ImZpcXJpIiwiZW1haWwiOiJmaXFyaUBtYWlsLmNvbSIsInJvbGVJZCI6MSwiaWF0IjoxNjcwMzMyOTU3fQ.wXPmJ2TXeprs3wcw_8u4RONLiUm_KG9zcboaAibyooo";
+
+    const response = await request(app)
+      .delete("/api/notification/delete/1")
+      .set("Authorization", "Bearer " + token);
+    expect(response.statusCode).toBe(200);
+  });
+
+  it("Not Found", async () => {
+    const token =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6ImZpcXJpIiwiZW1haWwiOiJmaXFyaUBtYWlsLmNvbSIsInJvbGVJZCI6MSwiaWF0IjoxNjcwMzMyOTU3fQ.wXPmJ2TXeprs3wcw_8u4RONLiUm_KG9zcboaAibyooo";
+
+    const response = await request(app)
+      .get("/api/notification/delete/10000")
+      .set("Authorization", "Bearer " + token);
+    expect(response.statusCode).toBe(404);
+  });
+});
