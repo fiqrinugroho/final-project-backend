@@ -2484,7 +2484,7 @@
         }
       }
     },
-    "/api/whistlist/delete/{id}": {
+    "/api/whistlist/{id}": {
       "delete": {
         "summary": "delete wishlist by id",
         "tags": ["Wishlist"],
