@@ -7,8 +7,8 @@ const addTransaction = (req, res, next) => {
     .then((transaction) => {
       res.status(201).json({
         status: "Success",
-        notifId:transaction.id,
-        message:transaction.message,
+        message: "Success Add New Transaction",
+        data: transaction,
       });
     })
     .catch((err) => {

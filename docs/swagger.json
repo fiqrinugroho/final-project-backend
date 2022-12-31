@@ -1731,15 +1731,15 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "example": "success"
-                    },
-                    "notifId": {
-                      "type": "integer",
-                      "example": "1"
+                      "example": "Success"
                     },
                     "message": {
                       "type": "string",
-                      "example": "Silahkan Lakukan Pembayaran Untuk Transaksi TR2022303109 Agar Transaksi Anda Dapat Segera di Proses"
+                      "example": "Success Create New Transaction"
+                    },
+                    "data": {
+                      "type": "object",
+                      "$ref": "#/components/schemas/transaksi"
                     }
                   }
                 }
@@ -1861,7 +1861,7 @@
                     },
                     "message": {
                       "type": "string",
-                      "example": "Transaksi Dibatalkan, Transaksi Dengan Kode TR2022303109 Telah Dibatalkan"
+                      "example": "Transaksi Dibatalkan, Transaksi Dengan Kode TR2022225040 Telah Dibatalkan"
                     } 
                   }
                 }
