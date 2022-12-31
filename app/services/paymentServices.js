@@ -23,8 +23,13 @@ const createPayment = async (reqBody) => {
       };
       await paymentRepository
         .createPayment(newPayment, transactionId);
+      const trans = 
+            await transactionRepository.getTransactionById(transactionId);
+
+
+
       // eslint-disable-next-line max-len
-      return await notifService.addNotification(transaction.userId, transaction.status, transaction.transactionCode);
+      return await notifService.addNotification(trans.userId, trans.status, trans.transactionCode);
     }
   }
 };
