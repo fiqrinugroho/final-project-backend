@@ -139,7 +139,7 @@ describe("API Update transaction data by Id", () => {
       brithDate: "2022-1-21",
     };
     const response = await request(app)
-      .put("/api/transaction/update/1")
+      .put("/api/transaction/update/10")
       .set("Authorization", "Bearer " + token)
       .send(transaction);
     expect(response.statusCode).toBe(200);
@@ -157,7 +157,7 @@ describe("API Update transaction data by Id", () => {
       brithDate: "2022-1-21",
     };
     const response = await request(app)
-      .put("/api/transaction/update/1")
+      .put("/api/transaction/update/10")
       .set("Authorization", "Bearer " + token)
       .send(transaction);
     expect(response.statusCode).toBe(401);
@@ -186,15 +186,23 @@ describe("API cancel transaction data by Id", () => {
   it("Success Cancel Transaction", async () => {
     const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiZW1haWwiOiJ2aXRvQG1haWwuY29tIiwicm9sZUlkIjoyLCJpYXQiOjE2Njk2NjM2MDB9.t-mS8RHauM7M5fiIGbXRDaJg7pVE2O82HwfTyY7Z98E";
     const response = await request(app)
-      .put("/api/transaction/cancel/1")
+      .put("/api/transaction/cancel/15")
       .set("Authorization", "Bearer " + token)
     expect(response.statusCode).toBe(200);
+  });
+
+  it("Transaction Alredy Canceled", async () => {
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiZW1haWwiOiJ2aXRvQG1haWwuY29tIiwicm9sZUlkIjoyLCJpYXQiOjE2Njk2NjM2MDB9.t-mS8RHauM7M5fiIGbXRDaJg7pVE2O82HwfTyY7Z98E";
+    const response = await request(app)
+      .put("/api/transaction/cancel/10")
+      .set("Authorization", "Bearer " + token)
+    expect(response.statusCode).toBe(400);
   });
 
   it("Invalid Token", async () => {
     const token = "";
     const response = await request(app)
-      .put("/api/transaction/cancel/1")
+      .put("/api/transaction/cancel/10")
       .set("Authorization", "Bearer " + token);
     expect(response.statusCode).toBe(401);
   });

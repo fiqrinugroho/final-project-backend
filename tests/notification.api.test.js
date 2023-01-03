@@ -50,7 +50,7 @@ describe("API Get Notification By Token And Id", () => {
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6ImZpcXJpIiwiZW1haWwiOiJmaXFyaUBtYWlsLmNvbSIsInJvbGVJZCI6MSwiaWF0IjoxNjcwMzMyOTU3fQ.wXPmJ2TXeprs3wcw_8u4RONLiUm_KG9zcboaAibyooo";
 
     const response = await request(app)
-      .get("/api/notification/1")
+      .get("/api/notification/4")
       .set("Authorization", "Bearer " + token);
     expect(response.statusCode).toBe(200);
   });
@@ -80,7 +80,7 @@ describe("API Delete Notification By Id", () => {
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6ImZpcXJpIiwiZW1haWwiOiJmaXFyaUBtYWlsLmNvbSIsInJvbGVJZCI6MSwiaWF0IjoxNjcwMzMyOTU3fQ.wXPmJ2TXeprs3wcw_8u4RONLiUm_KG9zcboaAibyooo";
 
     const response = await request(app)
-      .delete("/api/notification/delete/1")
+      .delete("/api/notification/delete/3")
       .set("Authorization", "Bearer " + token);
     expect(response.statusCode).toBe(200);
   });
